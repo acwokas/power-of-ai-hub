@@ -19,7 +19,7 @@ const Why = () => {
             
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                Because the future isn't about humans versus machines — it's about what 
+                Because the future isn't about humans versus machines - it's about what 
                 we can achieve together.
               </p>
               <p>
@@ -27,7 +27,7 @@ const Why = () => {
                 creativity, learning, and opportunity for everyone.
               </p>
               <p className="text-xl font-semibold text-foreground pt-4">
-                Real tools. Real skills. Real results — with the power of AI.
+                Real tools. Real skills. Real results - with the power of AI.
               </p>
             </div>
           </div>

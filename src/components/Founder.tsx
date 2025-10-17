@@ -34,7 +34,7 @@ const Founder = () => {
               </p>
               <p>
                 Along the way, I've launched plenty of startups and advised several scale-ups too. 
-                It's always been more complex than it should be, which is why I created BusinessInAByte — 
+                It's always been more complex than it should be, which is why I created BusinessInAByte - 
                 a space built to make starting and running a business simpler.
               </p>
               <p>

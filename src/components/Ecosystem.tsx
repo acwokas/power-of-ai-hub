@@ -24,14 +24,14 @@ const platforms = [
   },
   {
     headline: "Start up with the power of AI.",
-    description: "Launch smarter and faster with BusinessInAByte — your AI-powered startup factory for building modern ventures.",
+    description: "Launch smarter and faster with BusinessInAByte - your AI-powered startup factory for building modern ventures.",
     ctaText: "Visit BusinessInAByte.com",
     ctaUrl: "https://startup.withthepowerof.ai",
     gradient: "bg-gradient-to-br from-orange-500 to-red-500"
   },
   {
     headline: "Shop with the power of AI.",
-    description: "Discover personalised deals and AI-curated offers from around the web — powered by MyOfferClub.",
+    description: "Discover personalised deals and AI-curated offers from around the web - powered by MyOfferClub.",
     ctaText: "Visit MyOfferClub.com",
     ctaUrl: "https://shop.withthepowerof.ai",
     gradient: "bg-gradient-to-br from-yellow-500 to-orange-500"
@@ -51,10 +51,10 @@ const Ecosystem = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center space-y-6 mb-16 animate-slide-up">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Our Ecosystem — <span className="gradient-text">Connected by One Idea</span>
+            Our Ecosystem - <span className="gradient-text">Connected by One Idea</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Every project under WithThePowerOf.AI focuses on a different part of the journey — 
+            Every project under WithThePowerOf.AI focuses on a different part of the journey - 
             but all share one goal: making AI accessible and empowering for everyone.
           </p>
         </div>

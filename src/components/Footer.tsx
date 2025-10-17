@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center space-y-6">
           <p className="text-muted-foreground">
-            © WithThePowerOf.AI — A collective of projects empowering people through artificial intelligence.
+            © WithThePowerOf.AI - A collective of projects empowering people through artificial intelligence.
           </p>
           
           <div className="flex flex-wrap gap-6 justify-center text-sm">
