@@ -4,8 +4,8 @@ const About = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="space-y-6 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              What is <span className="gradient-text">WithThePowerOf.AI</span>?
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight break-words">
+              What is <span className="gradient-text break-words">WithThePowerOf.AI</span>?
             </h2>
             
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
