@@ -3,31 +3,26 @@ const Footer = () => {
   
   const collectiveLinks = [
     { 
-      name: "AIinASIA.com", 
       subdomain: "discover.withthepowerof.ai",
       url: "https://www.aiinasia.com",
       alt: "AIinASIA logo"
     },
     { 
-      name: "PromptAndGo.ai", 
       subdomain: "prompt.withthepowerof.ai",
       url: "https://www.promptandgo.ai",
       alt: "PromptAndGo logo"
     },
     { 
-      name: "MyOfferClub.com", 
-      subdomain: "shop.withthepowerof.ai",
-      url: "https://www.myofferclub.com",
-      alt: "MyOfferClub logo"
-    },
-    { 
-      name: "BusinessInAByte.com", 
       subdomain: "startup.withthepowerof.ai",
       url: "https://www.businessinabyte.com",
       alt: "BusinessInAByte logo"
     },
     { 
-      name: "AIAcademy.asia", 
+      subdomain: "shop.withthepowerof.ai",
+      url: "https://www.myofferclub.com",
+      alt: "MyOfferClub logo"
+    },
+    { 
       subdomain: "learn.withthepowerof.ai",
       url: "https://www.aiacademy.asia",
       alt: "AIAcademy logo"
@@ -85,11 +80,8 @@ const Footer = () => {
                     <span className="text-2xl" style={{ color: '#666' }}>●</span>
                   </div>
                   
-                  <div className="text-center space-y-1">
+                  <div className="text-center">
                     <div className="text-sm font-medium" style={{ color: '#00B3FF' }}>
-                      {link.name}
-                    </div>
-                    <div className="text-xs" style={{ color: '#999' }}>
                       {link.subdomain}
                     </div>
                   </div>
