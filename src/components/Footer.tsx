@@ -1,6 +1,7 @@
 import aiinasiaLogo from "@/assets/aiinasia-logo.png";
 import pagLogo from "@/assets/pag-logo.png";
 import biabLogo from "@/assets/biab-logo.png";
+import myofferclubLogo from "@/assets/myofferclub-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -28,7 +29,7 @@ const Footer = () => {
       subdomain: "shop.withthepowerof.ai",
       url: "https://www.myofferclub.com",
       alt: "MyOfferClub logo",
-      logo: null
+      logo: myofferclubLogo
     },
     { 
       subdomain: "learn.withthepowerof.ai",
