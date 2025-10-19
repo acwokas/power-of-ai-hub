@@ -3,14 +3,6 @@ import { ShoppingBag, Compass, Lightbulb, Rocket, GraduationCap, Palette } from 
 
 const platforms = [
   {
-    headline: "Shop with the power of AI.",
-    description: "Discover personalised deals and AI-curated offers from around the web - powered by MyOfferClub.",
-    ctaText: "Visit MyOfferClub.com",
-    ctaUrl: "https://shop.withthepowerof.ai",
-    gradient: "bg-gradient-to-br from-yellow-500 to-orange-500",
-    icon: ShoppingBag
-  },
-  {
     headline: "Discover Asian AI with the power of AI.",
     description: "Stories and insights on how artificial intelligence is reshaping business, culture, and careers across the region.",
     ctaText: "Visit AIinASIA.com",
@@ -33,6 +25,14 @@ const platforms = [
     ctaUrl: "https://startup.withthepowerof.ai",
     gradient: "bg-gradient-to-br from-orange-500 to-red-500",
     icon: Rocket
+  },
+  {
+    headline: "Shop with the power of AI.",
+    description: "Discover personalised deals and AI-curated offers from around the web - powered by MyOfferClub.",
+    ctaText: "Visit MyOfferClub.com",
+    ctaUrl: "https://shop.withthepowerof.ai",
+    gradient: "bg-gradient-to-br from-yellow-500 to-orange-500",
+    icon: ShoppingBag
   },
   {
     headline: "Learn with the power of AI.",
