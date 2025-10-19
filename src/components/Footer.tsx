@@ -115,6 +115,7 @@ const Footer = () => {
                             src={link.logo} 
                             alt={link.alt}
                             className="w-full h-full object-contain"
+                            loading="lazy"
                           />
                         ) : (
                           <span className="text-2xl" style={{ color: '#666' }}>●</span>
