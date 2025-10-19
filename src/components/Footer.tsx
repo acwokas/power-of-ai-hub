@@ -83,7 +83,7 @@ const Footer = () => {
                 >
                   {/* Logo */}
                   <div 
-                    className="w-32 h-24 flex items-center justify-center p-3"
+                    className={`w-40 h-28 flex items-center justify-center ${link.alt === "MyOfferClub logo" ? 'p-1' : 'p-3'}`}
                     style={{ backgroundColor: link.logo ? '#FFF' : '#333' }}
                     aria-label={link.alt}
                   >
