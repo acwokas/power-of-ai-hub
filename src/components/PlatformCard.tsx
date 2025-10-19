@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, LucideIcon } from "lucide-react";
 
 interface PlatformCardProps {
   logo?: boolean;
@@ -9,17 +9,18 @@ interface PlatformCardProps {
   ctaText: string;
   ctaUrl: string;
   gradient: string;
+  icon?: LucideIcon;
 }
 
-const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient }: PlatformCardProps) => {
+const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient, icon: Icon }: PlatformCardProps) => {
   return (
     <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10">
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 ${gradient}`} />
       
       <CardHeader className="space-y-4">
-        {logo && (
-          <div className="w-16 h-16 rounded-xl bg-gradient-primary/20 flex items-center justify-center">
-            <div className="w-12 h-12 rounded-lg bg-primary/30" />
+        {logo && Icon && (
+          <div className={`w-16 h-16 rounded-xl flex items-center justify-center ${gradient}`}>
+            <Icon className="w-8 h-8 text-white" />
           </div>
         )}
         
