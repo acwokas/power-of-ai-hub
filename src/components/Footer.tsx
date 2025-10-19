@@ -2,6 +2,7 @@ import aiinasiaLogo from "@/assets/aiinasia-logo.png";
 import pagLogo from "@/assets/pag-logo.png";
 import biabLogo from "@/assets/biab-logo.png";
 import myofferclubLogo from "@/assets/myofferclub-logo.png";
+import aiacademyLogo from "@/assets/aiacademy-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,7 +36,7 @@ const Footer = () => {
       subdomain: "learn.withthepowerof.ai",
       url: "https://www.aiacademy.asia",
       alt: "AIAcademy logo",
-      logo: null
+      logo: aiacademyLogo
     }
   ];
 
