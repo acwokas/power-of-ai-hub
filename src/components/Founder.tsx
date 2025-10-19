@@ -34,11 +34,12 @@ const Founder = () => {
               </p>
               <p>
                 Along the way, I've launched plenty of startups and advised several scale-ups too. 
-                It's always been more complex than it should be, which is why I created BusinessInAByte - 
-                a space built to make starting and running a business simpler.
+                It's always been more complex than it should be, which is why I created WithThePowerOf.AI - 
+                a collective of connected brands built to help people and businesses get real value from AI.
               </p>
               <p>
-                Think of it as a place where ideas turn into real businesses with a little help from AI.
+                From education and media to tools, startups, and smart shopping - everything we create 
+                is designed to help you do more, with the power of AI.
               </p>
             </div>
 
