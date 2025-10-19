@@ -27,8 +27,8 @@ const About = () => {
           </div>
 
           <div className="relative animate-fade-in h-[600px]" style={{ animationDelay: '0.2s' }}>
-            <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-50">
-              <img src={aiInAsiaScreenshot} alt="AiInAsia - AI news and insights platform" className="w-full h-auto" loading="lazy" />
+            <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-10">
+              <img src={aiAcademyScreenshot} alt="AI Academy - Business AI courses and training" className="w-full h-auto" loading="lazy" />
             </div>
             <div className="absolute top-[80px] right-0 w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-40">
               <img src={promptAndGoScreenshot} alt="PromptAndGo.ai - AI prompt optimization platform" className="w-full h-auto" loading="lazy" />
@@ -36,10 +36,10 @@ const About = () => {
             <div className="absolute top-[180px] left-[10%] w-[60%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-30">
               <img src={biabScreenshot} alt="Business in a Byte - Startup tools and resources" className="w-full h-auto" loading="lazy" />
             </div>
-            <div className="absolute bottom-0 left-[5%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-20">
-              <img src={aiAcademyScreenshot} alt="AI Academy - Business AI courses and training" className="w-full h-auto" loading="lazy" />
+            <div className="absolute bottom-0 left-[5%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-50">
+              <img src={aiInAsiaScreenshot} alt="AiInAsia - AI news and insights platform" className="w-full h-auto" loading="lazy" />
             </div>
-            <div className="absolute bottom-[120px] right-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-10">
+            <div className="absolute bottom-[120px] right-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-20">
               <img src={myOfferClubScreenshot} alt="MyOfferClub - AI-powered shopping deals" className="w-full h-auto" loading="lazy" />
             </div>
           </div>
