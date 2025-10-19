@@ -1,3 +1,9 @@
+import aiInAsiaScreenshot from "@/assets/aiinasia-screenshot.png";
+import promptAndGoScreenshot from "@/assets/promptandgo-screenshot.png";
+import biabScreenshot from "@/assets/biab-screenshot.png";
+import myOfferClubScreenshot from "@/assets/myofferclub-screenshot.png";
+import aiAcademyScreenshot from "@/assets/aiacademy-screenshot.png";
+
 const About = () => {
   return (
     <section id="about" className="py-24 px-6 bg-background">
@@ -20,17 +26,21 @@ const About = () => {
             </div>
           </div>
 
-          <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="aspect-square rounded-2xl bg-gradient-primary/10 backdrop-blur-sm border border-primary/20 p-8 flex items-center justify-center">
-              <div className="grid grid-cols-2 gap-8 w-full">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div 
-                    key={i} 
-                    className="aspect-square rounded-xl bg-gradient-primary/20 backdrop-blur-sm animate-pulse"
-                    style={{ animationDelay: `${i * 0.2}s`, animationDuration: '3s' }}
-                  />
-                ))}
-              </div>
+          <div className="relative animate-fade-in h-[600px]" style={{ animationDelay: '0.2s' }}>
+            <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-10">
+              <img src={aiInAsiaScreenshot} alt="AiInAsia platform" className="w-full h-auto" loading="lazy" />
+            </div>
+            <div className="absolute top-[80px] right-0 w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-10">
+              <img src={promptAndGoScreenshot} alt="PromptAndGo.ai platform" className="w-full h-auto" loading="lazy" />
+            </div>
+            <div className="absolute top-[180px] left-[10%] w-[60%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-10">
+              <img src={biabScreenshot} alt="Business in a Byte platform" className="w-full h-auto" loading="lazy" />
+            </div>
+            <div className="absolute bottom-[120px] right-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-10">
+              <img src={myOfferClubScreenshot} alt="MyOfferClub platform" className="w-full h-auto" loading="lazy" />
+            </div>
+            <div className="absolute bottom-0 left-[5%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-10">
+              <img src={aiAcademyScreenshot} alt="AI Academy platform" className="w-full h-auto" loading="lazy" />
             </div>
           </div>
         </div>
