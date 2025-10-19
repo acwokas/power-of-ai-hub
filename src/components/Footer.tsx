@@ -1,3 +1,7 @@
+import aiinasiaLogo from "@/assets/aiinasia-logo.png";
+import pagLogo from "@/assets/pag-logo.png";
+import biabLogo from "@/assets/biab-logo.png";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
@@ -5,27 +9,32 @@ const Footer = () => {
     { 
       subdomain: "discover.withthepowerof.ai",
       url: "https://www.aiinasia.com",
-      alt: "AIinASIA logo"
+      alt: "AIinASIA logo",
+      logo: aiinasiaLogo
     },
     { 
       subdomain: "prompt.withthepowerof.ai",
       url: "https://www.promptandgo.ai",
-      alt: "PromptAndGo logo"
+      alt: "PromptAndGo logo",
+      logo: pagLogo
     },
     { 
       subdomain: "startup.withthepowerof.ai",
       url: "https://www.businessinabyte.com",
-      alt: "BusinessInAByte logo"
+      alt: "BusinessInAByte logo",
+      logo: biabLogo
     },
     { 
       subdomain: "shop.withthepowerof.ai",
       url: "https://www.myofferclub.com",
-      alt: "MyOfferClub logo"
+      alt: "MyOfferClub logo",
+      logo: null
     },
     { 
       subdomain: "learn.withthepowerof.ai",
       url: "https://www.aiacademy.asia",
-      alt: "AIAcademy logo"
+      alt: "AIAcademy logo",
+      logo: null
     }
   ];
 
@@ -71,13 +80,21 @@ const Footer = () => {
                   rel="noopener"
                   className="flex flex-col items-center gap-3 hover:opacity-80 transition-opacity group"
                 >
-                  {/* Logo placeholder - circular grey box */}
+                  {/* Logo */}
                   <div 
-                    className="w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: '#333' }}
+                    className="w-32 h-24 flex items-center justify-center p-3"
+                    style={{ backgroundColor: link.logo ? '#FFF' : '#333' }}
                     aria-label={link.alt}
                   >
-                    <span className="text-2xl" style={{ color: '#666' }}>●</span>
+                    {link.logo ? (
+                      <img 
+                        src={link.logo} 
+                        alt={link.alt}
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <span className="text-2xl" style={{ color: '#666' }}>●</span>
+                    )}
                   </div>
                   
                   <div className="text-center">
