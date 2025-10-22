@@ -1,5 +1,6 @@
 import PlatformCard from "./PlatformCard";
 import { ShoppingBag, Compass, Lightbulb, Rocket, GraduationCap, Palette } from "lucide-react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const platforms = [
   {
@@ -22,7 +23,7 @@ const platforms = [
     headline: "Start up with the power of AI.",
     description: "Launch smarter and faster with BusinessInAByte - your AI-powered startup factory for building modern ventures.",
     ctaText: "Visit BusinessInAByte.com",
-    ctaUrl: "https://businessinabyte.ai",
+    ctaUrl: "https://www.businessinabyte.com",
     gradient: "bg-gradient-to-br from-orange-500 to-red-500",
     icon: Rocket
   },
@@ -54,8 +55,9 @@ const platforms = [
 
 const Ecosystem = () => {
   return (
-    <section id="ecosystem" className="py-24 px-6 bg-gradient-to-b from-background to-background/50">
-      <div className="container mx-auto max-w-7xl">
+    <TooltipProvider>
+      <section id="ecosystem" className="py-24 px-6 bg-gradient-to-b from-background to-background/50">
+        <div className="container mx-auto max-w-7xl">
         <div className="text-center space-y-6 mb-16 animate-slide-up">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
             Our Ecosystem<br />
@@ -78,8 +80,9 @@ const Ecosystem = () => {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </TooltipProvider>
   );
 };
 
