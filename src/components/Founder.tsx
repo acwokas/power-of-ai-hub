@@ -14,7 +14,7 @@ const Founder = () => {
   return (
     <section className="py-24 px-6 bg-card/30">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           <div className="order-2 md:order-1 space-y-6 animate-slide-up">
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl font-bold">

@@ -6,7 +6,7 @@ const platforms = [
     headline: "Discover Asian AI with the power of AI.",
     description: "Stories and insights on how artificial intelligence is reshaping business, culture, and careers across the region.",
     ctaText: "Visit AIinASIA.com",
-    ctaUrl: "https://asia.withthepowerof.ai",
+    ctaUrl: "https://www.aiinasia.com",
     gradient: "bg-gradient-to-br from-blue-500 to-cyan-500",
     icon: Compass
   },
@@ -14,7 +14,7 @@ const platforms = [
     headline: "Prompt with the power of AI.",
     description: "Premium prompts, automation packs, and creative templates to supercharge your work with ChatGPT, Midjourney, and beyond.",
     ctaText: "Visit PromptAndGo.ai",
-    ctaUrl: "https://prompt.withthepowerof.ai",
+    ctaUrl: "https://promptandgo.ai",
     gradient: "bg-gradient-to-br from-green-500 to-emerald-500",
     icon: Lightbulb
   },
@@ -22,7 +22,7 @@ const platforms = [
     headline: "Start up with the power of AI.",
     description: "Launch smarter and faster with BusinessInAByte - your AI-powered startup factory for building modern ventures.",
     ctaText: "Visit BusinessInAByte.com",
-    ctaUrl: "https://startup.withthepowerof.ai",
+    ctaUrl: "https://businessinabyte.ai",
     gradient: "bg-gradient-to-br from-orange-500 to-red-500",
     icon: Rocket
   },
@@ -30,7 +30,7 @@ const platforms = [
     headline: "Shop with the power of AI.",
     description: "Discover personalised deals and AI-curated offers from around the web - powered by MyOfferClub.",
     ctaText: "Visit MyOfferClub.com",
-    ctaUrl: "https://shop.withthepowerof.ai",
+    ctaUrl: "https://myofferclub.com",
     gradient: "bg-gradient-to-br from-yellow-500 to-orange-500",
     icon: ShoppingBag
   },
@@ -38,7 +38,7 @@ const platforms = [
     headline: "Learn with the power of AI.",
     description: "Master AI tools, data analytics, and digital marketing with flexible, real-world courses built for modern professionals.",
     ctaText: "Visit AIAcademy.asia",
-    ctaUrl: "https://learn.withthepowerof.ai",
+    ctaUrl: "https://aiacademy.asia",
     gradient: "bg-gradient-to-br from-purple-500 to-pink-500",
     icon: GraduationCap
   },
@@ -58,7 +58,8 @@ const Ecosystem = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center space-y-6 mb-16 animate-slide-up">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Our Ecosystem <span className="gradient-text">Connected by One Idea</span>
+            Our Ecosystem<br />
+            <span className="gradient-text">Connected by One Idea</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Every project under WithThePowerOf.AI focuses on a different part of the journey - 
