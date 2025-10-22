@@ -58,7 +58,7 @@ const Ecosystem = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center space-y-6 mb-16 animate-slide-up">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Our Ecosystem - <span className="gradient-text">Connected by One Idea</span>
+            Our Ecosystem <span className="gradient-text">Connected by One Idea</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Every project under WithThePowerOf.AI focuses on a different part of the journey - 

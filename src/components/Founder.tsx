@@ -85,7 +85,7 @@ const Founder = () => {
               <img
                 src={adrianImage}
                 alt="Adrian Watkins - Founder of WithThePowerOf.AI"
-                className="relative rounded-2xl shadow-2xl w-full h-auto object-cover"
+                className="relative rounded-2xl shadow-2xl w-full h-[600px] object-cover"
               />
             </div>
           </div>
