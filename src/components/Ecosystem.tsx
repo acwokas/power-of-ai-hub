@@ -71,13 +71,12 @@ const Ecosystem = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {platforms.map((platform, index) => (
-            <div 
+            <PlatformCard 
               key={index} 
-              className="animate-slide-up w-full"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <PlatformCard {...platform} logo={true} icon={platform.icon} />
-            </div>
+              {...platform} 
+              logo={true} 
+              icon={platform.icon} 
+            />
           ))}
         </div>
         </div>
