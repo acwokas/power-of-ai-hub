@@ -51,7 +51,7 @@ const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient, 
     return (
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="block cursor-not-allowed">
+          <div className="cursor-not-allowed">
             {cardContent}
           </div>
         </TooltipTrigger>
@@ -63,7 +63,7 @@ const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient, 
   }
 
   return (
-    <a href={ctaUrl} target="_blank" rel="noopener noreferrer" className="block">
+    <a href={ctaUrl} target="_blank" rel="noopener noreferrer">
       {cardContent}
     </a>
   );
