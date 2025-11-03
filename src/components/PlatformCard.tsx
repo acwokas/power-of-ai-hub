@@ -19,7 +19,7 @@ interface PlatformCardProps {
 
 const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient, icon: Icon }: PlatformCardProps) => {
   const cardContent = (
-    <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10 h-full">
+    <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 md:hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10 h-full">
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 ${gradient}`} />
       
       <CardHeader className="space-y-4">
