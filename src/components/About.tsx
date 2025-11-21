@@ -4,6 +4,7 @@ import aiAcademyScreenshot from "@/assets/aiacademy-screenshot.png";
 import myOfferClubScreenshot from "@/assets/myofferclub-screenshot.png";
 import promptAndGoScreenshot from "@/assets/promptandgo-screenshot.png";
 import aiInAsiaScreenshot from "@/assets/aiinasia-screenshot.png";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const About = () => {
   return (
@@ -28,30 +29,65 @@ const About = () => {
           </div>
 
           <div className="relative animate-fade-in h-[600px]" style={{ animationDelay: '0.2s' }}>
-            {/* 6. Shop with AI - Back */}
-            <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-10">
-              <img src={myOfferClubScreenshot} alt="MyOfferClub.com - AI-powered shopping deals" className="w-full h-auto" loading="lazy" />
-            </div>
-            {/* 5. Learn with AI */}
-            <div className="absolute top-[80px] right-0 w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-20">
-              <img src={aiAcademyScreenshot} alt="AIAcademy.asia - AI courses and training" className="w-full h-auto" loading="lazy" />
-            </div>
-            {/* 4. Start up with AI */}
-            <div className="absolute top-[160px] left-[10%] w-[60%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-30">
-              <img src={biabScreenshot} alt="BusinessInAByte.com - Startup tools and resources" className="w-full h-auto" loading="lazy" />
-            </div>
-            {/* 3. Discover with AI */}
-            <div className="absolute top-[240px] right-[8%] w-[68%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-40">
-              <img src={aiInAsiaScreenshot} alt="AIinASIA.com - Discover Asian AI news and insights" className="w-full h-auto" loading="lazy" />
-            </div>
-            {/* 2. Impact with AI */}
-            <div className="absolute bottom-[80px] left-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-50">
-              <img src={earnedIntelligenceScreenshot} alt="EarnedIntelligence.com - Building AI that earns its energy" className="w-full h-auto" loading="lazy" />
-            </div>
-            {/* 1. Prompt with AI - Front */}
-            <div className="absolute bottom-0 right-[10%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-60">
-              <img src={promptAndGoScreenshot} alt="PromptAndGo.ai - AI prompt optimization platform" className="w-full h-auto" loading="lazy" />
-            </div>
+            {/* 6. myofferclub.com - Back */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-10">
+                  <img src={myOfferClubScreenshot} alt="MyOfferClub.com - AI-powered shopping deals" className="w-full h-auto" loading="lazy" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>myofferclub.com</TooltipContent>
+            </Tooltip>
+            
+            {/* 5. AiAcademy.asia */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="absolute top-[80px] right-0 w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-20">
+                  <img src={aiAcademyScreenshot} alt="AIAcademy.asia - AI courses and training" className="w-full h-auto" loading="lazy" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>AIAcademy.asia</TooltipContent>
+            </Tooltip>
+            
+            {/* 4. businessinabyte.com */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="absolute top-[160px] left-[10%] w-[60%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-30">
+                  <img src={biabScreenshot} alt="BusinessInAByte.com - Startup tools and resources" className="w-full h-auto" loading="lazy" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>businessinabyte.com</TooltipContent>
+            </Tooltip>
+            
+            {/* 3. aiinasia.com */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="absolute top-[240px] right-[8%] w-[68%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-40">
+                  <img src={aiInAsiaScreenshot} alt="AIinASIA.com - Discover Asian AI news and insights" className="w-full h-auto" loading="lazy" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>aiinasia.com</TooltipContent>
+            </Tooltip>
+            
+            {/* 2. earnedintelligence.com */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="absolute bottom-[80px] left-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-50">
+                  <img src={earnedIntelligenceScreenshot} alt="EarnedIntelligence.com - Building AI that earns its energy" className="w-full h-auto" loading="lazy" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>earnedintelligence.com</TooltipContent>
+            </Tooltip>
+            
+            {/* 1. promptandgo.ai - Front */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="absolute bottom-0 right-[10%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-60">
+                  <img src={promptAndGoScreenshot} alt="PromptAndGo.ai - AI prompt optimization platform" className="w-full h-auto" loading="lazy" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>promptandgo.ai</TooltipContent>
+            </Tooltip>
           </div>
         </div>
       </div>
