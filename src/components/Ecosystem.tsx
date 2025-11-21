@@ -44,10 +44,10 @@ const platforms = [
     icon: GraduationCap
   },
   {
-    headline: "Create with the power of AI.",
-    description: "Our creative lab for AI prototypes, tools, and ideas in progress.",
-    ctaText: "Coming Soon",
-    ctaUrl: "#",
+    headline: "Impact with the power of AI.",
+    description: "Helping the world build AI that earns its energy. Outputs must equal outcomes.",
+    ctaText: "Visit earnedintelligence.com",
+    ctaUrl: "https://earnedintelligence.com",
     gradient: "bg-gradient-to-br from-indigo-500 to-purple-500",
     icon: Palette
   }
