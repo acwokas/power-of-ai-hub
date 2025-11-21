@@ -1,8 +1,9 @@
-import aiInAsiaScreenshot from "@/assets/aiinasia-screenshot.png";
-import promptAndGoScreenshot from "@/assets/promptandgo-screenshot.png";
+import earnedIntelligenceScreenshot from "@/assets/earnedintelligence-screenshot.png";
 import biabScreenshot from "@/assets/biab-screenshot.png";
-import myOfferClubScreenshot from "@/assets/myofferclub-screenshot.png";
 import aiAcademyScreenshot from "@/assets/aiacademy-screenshot.png";
+import myOfferClubScreenshot from "@/assets/myofferclub-screenshot.png";
+import promptAndGoScreenshot from "@/assets/promptandgo-screenshot.png";
+import aiInAsiaScreenshot from "@/assets/aiinasia-screenshot.png";
 
 const About = () => {
   return (
@@ -27,20 +28,29 @@ const About = () => {
           </div>
 
           <div className="relative animate-fade-in h-[600px]" style={{ animationDelay: '0.2s' }}>
-            <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-10">
-              <img src={aiAcademyScreenshot} alt="AI Academy - Business AI courses and training" className="w-full h-auto" loading="lazy" />
+            {/* 6. Discover with AI - Back */}
+            <div className="absolute top-0 left-0 w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-10">
+              <img src={aiInAsiaScreenshot} alt="AIinASIA.com - Discover Asian AI news and insights" className="w-full h-auto" loading="lazy" />
             </div>
-            <div className="absolute top-[80px] right-0 w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-30">
+            {/* 5. Prompt with AI */}
+            <div className="absolute top-[80px] right-0 w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-20">
               <img src={promptAndGoScreenshot} alt="PromptAndGo.ai - AI prompt optimization platform" className="w-full h-auto" loading="lazy" />
             </div>
-            <div className="absolute top-[180px] left-[10%] w-[60%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-20">
-              <img src={biabScreenshot} alt="Business in a Byte - Startup tools and resources" className="w-full h-auto" loading="lazy" />
+            {/* 4. Shop with AI */}
+            <div className="absolute top-[160px] left-[10%] w-[60%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-3deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-30">
+              <img src={myOfferClubScreenshot} alt="MyOfferClub.com - AI-powered shopping deals" className="w-full h-auto" loading="lazy" />
             </div>
-            <div className="absolute bottom-0 left-[5%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-50">
-              <img src={aiInAsiaScreenshot} alt="AiInAsia - AI news and insights platform" className="w-full h-auto" loading="lazy" />
+            {/* 3. Learn with AI */}
+            <div className="absolute top-[240px] right-[8%] w-[68%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-40">
+              <img src={aiAcademyScreenshot} alt="AIAcademy.asia - AI courses and training" className="w-full h-auto" loading="lazy" />
             </div>
-            <div className="absolute bottom-[120px] right-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[2deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[60] z-40">
-              <img src={myOfferClubScreenshot} alt="MyOfferClub - AI-powered shopping deals" className="w-full h-auto" loading="lazy" />
+            {/* 2. Start up with AI */}
+            <div className="absolute bottom-[80px] left-[5%] w-[65%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[-1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-50">
+              <img src={biabScreenshot} alt="BusinessInAByte.com - Startup tools and resources" className="w-full h-auto" loading="lazy" />
+            </div>
+            {/* 1. Impact with AI - Front */}
+            <div className="absolute bottom-0 right-[10%] w-[70%] rounded-xl overflow-hidden shadow-elegant border border-primary/10 transform rotate-[1deg] transition-transform hover:rotate-0 hover:scale-105 hover:z-[70] z-60">
+              <img src={earnedIntelligenceScreenshot} alt="EarnedIntelligence.com - Building AI that earns its energy" className="w-full h-auto" loading="lazy" />
             </div>
           </div>
         </div>
