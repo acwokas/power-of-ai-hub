@@ -1,5 +1,5 @@
 import PlatformCard from "./PlatformCard";
-import { ShoppingBag, Compass, Lightbulb, Rocket, GraduationCap, Palette } from "lucide-react";
+import { ShoppingBag, Compass, Lightbulb, Rocket, GraduationCap, Target } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const platforms = [
@@ -49,7 +49,7 @@ const platforms = [
     ctaText: "Visit earnedintelligence.com",
     ctaUrl: "https://earnedintelligence.com",
     gradient: "bg-gradient-to-br from-indigo-500 to-purple-500",
-    icon: Palette
+    icon: Target
   }
 ];
 
