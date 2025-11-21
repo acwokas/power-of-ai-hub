@@ -21,7 +21,7 @@ const About = () => {
                 get real value from AI.
               </p>
               <p>
-                From education and media to tools, startups, and smart shopping - everything 
+                From education and media to tools, startups, and smart to shopping and sustainability - everything 
                 we create is designed to help you do more, with the power of AI.
               </p>
             </div>
