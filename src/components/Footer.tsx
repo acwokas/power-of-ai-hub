@@ -21,12 +21,6 @@ const Footer = () => {
     alt: "PromptAndGo logo",
     logo: pagLogo
   }, {
-    subdomain: "startup.withthepowerof.ai",
-    url: "https://www.businessinabyte.com",
-    displayUrl: "BusinessInAByte.com",
-    alt: "BusinessInAByte logo",
-    logo: biabLogo
-  }, {
     subdomain: "shop.withthepowerof.ai",
     url: "https://www.myofferclub.com",
     displayUrl: "MyOfferClub.com",
@@ -38,6 +32,12 @@ const Footer = () => {
     displayUrl: "AIAcademy.asia",
     alt: "AIAcademy logo",
     logo: aiacademyLogo
+  }, {
+    subdomain: "startup.withthepowerof.ai",
+    url: "https://www.businessinabyte.com",
+    displayUrl: "BusinessInAByte.com",
+    alt: "BusinessInAByte logo",
+    logo: biabLogo
   }, {
     subdomain: "impact.withthepowerof.ai",
     url: "https://www.earnedintelligence.com",
@@ -90,7 +90,7 @@ const Footer = () => {
                   <TooltipTrigger asChild>
                     <a href={link.url} target="_blank" rel="noopener" className="flex flex-col items-center gap-3 transition-all duration-300 group">
                       {/* Logo */}
-                      <div className={`w-40 h-28 flex items-center justify-center rounded-lg border-2 shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105 group-hover:border-[#00B3FF] ${link.alt === "BusinessInAByte logo" ? 'p-3' : link.alt === "PromptAndGo logo" ? 'p-1' : 'p-0'}`} style={{
+                      <div className={`w-40 h-28 flex items-center justify-center rounded-lg border-2 shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105 group-hover:border-[#00B3FF] ${link.alt === "BusinessInAByte logo" ? 'p-1' : link.alt === "PromptAndGo logo" ? 'p-1' : 'p-0'}`} style={{
                       backgroundColor: link.logo ? '#FFF' : '#333',
                       borderColor: '#333'
                     }} aria-label={link.alt}>
