@@ -3,6 +3,7 @@ import pagLogo from "@/assets/pag-logo.png";
 import biabLogo from "@/assets/biab-logo.png";
 import myofferclubLogo from "@/assets/myofferclub-logo.png";
 import aiacademyLogo from "@/assets/aiacademy-logo.png";
+import earnedIntelligenceLogo from "@/assets/earnedintelligence-logo.png";
 import { ExternalLink } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 const Footer = () => {
@@ -37,6 +38,12 @@ const Footer = () => {
     displayUrl: "AIAcademy.asia",
     alt: "AIAcademy logo",
     logo: aiacademyLogo
+  }, {
+    subdomain: "impact.withthepowerof.ai",
+    url: "https://www.earnedintelligence.com",
+    displayUrl: "EarnedIntelligence.com",
+    alt: "EarnedIntelligence logo",
+    logo: earnedIntelligenceLogo
   }];
   return <TooltipProvider>
       <footer className="py-16 px-6" style={{
@@ -78,7 +85,7 @@ const Footer = () => {
             </h4>
             
             {/* logo placeholders */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {collectiveLinks.map((link, index) => <Tooltip key={index}>
                   <TooltipTrigger asChild>
                     <a href={link.url} target="_blank" rel="noopener" className="flex flex-col items-center gap-3 transition-all duration-300 group">
