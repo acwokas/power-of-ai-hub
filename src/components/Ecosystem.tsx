@@ -20,20 +20,20 @@ const platforms = [
     icon: Lightbulb
   },
   {
-    headline: "Start up with the power of AI.",
-    description: "Launch smarter and faster with BusinessInAByte - your AI-powered startup factory for building modern ventures.",
-    ctaText: "Visit BusinessInAByte.com",
-    ctaUrl: "https://www.businessinabyte.com",
-    gradient: "bg-gradient-to-br from-orange-500 to-red-500",
-    icon: Rocket
-  },
-  {
     headline: "Shop with the power of AI.",
     description: "Discover personalised deals and AI-curated offers from around the web - powered by MyOfferClub.",
     ctaText: "Visit MyOfferClub.com",
     ctaUrl: "https://myofferclub.com",
     gradient: "bg-gradient-to-br from-yellow-500 to-orange-500",
     icon: ShoppingBag
+  },
+  {
+    headline: "Start up with the power of AI.",
+    description: "Launch smarter and faster with BusinessInAByte - your AI-powered startup factory for building modern ventures.",
+    ctaText: "Visit BusinessInAByte.com",
+    ctaUrl: "https://www.businessinabyte.com",
+    gradient: "bg-gradient-to-br from-orange-500 to-red-500",
+    icon: Rocket
   },
   {
     headline: "Learn with the power of AI.",
