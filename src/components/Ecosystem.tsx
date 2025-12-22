@@ -44,10 +44,10 @@ const platforms = [
     icon: Rocket
   },
   {
-    headline: "Impact with the power of AI.",
-    description: "Helping the world build AI that earns its energy. Outputs must equal outcomes.",
-    ctaText: "Visit earnedintelligence.com",
-    ctaUrl: "https://earnedintelligence.com",
+    headline: "Play with the power of AI.",
+    description: "Fun, interactive AI experiences and games that make learning and creativity accessible to everyone.",
+    ctaText: "PromptAndPlay.ai (Coming Soon)",
+    ctaUrl: "#",
     gradient: "bg-gradient-to-br from-indigo-500 to-purple-500",
     icon: Target
   }
