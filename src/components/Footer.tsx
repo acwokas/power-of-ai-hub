@@ -39,11 +39,11 @@ const Footer = () => {
     alt: "BusinessInAByte logo",
     logo: biabLogo
   }, {
-    subdomain: "impact.withthepowerof.ai",
-    url: "https://www.earnedintelligence.com",
-    displayUrl: "EarnedIntelligence.com",
-    alt: "EarnedIntelligence logo",
-    logo: earnedIntelligenceLogo
+    subdomain: "play.withthepowerof.ai",
+    url: "#",
+    displayUrl: "PromptAndPlay.ai (Coming Soon)",
+    alt: "PromptAndPlay logo",
+    logo: null
   }];
   return <TooltipProvider>
       <footer className="py-16 px-6" style={{
