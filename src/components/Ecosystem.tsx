@@ -50,7 +50,7 @@ const platforms = [
 
 const Ecosystem = () => {
   return (
-    <section id="ecosystem" className="py-24 md:py-32 bg-muted/20">
+    <section id="ecosystem" className="py-12 md:py-16 bg-muted/20">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="max-w-3xl mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
