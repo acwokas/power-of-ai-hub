@@ -28,6 +28,10 @@ const SectionPartnerships = () => {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-2">•</span>
+                <span>Brands exploring clearer positioning, communication, and responsible use of AI</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-primary mt-2">•</span>
                 <span>Businesses building responsibly, not opportunistically</span>
               </li>
               <li className="flex items-start gap-3">
