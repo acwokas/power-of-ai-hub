@@ -47,6 +47,7 @@ const platforms = [
     url: "#",
     comingSoon: true,
     premium: true,
+    premiumNote: "Free to start. Advanced capabilities available.",
   },
 ];
 
@@ -84,9 +85,9 @@ const Ecosystem = () => {
                 
                 <p className="text-muted-foreground text-sm leading-relaxed flex-grow mb-6">
                   {platform.description}
-                  {platform.premium && (
+                  {platform.premium && platform.premiumNote && (
                     <span className="block mt-3 text-xs text-muted-foreground/70">
-                      Limited access. Paid options available.
+                      {platform.premiumNote}
                     </span>
                   )}
                 </p>
