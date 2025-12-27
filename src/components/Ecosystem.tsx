@@ -45,8 +45,6 @@ const platforms = [
     cta: "Explore Perform",
     url: "https://perform.withthepowerof.ai",
     premium: true,
-    statusNote: "Live. Free to start. Advanced capabilities available.",
-    ctaNote: "Free to start. No setup required.",
   },
 ];
 
@@ -84,11 +82,6 @@ const Ecosystem = () => {
                 
                 <p className="text-muted-foreground text-sm leading-relaxed flex-grow mb-6">
                   {platform.description}
-                  {platform.statusNote && (
-                    <span className="block mt-3 text-xs text-muted-foreground/70">
-                      {platform.statusNote}
-                    </span>
-                  )}
                 </p>
                 
                 <div>
@@ -102,11 +95,6 @@ const Ecosystem = () => {
                       <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                     </a>
                   </Button>
-                  {platform.ctaNote && (
-                    <p className="text-xs text-muted-foreground/60 text-center mt-2">
-                      {platform.ctaNote}
-                    </p>
-                  )}
                 </div>
               </CardContent>
             </Card>
