@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import SectionText from "@/components/SectionText";
 import About from "@/components/About";
 import Founder from "@/components/Founder";
 import Ecosystem from "@/components/Ecosystem";
@@ -10,6 +11,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Hero />
+      <SectionText />
       <About />
       <Founder />
       <Ecosystem />
