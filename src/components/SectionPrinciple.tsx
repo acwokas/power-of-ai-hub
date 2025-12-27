@@ -1,13 +1,13 @@
 const SectionPrinciple = () => {
   return (
-    <section id="principle" className="py-12 md:py-16 bg-muted/30">
+    <section id="principle" className="py-20 md:py-28">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-10 text-foreground/80">
             Clarity comes before tools
           </h2>
           
-          <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
+          <div className="space-y-8 text-base md:text-lg text-muted-foreground/80 leading-loose">
             <p>
               For decades, high quality strategic thinking and execution frameworks were locked inside elite consultancies, blue chip organisations, and specialist teams.
             </p>
@@ -22,9 +22,9 @@ const SectionPrinciple = () => {
               But by making structured thinking, practical guidance, and expert level frameworks accessible beyond a privileged few.
             </p>
             
-            <p className="pt-4">This ecosystem exists to support that shift.</p>
+            <p className="pt-6">This ecosystem exists to support that shift.</p>
             
-            <p className="text-foreground font-medium pt-4">
+            <p className="text-foreground/70 pt-6">
               AI is the enabler.
               <br />
               Judgment stays human.
