@@ -23,7 +23,6 @@ const platforms = [
     description: "Safe environments to experiment, rehearse, and explore ideas before committing. For people who learn best by doing.",
     cta: "Enter PromptAndPlay",
     url: "https://promptandplay.ai",
-    statusNote: "Live. Open to explore.",
   },
   {
     category: "Learn",
