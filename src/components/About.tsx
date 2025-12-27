@@ -18,11 +18,11 @@ const About = () => {
             
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                We're a collective of connected brands built to help people and businesses 
+                We are a collective of connected brands built to help people and businesses 
                 get real value from AI.
               </p>
               <p>
-                From education and media to tools, startups, and smart to shopping and sustainability - everything 
+                From education and media to tools, startups, and smart shopping, everything 
                 we create is designed to help you do more, with the power of AI.
               </p>
             </div>

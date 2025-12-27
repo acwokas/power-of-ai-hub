@@ -64,8 +64,8 @@ const Ecosystem = () => {
             <span className="gradient-text">Connected by One Idea</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Every project under WithThePowerOf.AI focuses on a different part of the journey - 
-            but all share one goal: making AI accessible and empowering for everyone.
+            Every project under WithThePowerOf.AI focuses on a different part of the journey, 
+            but all share one goal: helping you get real value from AI.
           </p>
         </div>
 
