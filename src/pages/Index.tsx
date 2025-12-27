@@ -4,6 +4,7 @@ import SectionPrinciple from "@/components/SectionPrinciple";
 import About from "@/components/About";
 import Founder from "@/components/Founder";
 import Ecosystem from "@/components/Ecosystem";
+import SectionUsage from "@/components/SectionUsage";
 import Why from "@/components/Why";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -17,6 +18,7 @@ const Index = () => {
       <About />
       <Founder />
       <Ecosystem />
+      <SectionUsage />
       <Why />
       <Contact />
       <Footer />
