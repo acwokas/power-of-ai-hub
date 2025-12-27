@@ -43,10 +43,11 @@ const platforms = [
     category: "Perform",
     title: "Perform",
     description: "Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next. For organisations ready to stop guessing.",
-    cta: "Learn about Perform",
+    cta: "Explore Perform",
     url: "https://perform.withthepowerof.ai",
     premium: true,
     statusNote: "Live. Free to start. Advanced capabilities available.",
+    ctaNote: "Free to start. No setup required.",
   },
 ];
 
@@ -91,16 +92,23 @@ const Ecosystem = () => {
                   )}
                 </p>
                 
-                <Button 
-                  variant="ghost" 
-                  className="w-full justify-between group-hover:text-primary transition-colors"
-                  asChild
-                >
-                  <a href={platform.url} target="_blank" rel="noopener noreferrer">
-                    {platform.cta}
-                    <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </a>
-                </Button>
+                <div>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-between group-hover:text-primary transition-colors"
+                    asChild
+                  >
+                    <a href={platform.url} target="_blank" rel="noopener noreferrer">
+                      {platform.cta}
+                      <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    </a>
+                  </Button>
+                  {platform.ctaNote && (
+                    <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                      {platform.ctaNote}
+                    </p>
+                  )}
+                </div>
               </CardContent>
             </Card>
           ))}
