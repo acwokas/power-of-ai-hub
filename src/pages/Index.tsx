@@ -6,6 +6,7 @@ import Founder from "@/components/Founder";
 import Ecosystem from "@/components/Ecosystem";
 import SectionUsage from "@/components/SectionUsage";
 import SectionGuardrails from "@/components/SectionGuardrails";
+import FinalCTA from "@/components/FinalCTA";
 import Why from "@/components/Why";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -21,7 +22,7 @@ const Index = () => {
       <Ecosystem />
       <SectionUsage />
       <SectionGuardrails />
-      <Why />
+      <FinalCTA />
       <Contact />
       <Footer />
     </div>
