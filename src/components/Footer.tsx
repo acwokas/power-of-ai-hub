@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import aiinasiaLogo from "@/assets/aiinasia-logo.png";
 import pagLogo from "@/assets/pag-logo.png";
 import biabLogo from "@/assets/biab-logo.png";
@@ -6,6 +7,7 @@ import aiacademyLogo from "@/assets/aiacademy-logo.png";
 import earnedIntelligenceLogo from "@/assets/earnedintelligence-logo.png";
 import { ExternalLink } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const collectiveLinks = [{
@@ -114,10 +116,15 @@ const Footer = () => {
             </div>
           </div>
 
-            {/* copyright */}
-            <div className="pt-12 border-t" style={{
+            {/* footer links and copyright */}
+            <div className="pt-12 border-t flex flex-col md:flex-row justify-between items-center gap-4" style={{
             borderColor: '#333'
           }}>
+              <div className="flex gap-6">
+                <Link to="/about" className="text-sm hover:opacity-80 transition-opacity" style={{ color: '#999' }}>
+                  About
+                </Link>
+              </div>
               <p className="text-sm" style={{
               color: '#999'
             }}>
