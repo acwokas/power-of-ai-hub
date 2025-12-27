@@ -70,9 +70,7 @@ const Footer = () => {
             <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{
               color: '#FFF'
             }}>
-              Every project under You.WithThePowerOf.AI focuses on a different part of the journey, but all share one goal: making AI accessible and empowering for everyone. <span style={{
-                color: '#00B3FF'
-              }}>#Democratising.AI</span>
+              Every project under You.WithThePowerOf.AI focuses on a different part of the journey, but all share one goal: helping people and businesses get real value from AI.
             </p>
           </div>
 

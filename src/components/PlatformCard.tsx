@@ -56,7 +56,7 @@ const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient, 
           </div>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Coming Soon</p>
+          <p>This platform is currently in development.</p>
         </TooltipContent>
       </Tooltip>
     );

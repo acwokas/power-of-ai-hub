@@ -28,17 +28,17 @@ const Founder = () => {
 
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                I've spent over 26 years helping companies from global corporations to fast-growing 
-                startups achieve measurable success through AI-powered digital transformation, smart 
+                I have spent over 26 years helping companies, from global corporations to fast-growing 
+                startups, achieve measurable success through AI-powered digital transformation, smart 
                 go-to-market execution, and sustainable revenue growth.
               </p>
               <p>
-                Along the way, I've launched plenty of startups and advised several scale-ups too. 
-                It's always been more complex than it should be, which is why I created WithThePowerOf.AI - 
+                Along the way, I have launched startups and advised scale-ups. 
+                It has always been more complex than it should be, which is why I created WithThePowerOf.AI: 
                 a collective of connected brands built to help people and businesses get real value from AI.
               </p>
               <p>
-                From education and media to tools, startups, and smart shopping - everything we create 
+                From education and media to tools, startups, and smart shopping, everything we create 
                 is designed to help you do more, with the power of AI.
               </p>
             </div>

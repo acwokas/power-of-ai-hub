@@ -19,15 +19,15 @@ const Why = () => {
             
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                Because the future isn't about humans versus machines - it's about what 
+                The future is not about humans versus machines. It is about what 
                 we can achieve together.
               </p>
               <p>
                 WithThePowerOf.AI is built on the belief that technology should enhance 
-                creativity, learning, and opportunity for everyone.
+                creativity, learning, and opportunity.
               </p>
               <p className="text-xl font-semibold text-foreground pt-4">
-                Real tools. Real skills. Real results - with the power of AI.
+                Real tools. Real skills. Real results, with the power of AI.
               </p>
             </div>
           </div>

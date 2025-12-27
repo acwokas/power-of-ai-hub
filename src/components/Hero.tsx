@@ -22,8 +22,8 @@ const Hero = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            We build platforms that make artificial intelligence useful, practical, and human - 
-            helping people learn, create, build, and grow with the power of AI.
+            We build platforms that make artificial intelligence useful, practical, and human. 
+            Tools to help you learn, create, build, and grow with the power of AI.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
