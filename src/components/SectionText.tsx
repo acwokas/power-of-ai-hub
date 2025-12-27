@@ -2,7 +2,7 @@ import sectionAbstract from "@/assets/hero-abstract.png";
 
 const SectionText = () => {
   return (
-    <section id="problem" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="problem" className="relative py-12 md:py-16 overflow-hidden">
       {/* Optional abstract background */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-10"

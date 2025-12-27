@@ -1,6 +1,6 @@
 const SectionPrinciple = () => {
   return (
-    <section id="principle" className="py-24 md:py-32 bg-muted/30">
+    <section id="principle" className="py-12 md:py-16 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
