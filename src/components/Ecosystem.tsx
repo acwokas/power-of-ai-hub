@@ -22,8 +22,8 @@ const platforms = [
     title: "PromptAndPlay",
     description: "Safe environments to experiment, rehearse, and explore ideas before committing. For people who learn best by doing.",
     cta: "Enter PromptAndPlay",
-    url: "#",
-    comingSoon: true,
+    url: "https://promptandplay.ai",
+    statusNote: "Live. Open to explore.",
   },
   {
     category: "Learn",
@@ -44,10 +44,9 @@ const platforms = [
     title: "Perform",
     description: "Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next. For organisations ready to stop guessing.",
     cta: "Learn about Perform",
-    url: "#",
-    comingSoon: true,
+    url: "https://perform.withthepowerof.ai",
     premium: true,
-    premiumNote: "Free to start. Advanced capabilities available.",
+    statusNote: "Live. Free to start. Advanced capabilities available.",
   },
 ];
 
@@ -85,34 +84,23 @@ const Ecosystem = () => {
                 
                 <p className="text-muted-foreground text-sm leading-relaxed flex-grow mb-6">
                   {platform.description}
-                  {platform.premium && platform.premiumNote && (
+                  {platform.statusNote && (
                     <span className="block mt-3 text-xs text-muted-foreground/70">
-                      {platform.premiumNote}
+                      {platform.statusNote}
                     </span>
                   )}
                 </p>
                 
-                {platform.comingSoon ? (
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-between text-muted-foreground cursor-default"
-                    disabled
-                  >
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-between group-hover:text-primary transition-colors"
+                  asChild
+                >
+                  <a href={platform.url} target="_blank" rel="noopener noreferrer">
                     {platform.cta}
-                    <span className="text-xs">(Coming soon)</span>
-                  </Button>
-                ) : (
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-between group-hover:text-primary transition-colors"
-                    asChild
-                  >
-                    <a href={platform.url} target="_blank" rel="noopener noreferrer">
-                      {platform.cta}
-                      <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                    </a>
-                  </Button>
-                )}
+                    <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           ))}
