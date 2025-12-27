@@ -14,6 +14,13 @@ const Footer = () => {
             <Link to="/founder" className="text-sm hover:opacity-80 transition-opacity" style={{ color: '#999' }}>
               About the founder
             </Link>
+            <a 
+              href="mailto:hello@withthepowerof.ai" 
+              className="text-sm hover:opacity-80 transition-opacity" 
+              style={{ color: '#999' }}
+            >
+              hello@withthepowerof.ai
+            </a>
           </div>
           <p className="text-sm" style={{ color: '#999' }}>
             © {currentYear} You.WithThePowerOf.AI. All rights reserved.
