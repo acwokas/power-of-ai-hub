@@ -39,7 +39,7 @@ const PlatformCard = ({ logo, headline, description, ctaText, ctaUrl, gradient, 
           {description}
         </CardDescription>
 
-        <div className="w-full flex justify-between items-center text-sm text-muted-foreground group-hover:text-primary transition-all">
+        <div className="w-full flex justify-between items-center text-sm text-muted-foreground group-hover:text-foreground transition-all">
           <span>{ctaText}</span>
           {ctaUrl !== "#" && <ExternalLink className="h-4 w-4" />}
         </div>

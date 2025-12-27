@@ -43,7 +43,7 @@ const Hero = () => {
               size="lg" 
               variant="outline"
               onClick={scrollToEcosystem}
-              className="border-primary text-foreground text-lg px-8 py-6 h-auto transition-all duration-300 hover:scale-105 hover:bg-primary/15 hover:border-primary"
+              className="border-foreground/30 text-foreground text-lg px-8 py-6 h-auto transition-all duration-300 hover:scale-105 hover:bg-foreground/10 hover:border-foreground/50"
             >
               Start where you are
             </Button>
