@@ -67,7 +67,11 @@ const Ecosystem = () => {
           {platforms.map((platform, index) => (
             <Card 
               key={index} 
-              className="group bg-card/50 border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
+              className={`group bg-card/50 transition-all duration-300 hover:shadow-lg ${
+                platform.premium 
+                  ? "border-2 border-primary/40 hover:border-primary/60 shadow-md shadow-primary/10" 
+                  : "border-border/50 hover:border-primary/30"
+              }`}
             >
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="mb-4">
