@@ -62,6 +62,30 @@ const AboutPage = () => {
               </p>
             </div>
 
+            {/* How we work with others */}
+            <div className="border-t border-border pt-12 mt-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">
+                How we work with others
+              </h2>
+              
+              <div className="space-y-4 text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <p>We believe the best work happens through considered collaboration.</p>
+                
+                <p>
+                  Where it makes sense, we work with educators, operators, and organisations 
+                  who bring complementary expertise and grounded experience.
+                </p>
+                
+                <p>Partnerships are selective and principle-led.</p>
+                
+                <p>They exist to improve outcomes, not to broaden reach.</p>
+                
+                <p className="text-foreground font-medium pt-2">
+                  This approach allows the ecosystem to remain focused, independent, and accountable.
+                </p>
+              </div>
+            </div>
+
             <div className="pt-16">
               <Button 
                 size="lg" 

@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Ecosystem from "@/components/Ecosystem";
 import SectionUsage from "@/components/SectionUsage";
 import SectionGuardrails from "@/components/SectionGuardrails";
+import SectionPartnerships from "@/components/SectionPartnerships";
 import FinalCTA from "@/components/FinalCTA";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -19,6 +20,7 @@ const Index = () => {
       <Ecosystem />
       <SectionUsage />
       <SectionGuardrails />
+      <SectionPartnerships />
       <FinalCTA />
       <Contact />
       <Footer />
