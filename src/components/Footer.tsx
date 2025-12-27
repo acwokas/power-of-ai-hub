@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import aiinasiaLogo from "@/assets/aiinasia-logo.png";
 import pagLogo from "@/assets/pag-logo.png";
 import biabLogo from "@/assets/biab-logo.png";
-import myofferclubLogo from "@/assets/myofferclub-logo.png";
+// myofferclubLogo removed - shop is secondary, not primary CTA
 import aiacademyLogo from "@/assets/aiacademy-logo.png";
 import earnedIntelligenceLogo from "@/assets/earnedintelligence-logo.png";
 import { ExternalLink } from "lucide-react";
@@ -10,43 +10,51 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const collectiveLinks = [{
-    subdomain: "discover.withthepowerof.ai",
-    url: "https://www.aiinasia.com",
-    displayUrl: "AIinASIA.com",
-    alt: "AIinASIA logo",
-    logo: aiinasiaLogo
-  }, {
-    subdomain: "prompt.withthepowerof.ai",
-    url: "https://www.promptandgo.ai",
-    displayUrl: "PromptAndGo.ai",
-    alt: "PromptAndGo logo",
-    logo: pagLogo
-  }, {
-    subdomain: "shop.withthepowerof.ai",
-    url: "https://www.myofferclub.com",
-    displayUrl: "MyOfferClub.com",
-    alt: "MyOfferClub logo",
-    logo: myofferclubLogo
-  }, {
-    subdomain: "learn.withthepowerof.ai",
-    url: "https://www.aiacademy.asia",
-    displayUrl: "AIAcademy.asia",
-    alt: "AIAcademy logo",
-    logo: aiacademyLogo
-  }, {
-    subdomain: "startup.withthepowerof.ai",
-    url: "https://www.businessinabyte.com",
-    displayUrl: "BusinessInAByte.com",
-    alt: "BusinessInAByte logo",
-    logo: biabLogo
-  }, {
-    subdomain: "play.withthepowerof.ai",
-    url: "#",
-    displayUrl: "PromptAndPlay.ai (Coming Soon)",
-    alt: "PromptAndPlay logo",
-    logo: null
-  }];
+  // Ordered by hierarchy: Discover > Prompt > Play > Learn > Build > Perform
+  // Shop/experimental properties are secondary, not primary CTAs
+  const collectiveLinks = [
+    {
+      category: "Discover",
+      subdomain: "discover.withthepowerof.ai",
+      url: "https://www.aiinasia.com",
+      displayUrl: "AIinASIA.com",
+      alt: "AIinASIA logo",
+      logo: aiinasiaLogo
+    },
+    {
+      category: "Prompt",
+      subdomain: "prompt.withthepowerof.ai",
+      url: "https://www.promptandgo.ai",
+      displayUrl: "PromptAndGo.ai",
+      alt: "PromptAndGo logo",
+      logo: pagLogo
+    },
+    {
+      category: "Play",
+      subdomain: "play.withthepowerof.ai",
+      url: "#",
+      displayUrl: "PromptAndPlay.ai (Coming Soon)",
+      alt: "PromptAndPlay logo",
+      logo: null,
+      comingSoon: true
+    },
+    {
+      category: "Learn",
+      subdomain: "learn.withthepowerof.ai",
+      url: "https://www.aiacademy.asia",
+      displayUrl: "AIAcademy.asia",
+      alt: "AIAcademy logo",
+      logo: aiacademyLogo
+    },
+    {
+      category: "Build",
+      subdomain: "build.withthepowerof.ai",
+      url: "https://www.businessinabyte.com",
+      displayUrl: "BusinessInAByte.com",
+      alt: "BusinessInAByte logo",
+      logo: biabLogo
+    }
+  ];
   return <TooltipProvider>
       <footer className="py-16 px-6" style={{
       backgroundColor: '#111'
@@ -88,7 +96,7 @@ const Footer = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {collectiveLinks.map((link, index) => <Tooltip key={index}>
                   <TooltipTrigger asChild>
-                    <a href={link.url} target="_blank" rel="noopener" className="flex flex-col items-center gap-3 transition-all duration-300 group">
+                    <a href={link.comingSoon ? undefined : link.url} target={link.comingSoon ? undefined : "_blank"} rel="noopener" className={`flex flex-col items-center gap-3 transition-all duration-300 group ${link.comingSoon ? 'cursor-default' : ''}`}>
                       {/* Logo */}
                       <div className={`w-40 h-28 flex items-center justify-center rounded-lg border-2 shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105 group-hover:border-[#00B3FF] ${link.alt === "BusinessInAByte logo" ? 'p-6' : link.alt === "PromptAndGo logo" ? 'p-1' : 'p-0'}`} style={{
                       backgroundColor: link.logo ? '#FFF' : '#333',
