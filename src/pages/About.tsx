@@ -86,6 +86,35 @@ const AboutPage = () => {
               </div>
             </div>
 
+            {/* The thinking behind the ecosystem */}
+            <div className="border-t border-border pt-12 mt-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-muted-foreground">
+                The thinking behind the ecosystem
+              </h2>
+              
+              <div className="space-y-4 text-base text-muted-foreground/80 leading-relaxed">
+                <p>
+                  This ecosystem is shaped by practical experience working across digital transformation, go-to-market strategy, and AI-led innovation in both commercial and public-sector contexts.
+                </p>
+                
+                <p>Repeated exposure to the same patterns shaped its direction:</p>
+                
+                <p>
+                  access to tools is rarely the constraint, but clarity, positioning, and decision-making often are.
+                </p>
+                
+                <p>The focus of this work is not personal visibility.</p>
+                
+                <p>
+                  It is building systems that help people think more clearly and act more deliberately.
+                </p>
+                
+                <p className="pt-4 text-muted-foreground/60">
+                  Created by Adrian Watkins
+                </p>
+              </div>
+            </div>
+
             <div className="pt-16">
               <Button 
                 size="lg" 

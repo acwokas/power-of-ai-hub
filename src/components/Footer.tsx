@@ -11,9 +11,6 @@ const Footer = () => {
             <Link to="/about" className="text-sm hover:opacity-80 transition-opacity" style={{ color: '#999' }}>
               About
             </Link>
-            <Link to="/founder" className="text-sm hover:opacity-80 transition-opacity" style={{ color: '#999' }}>
-              About the founder
-            </Link>
             <a 
               href="mailto:hello@withthepowerof.ai" 
               className="text-sm hover:opacity-80 transition-opacity" 
