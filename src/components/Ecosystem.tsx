@@ -1,87 +1,123 @@
-import PlatformCard from "./PlatformCard";
-import { ShoppingBag, Compass, Lightbulb, Rocket, GraduationCap, Target } from "lucide-react";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const platforms = [
   {
-    headline: "Discover Asian AI with the power of AI.",
-    description: "Stories and insights on how artificial intelligence is reshaping business, culture, and careers across the region.",
-    ctaText: "Visit AIinASIA.com",
-    ctaUrl: "https://www.aiinasia.com",
-    gradient: "bg-gradient-to-br from-blue-500 to-cyan-500",
-    icon: Compass
+    category: "Discover",
+    title: "AIinASIA",
+    description: "Insight, context, and perspective on AI, business, regulation, and culture. For people who want understanding before action.",
+    cta: "Visit AIinASIA",
+    url: "https://www.aiinasia.com",
   },
   {
-    headline: "Prompt with the power of AI.",
-    description: "Premium prompts, automation packs, and creative templates to supercharge your work with ChatGPT, Midjourney, and beyond.",
-    ctaText: "Visit PromptAndGo.ai",
-    ctaUrl: "https://promptandgo.ai",
-    gradient: "bg-gradient-to-br from-green-500 to-emerald-500",
-    icon: Lightbulb
+    category: "Prompt",
+    title: "PromptAndGo",
+    description: "Structured prompts that turn questions into practical thinking and usable outputs. For people who want utility without complexity.",
+    cta: "Use PromptAndGo",
+    url: "https://promptandgo.ai",
   },
   {
-    headline: "Shop with the power of AI.",
-    description: "Discover personalised deals and AI-curated offers from around the web - powered by MyOfferClub.",
-    ctaText: "Visit MyOfferClub.com",
-    ctaUrl: "https://myofferclub.com",
-    gradient: "bg-gradient-to-br from-yellow-500 to-orange-500",
-    icon: ShoppingBag
+    category: "Play",
+    title: "PromptAndPlay",
+    description: "Safe environments to experiment, rehearse, and explore ideas before committing. For people who learn best by doing.",
+    cta: "Enter PromptAndPlay",
+    url: "#",
+    comingSoon: true,
   },
   {
-    headline: "Learn with the power of AI.",
-    description: "Master AI tools, data analytics, and digital marketing with flexible, real-world courses built for modern professionals.",
-    ctaText: "Visit AIAcademy.asia",
-    ctaUrl: "https://aiacademy.asia",
-    gradient: "bg-gradient-to-br from-purple-500 to-pink-500",
-    icon: GraduationCap
+    category: "Learn",
+    title: "AIacademy",
+    description: "Build real capability in AI, marketing, and strategy, grounded in real world use. For individuals and teams who want depth, not surface knowledge.",
+    cta: "Visit AIacademy",
+    url: "https://aiacademy.asia",
   },
   {
-    headline: "Start up with the power of AI.",
-    description: "Launch smarter and faster with BusinessInAByte - your AI-powered startup factory for building modern ventures.",
-    ctaText: "Visit BusinessInAByte.com",
-    ctaUrl: "https://www.businessinabyte.com",
-    gradient: "bg-gradient-to-br from-orange-500 to-red-500",
-    icon: Rocket
+    category: "Build",
+    title: "BusinessInAByte",
+    description: "Apply AI thinking to real ventures, products, and businesses. For builders moving from idea to execution.",
+    cta: "Explore BusinessInAByte",
+    url: "https://www.businessinabyte.com",
   },
   {
-    headline: "Play with the power of AI.",
-    description: "Fun, interactive AI experiences and games that make learning and creativity accessible to everyone.",
-    ctaText: "PromptAndPlay.ai (Coming Soon)",
-    ctaUrl: "#",
-    gradient: "bg-gradient-to-br from-indigo-500 to-purple-500",
-    icon: Target
-  }
+    category: "Perform",
+    title: "Perform",
+    description: "Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next. For organisations ready to stop guessing.",
+    cta: "Learn about Perform",
+    url: "#",
+    comingSoon: true,
+    premium: true,
+  },
 ];
 
 const Ecosystem = () => {
   return (
-    <TooltipProvider>
-      <section id="ecosystem" className="py-24 px-6 bg-gradient-to-b from-background to-background/50">
-        <div className="container mx-auto max-w-7xl">
-        <div className="text-center space-y-6 mb-16 animate-slide-up">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Our Ecosystem<br />
-            <span className="gradient-text">Connected by One Idea</span>
+    <section id="ecosystem" className="py-24 md:py-32 bg-muted/20">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="max-w-3xl mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            One ecosystem. Different roles.
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Every project under WithThePowerOf.AI focuses on a different part of the journey, 
-            but all share one goal: helping you get real value from AI.
-          </p>
+          <div className="space-y-4 text-lg text-muted-foreground">
+            <p>Each part of the ecosystem serves a specific purpose.</p>
+            <p>You do not need everything.</p>
+            <p>You need the right starting point.</p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {platforms.map((platform, index) => (
-            <PlatformCard 
+            <Card 
               key={index} 
-              {...platform} 
-              logo={true} 
-              icon={platform.icon} 
-            />
+              className="group bg-card/50 border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
+            >
+              <CardContent className="p-6 flex flex-col h-full">
+                <div className="mb-4">
+                  <span className="text-xs font-medium uppercase tracking-wider text-primary/80">
+                    {platform.category}
+                  </span>
+                </div>
+                
+                <h3 className="text-xl font-semibold mb-3 text-foreground">
+                  {platform.title}
+                </h3>
+                
+                <p className="text-muted-foreground text-sm leading-relaxed flex-grow mb-6">
+                  {platform.description}
+                  {platform.premium && (
+                    <span className="block mt-3 text-xs text-muted-foreground/70">
+                      Limited access. Paid options available.
+                    </span>
+                  )}
+                </p>
+                
+                {platform.comingSoon ? (
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-between text-muted-foreground cursor-default"
+                    disabled
+                  >
+                    {platform.cta}
+                    <span className="text-xs">(Coming soon)</span>
+                  </Button>
+                ) : (
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-between group-hover:text-primary transition-colors"
+                    asChild
+                  >
+                    <a href={platform.url} target="_blank" rel="noopener noreferrer">
+                      {platform.cta}
+                      <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    </a>
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
           ))}
         </div>
-        </div>
-      </section>
-    </TooltipProvider>
+      </div>
+    </section>
   );
 };
 
