@@ -7,15 +7,12 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background/95">
-      {/* Abstract background image */}
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
+      {/* Single subtle background overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-20"
+        className="absolute inset-0 bg-cover bg-center opacity-10"
         style={{ backgroundImage: `url(${heroAbstract})` }}
       />
-      
-      {/* Darker overlay for hero distinction */}
-      <div className="absolute inset-0 bg-black/10" />
 
       <div className="container mx-auto px-6 relative z-10 py-24 md:py-32">
         <div className="max-w-5xl mx-auto text-center space-y-10">
