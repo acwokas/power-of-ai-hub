@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import heroAbstract from "@/assets/hero-abstract.png";
 
 const Hero = () => {
   const scrollToEcosystem = () => {
@@ -7,23 +7,28 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background animate-pulse" style={{ animationDuration: '8s' }} />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Abstract background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-30"
+        style={{ backgroundImage: `url(${heroAbstract})` }}
+      />
       
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }} />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-8 animate-fade-in">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
             You, <span className="gradient-text">with the power of AI.</span>
+            <br />
+            <span className="text-foreground">But with clarity, not chaos.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            We build platforms that make artificial intelligence useful, practical, and human. 
-            Tools to help you learn, create, build, and grow with the power of AI.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Most organisations do not struggle with AI itself. They struggle with positioning, decision making, and how to communicate clearly in a world full of tools.
+            <br /><br />
+            you.withthepowerof.ai is an ecosystem designed to help people think clearly, act deliberately, and execute with confidence, without handing over control.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
@@ -32,23 +37,18 @@ const Hero = () => {
               onClick={scrollToEcosystem}
               className="bg-gradient-primary hover:opacity-90 text-white text-lg px-8 py-6 h-auto"
             >
-              Explore the Ecosystem <ArrowDown className="ml-2 h-5 w-5" />
+              Explore the ecosystem
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={scrollToEcosystem}
               className="border-primary/50 hover:bg-primary/10 text-lg px-8 py-6 h-auto"
             >
-              Learn More About Us
+              Start where you are
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </div>
     </section>
   );
