@@ -13,6 +13,9 @@ const Hero = () => {
         className="absolute inset-0 bg-cover bg-center opacity-10"
         style={{ backgroundImage: `url(${heroAbstract})` }}
       />
+      
+      {/* Bottom gradient fade for smooth transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10 py-24 md:py-32">
         <div className="max-w-5xl mx-auto text-center space-y-10">
