@@ -41,7 +41,7 @@ const platforms = [
   {
     category: "Perform",
     title: "Perform",
-    description: "Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next. For organisations ready to stop guessing.",
+    description: "Stop guessing. Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next.",
     cta: "Explore Perform",
     url: "https://perform.withthepowerof.ai",
     premium: true,
