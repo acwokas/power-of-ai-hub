@@ -7,25 +7,25 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background/95">
       {/* Abstract background image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-30"
+        className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{ backgroundImage: `url(${heroAbstract})` }}
       />
       
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+      {/* Darker overlay for hero distinction */}
+      <div className="absolute inset-0 bg-black/10" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-8 animate-fade-in">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+      <div className="container mx-auto px-6 relative z-10 py-24 md:py-32">
+        <div className="max-w-5xl mx-auto text-center space-y-10">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tight">
             You, <span className="gradient-text">with the power of AI.</span>
             <br />
             <span className="text-foreground">But with clarity, not chaos.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Most organisations do not struggle with AI itself. They struggle with positioning, decision making, and how to communicate clearly in a world full of tools.
             <br /><br />
             you.withthepowerof.ai is an ecosystem designed to help people think clearly, act deliberately, and execute with confidence, without handing over control.
