@@ -11,8 +11,8 @@ const SectionPartnerships = () => {
             <p>This ecosystem is not built alone.</p>
             
             <p>
-              Alongside the products and platforms you see here, we collaborate with a small number of 
-              like-minded people, educators, and organisations who share the same principles.
+              Alongside the products and platforms you see here, we also collaborate with people, 
+              educators, brands, and organisations who share the same principles.
             </p>
             
             <p className="pt-4">That includes:</p>
