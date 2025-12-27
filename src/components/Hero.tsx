@@ -35,7 +35,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               onClick={scrollToEcosystem}
-              className="bg-gradient-primary hover:opacity-90 text-white text-lg px-8 py-6 h-auto"
+              className="bg-gradient-primary text-white text-lg px-8 py-6 h-auto transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
             >
               Explore the ecosystem
             </Button>
@@ -43,7 +43,7 @@ const Hero = () => {
               size="lg" 
               variant="outline"
               onClick={scrollToEcosystem}
-              className="border-primary/50 hover:bg-primary/10 text-lg px-8 py-6 h-auto"
+              className="border-primary text-foreground text-lg px-8 py-6 h-auto transition-all duration-300 hover:scale-105 hover:bg-primary/15 hover:border-primary"
             >
               Start where you are
             </Button>
