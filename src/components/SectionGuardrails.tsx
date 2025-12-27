@@ -21,6 +21,10 @@ const SectionGuardrails = () => {
             <p className="text-foreground font-medium">
               What you do next is always your decision.
             </p>
+            
+            <p className="pt-4">Some parts of the ecosystem are open to explore.</p>
+            
+            <p>Others are designed for deeper, more deliberate use.</p>
           </div>
         </div>
       </div>
