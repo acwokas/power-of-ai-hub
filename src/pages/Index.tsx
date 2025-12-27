@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import SectionText from "@/components/SectionText";
 import SectionPrinciple from "@/components/SectionPrinciple";
-import About from "@/components/About";
 import Ecosystem from "@/components/Ecosystem";
 import SectionUsage from "@/components/SectionUsage";
 import SectionGuardrails from "@/components/SectionGuardrails";
@@ -16,7 +15,6 @@ const Index = () => {
       <Hero />
       <SectionText />
       <SectionPrinciple />
-      <About />
       <Ecosystem />
       <SectionUsage />
       <SectionGuardrails />
