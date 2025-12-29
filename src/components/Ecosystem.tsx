@@ -40,7 +40,7 @@ const platforms = [
   },
   {
     category: "Prepare",
-    title: "Prepare",
+    title: "Prepare.",
     description: "Stop guessing. Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next.",
     cta: "Explore Prepare",
     url: "https://prepare.withthepowerof.ai",
