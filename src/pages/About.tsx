@@ -109,13 +109,10 @@ const AboutPage = () => {
                   It is building systems that help people think more clearly and act more deliberately.
                 </p>
                 
-                <p className="pt-4 text-muted-foreground/60">
-                  Created by Adrian Watkins
-                </p>
               </div>
             </div>
 
-            <div className="pt-16">
+            <div className="pt-16 flex justify-center">
               <Button 
                 size="lg" 
                 className="bg-gradient-primary hover:opacity-90 text-white text-lg px-8 py-6 h-auto"
