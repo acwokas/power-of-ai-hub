@@ -39,18 +39,18 @@ const platforms = [
     url: "https://www.businessinabyte.com",
   },
   {
-    category: "Perform",
-    title: "Perform",
+    category: "Prepare",
+    title: "Prepare",
     description: "Stop guessing. Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next.",
-    cta: "Explore Perform",
-    url: "https://perform.withthepowerof.ai",
+    cta: "Explore Prepare",
+    url: "https://prepare.withthepowerof.ai",
     premium: true,
   },
 ];
 
 const Ecosystem = () => {
   const row1 = platforms.slice(0, 3); // Discover, Prompt, Play
-  const row2 = platforms.slice(3);    // Learn, Build, Perform
+  const row2 = platforms.slice(3);    // Learn, Build, Prepare
 
   return (
     <section id="ecosystem" className="py-12 md:py-16 bg-muted/20">
@@ -105,7 +105,7 @@ const Ecosystem = () => {
           ))}
         </div>
 
-        {/* Row 2: Learn, Build, Perform - stronger presence */}
+        {/* Row 2: Learn, Build, Prepare - stronger presence */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {row2.map((platform, index) => (
             <Card 
