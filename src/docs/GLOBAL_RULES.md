@@ -126,7 +126,7 @@ Example:
 ### Navigation:
 - you.withthepowerof.ai is the framing layer, not a product
 - Sub-sites may link back to the ecosystem but must retain their own identity
-- Perform must never be positioned as a beginner or default option
+- Prepare must never be positioned as a beginner or default option
 - Experimental or shop properties must not appear as primary CTAs
 
 ### Language:
@@ -140,7 +140,7 @@ Example:
 3. **Play** - supports thinking
 4. **Learn** - builds capability
 5. **Build** - enables application
-6. **Perform** - represents execution and outcomes
+6. **Prepare** - represents execution and outcomes
 
 All future pages or products must map explicitly to this hierarchy before being added.
 
