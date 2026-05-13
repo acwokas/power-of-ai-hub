@@ -10,10 +10,10 @@ const Footer = () => {
               DEMOCRATISING.AI
             </span>
             <a
-              href="mailto:hello@withthepowerof.ai"
+              href="mailto:hello@democratising.ai"
               className="text-sm text-foreground/70 hover:text-accent transition-colors"
             >
-              hello@withthepowerof.ai
+              hello@democratising.ai
             </a>
           </div>
           <p className="text-sm text-foreground/60">
