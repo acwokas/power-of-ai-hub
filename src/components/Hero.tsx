@@ -27,7 +27,7 @@ const Hero = () => {
 
           <div className="mt-12 max-w-2xl space-y-5 text-lg md:text-xl text-foreground/85 leading-relaxed">
             <p>
-              Most organisations do not struggle with AI itself. They struggle with positioning, decision making, and how to communicate clearly in a world full of tools.
+              Most organisations don't struggle with AI itself. They struggle with positioning, decision making, and how to communicate clearly in a world full of tools.
             </p>
             <p>
               you.withthepowerof.ai is an ecosystem designed to help people think clearly, act deliberately, and execute with confidence, without handing over control.

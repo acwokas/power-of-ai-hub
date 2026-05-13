@@ -63,7 +63,7 @@ const Ecosystem = () => {
           </h2>
           <div className="mt-6 space-y-3 text-lg md:text-xl text-foreground/80 leading-relaxed">
             <p>Each part of the ecosystem serves a specific purpose.</p>
-            <p>You do not need everything. You need the right starting point.</p>
+            <p>You don't need everything. You need the right starting point.</p>
           </div>
         </header>
 

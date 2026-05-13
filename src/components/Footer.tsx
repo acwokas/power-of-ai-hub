@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 const Footer = () => {
   const currentYear = 2026;
 
@@ -11,12 +9,6 @@ const Footer = () => {
             <span className="font-serif text-lg tracking-tight text-foreground">
               you.withthepowerof.ai
             </span>
-            <Link
-              to="/about"
-              className="text-sm text-foreground/70 hover:text-accent transition-colors"
-            >
-              About
-            </Link>
             <a
               href="mailto:hello@withthepowerof.ai"
               className="text-sm text-foreground/70 hover:text-accent transition-colors"

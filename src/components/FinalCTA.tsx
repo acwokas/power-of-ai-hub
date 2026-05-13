@@ -15,7 +15,7 @@ const FinalCTA = () => {
           </h2>
 
           <p className="text-lg md:text-xl text-foreground/85 leading-relaxed mb-10">
-            You do not need to understand everything here.
+            You don't need to understand everything here.
             <br />
             You just need to start in the right place.
           </p>

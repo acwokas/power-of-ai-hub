@@ -11,7 +11,7 @@ const SectionPartnerships = () => {
           </div>
 
           <div className="md:col-span-8 md:col-start-6 space-y-5 text-lg md:text-xl text-foreground/85 leading-relaxed">
-            <p>This ecosystem is not built alone.</p>
+            <p>This ecosystem isn't built alone.</p>
 
             <p>
               Alongside the products and platforms you see here, we also collaborate with people, educators, brands, and organisations who share the same principles.
