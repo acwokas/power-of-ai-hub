@@ -30,18 +30,10 @@ const tools = [
     category: "Prompt",
     title: "PromptAndGo",
     description:
-      "Structured prompts that turn questions into practical thinking and usable outputs. For people who want utility without complexity.",
+      "AI prompts that speak Asia fluently. Built for every language. Cultural register, not just translation.",
     cta: "Use PromptAndGo",
     url: "https://promptandgo.ai",
     feature: true,
-  },
-  {
-    category: "Play",
-    title: "PromptAndPlay",
-    description:
-      "Safe environments to experiment, rehearse, and explore ideas before committing. For people who learn best by doing.",
-    cta: "Enter PromptAndPlay",
-    url: "https://promptandplay.ai",
   },
   {
     category: "Learn",
@@ -50,14 +42,6 @@ const tools = [
       "Build real capability in AI, marketing, and strategy, grounded in real world use. For individuals and teams who want depth, not surface knowledge.",
     cta: "Visit AIacademy",
     url: "https://aiacademy.asia",
-  },
-  {
-    category: "Prepare",
-    title: "Prepare.",
-    description:
-      "Stop guessing. Clarify brand positioning, plan platform specific communication, and understand what works so you know what to do next.",
-    cta: "Explore Prepare",
-    url: "https://prepare.withthepowerof.ai",
   },
 ];
 
@@ -119,7 +103,7 @@ const Ecosystem = () => {
             <span className="eyebrow hidden md:block">Applied</span>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {tools.map((tool) => (
               <div
                 key={tool.title}
