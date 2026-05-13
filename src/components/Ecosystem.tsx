@@ -33,7 +33,14 @@ const tools = [
       "AI prompts that speak Asia fluently. Built for every language. Cultural register, not just translation.",
     cta: "Use PromptAndGo",
     url: "https://promptandgo.ai",
-    feature: true,
+  },
+  {
+    category: "Framework",
+    title: "EDGE Framework",
+    description:
+      "Applied intelligence, operationalised. Twelve session-based tools across Evaluate, Define, Govern, and Elevate. Diagnose maturity, simulate decisions, rehearse governance, engineer prompts. Privacy first, no signup.",
+    cta: "Open the framework",
+    url: "#edge",
   },
   {
     category: "Learn",
@@ -107,25 +114,13 @@ const Ecosystem = () => {
             {tools.map((tool) => (
               <div
                 key={tool.title}
-                className={`group flex flex-col p-6 border ${
-                  tool.feature
-                    ? "border-accent/40 bg-card lg:col-span-2 lg:p-8"
-                    : "border-border bg-card/40"
-                } hover:border-accent/60 transition-colors`}
+                className="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors"
               >
                 <p className="eyebrow mb-5">{tool.category}</p>
-                <h4
-                  className={`font-serif font-black tracking-tight mb-4 text-foreground ${
-                    tool.feature ? "text-3xl md:text-4xl" : "text-2xl"
-                  }`}
-                >
+                <h4 className="font-serif text-2xl md:text-3xl font-black tracking-tight mb-4 text-foreground">
                   {tool.title}
                 </h4>
-                <p
-                  className={`text-foreground/80 leading-relaxed flex-grow mb-6 ${
-                    tool.feature ? "text-base md:text-lg" : "text-sm"
-                  }`}
-                >
+                <p className="text-base text-foreground/80 leading-relaxed flex-grow mb-6">
                   {tool.description}
                 </p>
                 <Button
