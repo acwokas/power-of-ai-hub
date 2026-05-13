@@ -7,19 +7,17 @@ const Hero = () => {
 
   return (
     <section className="relative bg-background border-b border-border/60">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="flex items-center justify-between py-6 text-sm">
-          <span className="font-serif text-xl tracking-tight text-foreground">
-            you.withthepowerof.ai
-          </span>
-          <span className="eyebrow hidden sm:block">
+      <div className="container mx-auto px-6 max-w-6xl py-20 md:py-28 lg:py-32">
+        <div className="max-w-5xl">
+          <p className="font-serif font-black tracking-tighter text-accent text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-none">
+            DEMOCRATISING.AI
+          </p>
+          <p className="mt-4 eyebrow text-foreground/70">
             An ecosystem of editorial and applied AI
-          </span>
-        </div>
+          </p>
+          <div className="mt-8 h-px w-20 bg-accent" />
 
-        <div className="py-20 md:py-28 lg:py-32 max-w-5xl">
-          <p className="eyebrow mb-8">Hub</p>
-          <h1 className="font-serif font-black tracking-tight text-foreground text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.02]">
+          <h1 className="mt-10 font-serif font-black tracking-tight text-foreground text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.02]">
             You, with the power of AI.
             <br />
             <span className="text-muted-foreground">But with clarity, not chaos.</span>

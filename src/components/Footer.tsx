@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
-            <span className="font-serif text-lg tracking-tight text-foreground">
-              you.withthepowerof.ai
+            <span className="font-serif font-black tracking-tighter text-accent text-lg">
+              DEMOCRATISING.AI
             </span>
             <a
               href="mailto:hello@withthepowerof.ai"
@@ -17,7 +17,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="text-sm text-foreground/60">
-            © {currentYear} You.WithThePowerOf.AI
+            © {currentYear} DEMOCRATISING.AI
           </p>
         </div>
       </div>
