@@ -1,1 +1,4 @@
-/*    /index.html    200
+/edge          https://adrianwatkins.com/edge    301
+/edge/*        https://adrianwatkins.com/edge    301
+
+/*             /index.html                       200

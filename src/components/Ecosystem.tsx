@@ -40,7 +40,7 @@ const tools = [
     description:
       "Applied intelligence, operationalised. Twelve session-based tools across Evaluate, Define, Govern, and Elevate. Diagnose maturity, simulate decisions, rehearse governance, engineer prompts. Privacy first, no signup.",
     cta: "Open the framework",
-    url: "#edge",
+    url: "/edge",
   },
   {
     category: "Learn",
@@ -61,9 +61,8 @@ const Ecosystem = () => {
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
             One ecosystem. Different roles.
           </h2>
-          <div className="mt-6 space-y-3 text-lg md:text-xl text-foreground/80 leading-relaxed">
+          <div className="mt-6 text-lg md:text-xl text-foreground/80 leading-relaxed">
             <p>Each part of the ecosystem serves a specific purpose.</p>
-            <p>You don't need everything. You need the right starting point.</p>
           </div>
         </header>
 
