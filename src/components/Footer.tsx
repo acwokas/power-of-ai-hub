@@ -4,22 +4,27 @@ const Footer = () => {
   const currentYear = 2026;
 
   return (
-    <footer className="py-8 md:py-12 px-6" style={{ backgroundColor: '#111' }}>
-      <div className="container mx-auto max-w-7xl">
-        <div className="flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
-            <Link to="/about" className="text-sm hover:opacity-80 transition-opacity" style={{ color: '#999' }}>
+    <footer className="py-10 md:py-14 px-6 bg-background border-t border-border">
+      <div className="container mx-auto max-w-6xl">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+            <span className="font-serif text-lg tracking-tight text-foreground">
+              you.withthepowerof.ai
+            </span>
+            <Link
+              to="/about"
+              className="text-sm text-foreground/70 hover:text-accent transition-colors"
+            >
               About
             </Link>
-            <a 
-              href="mailto:hello@withthepowerof.ai" 
-              className="text-sm hover:opacity-80 transition-opacity" 
-              style={{ color: '#999' }}
+            <a
+              href="mailto:hello@withthepowerof.ai"
+              className="text-sm text-foreground/70 hover:text-accent transition-colors"
             >
               hello@withthepowerof.ai
             </a>
           </div>
-          <p className="text-sm" style={{ color: '#999' }}>
+          <p className="text-sm text-foreground/60">
             © {currentYear} You.WithThePowerOf.AI
           </p>
         </div>

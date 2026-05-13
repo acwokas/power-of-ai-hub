@@ -1,52 +1,39 @@
 const SectionPartnerships = () => {
   return (
-    <section className="py-12 md:py-16 bg-muted/40 border-y border-border/20">
-      <div className="container mx-auto px-8 md:px-12 lg:px-16">
-        <div className="max-w-2xl">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-foreground/90">
-            Built with others, not in isolation
-          </h2>
-          
-          <div className="space-y-5 text-base md:text-lg text-muted-foreground/90 leading-relaxed">
+    <section className="py-20 md:py-28 bg-card/50 border-t border-border/60">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16">
+          <div className="md:col-span-4">
+            <p className="eyebrow mb-5">Partnerships</p>
+            <h2 className="font-serif text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+              Built with others, not in isolation
+            </h2>
+          </div>
+
+          <div className="md:col-span-8 md:col-start-6 space-y-5 text-lg md:text-xl text-foreground/85 leading-relaxed">
             <p>This ecosystem is not built alone.</p>
-            
+
             <p>
-              Alongside the products and platforms you see here, we also collaborate with people, 
-              educators, brands, and organisations who share the same principles.
+              Alongside the products and platforms you see here, we also collaborate with people, educators, brands, and organisations who share the same principles.
             </p>
-            
-            <p className="pt-3">That includes:</p>
-            
-            <ul className="space-y-2.5 pl-4">
-              <li className="flex items-start gap-3">
-                <span className="text-primary/60 mt-1.5">•</span>
-                <span>Educators developing real-world capability</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary/60 mt-1.5">•</span>
-                <span>Practitioners applying AI in commercial and public contexts</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary/60 mt-1.5">•</span>
-                <span>Brands exploring clearer positioning, communication, and responsible use of AI</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary/60 mt-1.5">•</span>
-                <span>Businesses building responsibly, not opportunistically</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary/60 mt-1.5">•</span>
-                <span>Independent thinkers contributing perspective and challenge</span>
-              </li>
+
+            <p className="pt-2">That includes:</p>
+
+            <ul className="space-y-2.5 border-l-2 border-accent pl-6">
+              <li>Educators developing real-world capability</li>
+              <li>Practitioners applying AI in commercial and public contexts</li>
+              <li>Brands exploring clearer positioning, communication, and responsible use of AI</li>
+              <li>Businesses building responsibly, not opportunistically</li>
+              <li>Independent thinkers contributing perspective and challenge</li>
             </ul>
-            
+
             <p className="pt-4">These partnerships are intentional.</p>
-            
+
             <p>They exist to strengthen thinking, not to scale noise.</p>
-            
+
             <p className="pt-4">The ecosystem remains independent.</p>
-            
-            <p className="text-foreground/80">
+
+            <p className="text-foreground font-medium">
               Collaboration happens where it adds clarity and depth.
             </p>
           </div>

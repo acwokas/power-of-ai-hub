@@ -14,17 +14,18 @@ const AboutPage = () => {
               Back to home
             </Link>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">
+            <p className="eyebrow mb-5">About</p>
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-10">
               About this ecosystem
             </h1>
-            
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-16">
+
+            <p className="text-xl md:text-2xl text-foreground/85 leading-relaxed mb-16">
               This ecosystem exists because access to good tools has never been the real problem.
               <br /><br />
               Access to good thinking has.
             </p>
 
-            <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed mb-16">
+            <div className="space-y-6 text-lg md:text-xl text-foreground/85 leading-relaxed mb-16">
               <p>
                 For decades, high quality strategic thinking, frameworks, and execution knowledge were concentrated inside elite consultancies, blue chip organisations, and specialist teams.
               </p>
@@ -51,24 +52,24 @@ const AboutPage = () => {
             </div>
 
             <div className="border-t border-border pt-12">
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-xl text-foreground/85 leading-relaxed">
                 AI is powerful.
               </p>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-xl text-foreground/85 leading-relaxed">
                 Clarity is rarer.
               </p>
-              <p className="text-lg md:text-xl text-foreground font-medium pt-4">
+              <p className="font-serif text-2xl md:text-3xl text-foreground font-bold tracking-tight pt-4">
                 We focus on the second.
               </p>
             </div>
 
             {/* How we work with others */}
             <div className="border-t border-border pt-12 mt-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">
+              <h2 className="font-serif text-3xl md:text-4xl font-black tracking-tight mb-6">
                 How we work with others
               </h2>
-              
-              <div className="space-y-4 text-lg md:text-xl text-muted-foreground leading-relaxed">
+
+              <div className="space-y-4 text-lg md:text-xl text-foreground/85 leading-relaxed">
                 <p>We believe the best work happens through considered collaboration.</p>
                 
                 <p>
@@ -88,11 +89,11 @@ const AboutPage = () => {
 
             {/* The thinking behind the ecosystem */}
             <div className="border-t border-border pt-12 mt-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-muted-foreground">
+              <h2 className="font-serif text-3xl md:text-4xl font-black tracking-tight mb-6 text-foreground/90">
                 The thinking behind the ecosystem
               </h2>
-              
-              <div className="space-y-4 text-base text-muted-foreground/80 leading-relaxed">
+
+              <div className="space-y-4 text-base text-foreground/75 leading-relaxed">
                 <p>
                   This ecosystem is shaped by practical experience working across digital transformation, go-to-market strategy, and AI-led innovation in both commercial and public-sector contexts.
                 </p>
@@ -112,10 +113,10 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className="pt-16 flex justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-primary hover:opacity-90 text-white text-lg px-8 py-6 h-auto"
+            <div className="pt-16">
+              <Button
+                size="lg"
+                className="bg-foreground text-background hover:bg-foreground/90 text-base px-7 py-6 h-auto rounded-sm font-semibold"
                 asChild
               >
                 <Link to="/#ecosystem">

@@ -6,23 +6,24 @@ const FinalCTA = () => {
   };
 
   return (
-    <section className="py-20 md:py-28">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+    <section className="py-20 md:py-28 bg-background border-t border-border/60">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="max-w-3xl">
+          <p className="eyebrow mb-5">Begin</p>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-8">
             Start where clarity matters most
           </h2>
-          
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10">
+
+          <p className="text-lg md:text-xl text-foreground/85 leading-relaxed mb-10">
             You do not need to understand everything here.
             <br />
             You just need to start in the right place.
           </p>
 
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             onClick={scrollToEcosystem}
-            className="bg-gradient-primary hover:opacity-90 text-white text-lg px-8 py-6 h-auto"
+            className="bg-foreground text-background hover:bg-foreground/90 text-base px-7 py-6 h-auto rounded-sm font-semibold"
           >
             Explore the ecosystem
           </Button>

@@ -1,48 +1,30 @@
-import sectionAbstract from "@/assets/hero-abstract.png";
-
 const SectionText = () => {
   return (
-    <section id="problem" className="relative py-10 md:py-14 overflow-hidden">
-      {/* Optional abstract background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center opacity-10"
-        style={{ backgroundImage: `url(${sectionAbstract})` }}
-      />
-      <div className="absolute inset-0 bg-background/90" />
+    <section id="problem" className="py-20 md:py-28 bg-background border-t border-border/60">
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16">
+          <div className="md:col-span-4">
+            <p className="eyebrow mb-5">The problem</p>
+            <h2 className="font-serif text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+              The real issue is not access to AI
+            </h2>
+          </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
-            The real issue is not access to AI
-          </h2>
-          
-          <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
+          <div className="md:col-span-8 md:col-start-6 space-y-6 text-lg md:text-xl text-foreground/85 leading-relaxed">
             <p>We speak to founders, teams, and leaders every week who:</p>
-            
-            <ul className="space-y-3 pl-1">
-              <li className="flex items-start gap-3">
-                <span className="text-primary mt-1.5">•</span>
-                <span>Cannot clearly explain what they do</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary mt-1.5">•</span>
-                <span>Communicate differently on every platform</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary mt-1.5">•</span>
-                <span>Jump between tools without direction</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary mt-1.5">•</span>
-                <span>Confuse activity with progress</span>
-              </li>
+
+            <ul className="space-y-2.5 border-l-2 border-accent pl-6">
+              <li>Cannot clearly explain what they do</li>
+              <li>Communicate differently on every platform</li>
+              <li>Jump between tools without direction</li>
+              <li>Confuse activity with progress</li>
             </ul>
 
             <p className="pt-4">AI has not fixed this.</p>
-            
+
             <p>In many cases, it has made the confusion faster.</p>
-            
-            <p className="pt-4 text-foreground font-medium">
+
+            <p className="pt-4 text-foreground font-serif text-2xl md:text-3xl font-bold leading-tight tracking-tight">
               More tools do not create clarity.
               <br />
               Better thinking does.
