@@ -1,0 +1,33 @@
+# DEMOCRATISING.AI
+
+> An ecosystem of editorial and applied AI. We help people think clearly, act deliberately, and execute with confidence, without handing over control. We are a venture, not a person.
+
+DEMOCRATISING.AI brings together three regional editorial publications, the EDGE framework of twelve session-based tools, a prompt engineering platform, and a training academy. The work is grounded in British English and a refusal to confuse activity with progress.
+
+## Core pages
+
+- [Home](/): The masthead. Problem, principle, ecosystem, partnerships, get involved.
+- [EDGE Framework](/tools): Twelve tools across Evaluate, Define, Govern, and Elevate. Privacy first, no signup.
+- [Prompt Engineer](/tools/prompt-engineer): Rewrite any prompt for ChatGPT, Claude, Gemini, MidJourney, or Perplexity. Client-side, no storage.
+
+## Regional editorial network
+
+- [AI in Asia](https://www.aiinasia.com): Insight on AI, business, regulation, and culture across Asia.
+- [AI in Arabia](https://www.aiinarabia.com): The Arab world's independent home for AI news and practical guides.
+- [AI in Europe](https://www.aiineurope.co): Europe's daily AI brief. EU, UK, Switzerland. British English, no hype.
+
+## Tools and platforms
+
+- [PromptAndGo](https://promptandgo.ai): AI prompts that speak Asia fluently. Built for every language. Cultural register, not just translation.
+- [AIacademy](https://aiacademy.asia): Build real capability in AI, marketing, and strategy. For people who want depth.
+
+## Principles
+
+- AI is the enabler. Judgment stays human.
+- Clarity comes before tools.
+- More tools don't create clarity. Better thinking does.
+- The ecosystem remains independent. Collaboration happens where it adds clarity and depth.
+
+## Contact
+
+hello@democratising.ai

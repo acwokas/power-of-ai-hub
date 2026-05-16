@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import { tools, type Pillar } from '../../lib/tools';
+
+const pillars: Pillar[] = ['Evaluate', 'Define', 'Govern', 'Elevate'];
+---
+<BaseLayout
+  title="EDGE Framework - DEMOCRATISING.AI"
+  description="Twelve session-based tools across Evaluate, Define, Govern, and Elevate. Diagnose maturity, simulate decisions, rehearse governance, engineer prompts. Privacy first, no signup."
+>
+  <main>
+    <section class="bg-background border-b border-border/60">
+      <div class="container mx-auto px-6 max-w-6xl py-16 md:py-24">
+        <p class="eyebrow mb-5"><a href="/" class="hover:text-foreground/80 transition-colors">DEMOCRATISING.AI</a> &middot; EDGE</p>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6">
+          The EDGE Framework
+        </h1>
+        <p class="max-w-3xl text-lg md:text-xl text-foreground/85 leading-relaxed">
+          Applied intelligence, operationalised. Twelve session-based tools across Evaluate, Define, Govern, and Elevate. Privacy first, no signup.
+        </p>
+      </div>
+    </section>
+
+    {pillars.map((pillar) => (
+      <section class="py-14 md:py-20 border-t border-border/60">
+        <div class="container mx-auto px-6 max-w-6xl">
+          <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
+            <h2 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">{pillar}</h2>
+            <span class="eyebrow hidden md:block">Pillar</span>
+          </div>
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {tools.filter((t) => t.pillar === pillar).map((tool) => {
+              const isLive = tool.status === 'live';
+              const cardClass = isLive
+                ? 'group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors'
+                : 'flex flex-col p-7 md:p-8 border border-border/40 bg-card/20 opacity-70';
+              return (
+                <a
+                  href={isLive ? `/tools/${tool.slug}` : `/tools/${tool.slug}`}
+                  class={cardClass}
+                  aria-disabled={!isLive}
+                >
+                  <p class="eyebrow mb-5">{tool.pillar}</p>
+                  <h3 class="font-serif text-2xl md:text-3xl font-black tracking-tight mb-4 text-foreground">
+                    {tool.title}
+                  </h3>
+                  <p class="text-base text-foreground/80 leading-relaxed flex-grow mb-6">
+                    {tool.description}
+                  </p>
+                  {isLive ? (
+                    <span class="inline-flex items-center gap-2 text-sm font-semibold text-accent group-hover:gap-3 transition-all">
+                      Open the tool
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                    </span>
+                  ) : (
+                    <span class="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/40">
+                      Coming soon
+                    </span>
+                  )}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+  <Footer />
+</BaseLayout>

@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Astro / wrangler
+.astro/
+.wrangler/
+
+# env
+.env
+.env.production
+.env.local

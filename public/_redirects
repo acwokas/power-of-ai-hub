@@ -1,4 +1,2 @@
-/edge          https://adrianwatkins.com/edge    301
-/edge/*        https://adrianwatkins.com/edge    301
-
-/*             /index.html                       200
+/edge          /tools          301
+/edge/*        /tools          301
