@@ -70,7 +70,7 @@ export const tools: Tool[] = [
     title: 'Red Team Simulation',
     pillar: 'Govern',
     description: 'Stress-test a plan from the perspective of someone trying to break it.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'prompt-engineer',

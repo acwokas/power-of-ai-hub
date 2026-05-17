@@ -1,8 +1,40 @@
 ---
-import ToolStub from '../../components/ToolStub.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import RedTeamSimulation from '../../components/tools/RedTeamSimulation.tsx';
 ---
-<ToolStub
-  title="Red Team Simulation"
-  pillar="Govern"
-  description="Stress-test a plan from the perspective of someone trying to break it. Designed to find what you missed before someone else does."
-/>
+<BaseLayout
+  title="Red Team Simulation - EDGE Govern - DEMOCRATISING.AI"
+  description="Pressure-test a plan from the perspective of someone trying to break it. Red team challenge, blue team defence, fault line analysis. Privacy first, no signup."
+>
+  <main>
+    <section class="bg-background border-b border-border/60">
+      <div class="container mx-auto px-6 max-w-3xl py-16 md:py-24">
+        <p class="eyebrow mb-5">
+          <a href="/" class="hover:text-foreground/80 transition-colors">DEMOCRATISING.AI</a>
+          <span class="text-foreground/40 mx-1">/</span>
+          <a href="/tools" class="hover:text-foreground/80 transition-colors">EDGE</a>
+          <span class="text-foreground/40 mx-1">/</span>
+          Govern
+        </p>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.05] mb-6">
+          Red Team Simulation
+        </h1>
+        <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-6">
+          Pressure-test before you present. Three perspectives in parallel: adversarial challenge, measured defence, and the load-bearing assumptions that could collapse the whole plan.
+        </p>
+        <div class="flex items-start gap-3 text-sm text-foreground/60">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 text-accent/70 shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Your inputs are only used to generate this analysis. Nothing is stored on a server. Form drafts and your reflection live in your browser only.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <RedTeamSimulation client:load />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
