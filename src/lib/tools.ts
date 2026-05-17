@@ -49,7 +49,7 @@ export const tools: Tool[] = [
     title: 'Conversation Simulator',
     pillar: 'Define',
     description: 'Rehearse a difficult conversation before it happens for real.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'governance-review',
