@@ -1,8 +1,40 @@
 ---
-import ToolStub from '../../components/ToolStub.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import NegotiationSimulator from '../../components/tools/NegotiationSimulator.tsx';
 ---
-<ToolStub
-  title="Negotiation Simulator"
-  pillar="Elevate"
-  description="Run a negotiation drill against a structured counterpart. Surface the moves and concessions you'd otherwise discover too late."
-/>
+<BaseLayout
+  title="Negotiation Simulator - EDGE Elevate - DEMOCRATISING.AI"
+  description="Run a negotiation drill against a counterpart with realistic tactics, counter-asks, and pressure. Surface the moves and concessions you would otherwise discover too late. Privacy first, no signup."
+>
+  <main>
+    <section class="bg-background border-b border-border/60">
+      <div class="container mx-auto px-6 max-w-3xl py-16 md:py-24">
+        <p class="eyebrow mb-5">
+          <a href="/" class="hover:text-foreground/80 transition-colors">DEMOCRATISING.AI</a>
+          <span class="text-foreground/40 mx-1">/</span>
+          <a href="/tools" class="hover:text-foreground/80 transition-colors">EDGE</a>
+          <span class="text-foreground/40 mx-1">/</span>
+          Elevate
+        </p>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.05] mb-6">
+          Negotiation Simulator
+        </h1>
+        <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-6">
+          Rehearse before the stakes are real. The AI plays a counterparty with their own objectives, constraints, and tactics. Concessions must be earned, not handed out.
+        </p>
+        <div class="flex items-start gap-3 text-sm text-foreground/60">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 text-accent/70 shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Your scenario and transcript are only used to generate this negotiation and coaching. Nothing is stored on a server. Form drafts and reflections live in your browser only.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <NegotiationSimulator client:load />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -91,6 +91,6 @@ export const tools: Tool[] = [
     title: 'Negotiation Simulator',
     pillar: 'Elevate',
     description: 'Run a negotiation drill against a structured counterpart.',
-    status: 'coming-soon',
+    status: 'live',
   },
 ];
