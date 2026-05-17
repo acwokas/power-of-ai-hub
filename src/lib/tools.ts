@@ -56,7 +56,7 @@ export const tools: Tool[] = [
     title: 'Governance Review',
     pillar: 'Govern',
     description: 'Surface gaps in how AI is being used inside your organisation.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'ethical-dilemma',
