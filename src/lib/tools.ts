@@ -28,7 +28,7 @@ export const tools: Tool[] = [
     title: 'Before You Send',
     pillar: 'Evaluate',
     description: 'Sharpen a message before it leaves your hands.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'brand-palette',
