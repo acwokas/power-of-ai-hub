@@ -14,7 +14,7 @@ export const tools: Tool[] = [
     title: 'Maturity Assessment',
     pillar: 'Evaluate',
     description: 'Diagnose where your organisation sits on the AI maturity curve.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'decision-simulation',
