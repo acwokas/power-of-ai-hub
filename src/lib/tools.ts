@@ -21,7 +21,7 @@ export const tools: Tool[] = [
     title: 'Decision Simulation',
     pillar: 'Evaluate',
     description: 'Pressure-test a decision before you make it.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'before-you-send',
