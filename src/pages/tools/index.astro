@@ -4,6 +4,13 @@ import Footer from '../../components/Footer.astro';
 import { tools, type Pillar } from '../../lib/tools';
 
 const pillars: Pillar[] = ['Evaluate', 'Define', 'Govern', 'Elevate'];
+
+const pillarMark: Record<Pillar, string> = {
+  Evaluate: '/brand/edge-mark-evaluate.svg',
+  Define: '/brand/edge-mark-define.svg',
+  Govern: '/brand/edge-mark-govern.svg',
+  Elevate: '/brand/edge-mark-elevate.svg',
+};
 ---
 <BaseLayout
   title="EDGE Framework - DEMOCRATISING.AI"
@@ -13,9 +20,18 @@ const pillars: Pillar[] = ['Evaluate', 'Define', 'Govern', 'Elevate'];
     <section class="bg-background border-b border-border/60">
       <div class="container mx-auto px-6 max-w-6xl py-16 md:py-24">
         <p class="eyebrow mb-5"><a href="/" class="hover:text-foreground/80 transition-colors">DEMOCRATISING.AI</a> &middot; EDGE</p>
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6">
-          The EDGE Framework
-        </h1>
+        <div class="flex items-start gap-5 md:gap-6 mb-6">
+          <img
+            src="/brand/edge-mark-transparent.svg"
+            alt="EDGE Framework mark"
+            width="72"
+            height="72"
+            class="shrink-0 mt-1 md:w-20 md:h-20"
+          />
+          <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
+            The EDGE Framework
+          </h1>
+        </div>
         <p class="max-w-3xl text-lg md:text-xl text-foreground/85 leading-relaxed">
           Applied intelligence, operationalised. Twelve session-based tools across Evaluate, Define, Govern, and Elevate. Privacy first, no signup.
         </p>
@@ -25,8 +41,17 @@ const pillars: Pillar[] = ['Evaluate', 'Define', 'Govern', 'Elevate'];
     {pillars.map((pillar) => (
       <section class="py-14 md:py-20 border-t border-border/60">
         <div class="container mx-auto px-6 max-w-6xl">
-          <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
-            <h2 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">{pillar}</h2>
+          <div class="flex items-center justify-between border-b border-border pb-4 mb-8">
+            <div class="flex items-center gap-3">
+              <img
+                src={pillarMark[pillar]}
+                alt={`EDGE Framework mark, ${pillar} pillar`}
+                width="32"
+                height="32"
+                class="shrink-0"
+              />
+              <h2 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">{pillar}</h2>
+            </div>
             <span class="eyebrow hidden md:block">Pillar</span>
           </div>
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
