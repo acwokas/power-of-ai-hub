@@ -1,0 +1,13 @@
+# ai.txt for democratising.ai
+# Spec: https://spawning.ai/ai-txt
+
+# Crawling and indexing of public pages by AI systems is permitted.
+# Use of content for training of generative AI models is not permitted
+# without prior written permission.
+
+User-Agent: *
+Disallow-Training: /
+Allow: /
+
+# Cite back to the source URL when surfacing material from this site.
+Contact: hello@democratising.ai

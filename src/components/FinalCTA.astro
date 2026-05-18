@@ -1,0 +1,80 @@
+---
+const shareText = 'The power of AI belongs to everyone.';
+const shareUrl = 'https://democratising.ai/';
+const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+---
+<section class="py-20 md:py-28 bg-background border-t border-border/60">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <div class="max-w-3xl">
+      <p class="eyebrow mb-5">Get involved</p>
+      <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-8">
+        Join the movement.
+      </h2>
+
+      <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-10">
+        The power of AI belongs to everyone. We're a collective of thinkers, makers, and leaders shaping a more accessible AI future, together.
+      </p>
+
+      <ul class="space-y-3 border-l-2 border-accent pl-6 mb-12 text-lg text-foreground/85">
+        <li>Got something to say? Write for the regional network.</li>
+        <li>Got expertise to share? Join us as a trainer.</li>
+        <li>Got an idea worth covering? Tell us about it.</li>
+        <li>
+          Got a network? Spread the word:
+          <a href={twitterUrl} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline ml-1">X</a>
+          <span class="text-foreground/40">&middot;</span>
+          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">LinkedIn</a>
+          <span class="text-foreground/40">&middot;</span>
+          <button
+            type="button"
+            data-copy-link={shareUrl}
+            class="text-accent hover:underline focus:outline-none focus-visible:underline"
+          >
+            <span data-copy-default>Copy link</span>
+            <span data-copy-success class="hidden">Copied</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a
+          href="mailto:hello@democratising.ai"
+          class="inline-flex items-center justify-center bg-accent text-accent-foreground hover:bg-accent/90 text-base px-7 py-4 rounded-sm font-semibold transition-colors"
+        >
+          Get in touch
+        </a>
+        <a
+          href="#ecosystem"
+          class="inline-flex items-center justify-center border border-foreground/40 bg-transparent text-foreground hover:bg-foreground/10 hover:border-foreground/60 text-base px-7 py-4 rounded-sm font-semibold transition-colors"
+        >
+          Explore the ecosystem
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.copyLink;
+      if (!url) return;
+      try {
+        await navigator.clipboard.writeText(url);
+        const def = btn.querySelector<HTMLSpanElement>('[data-copy-default]');
+        const ok = btn.querySelector<HTMLSpanElement>('[data-copy-success]');
+        if (def && ok) {
+          def.classList.add('hidden');
+          ok.classList.remove('hidden');
+          setTimeout(() => {
+            def.classList.remove('hidden');
+            ok.classList.add('hidden');
+          }, 2000);
+        }
+      } catch {
+        // clipboard blocked; silently fail
+      }
+    });
+  });
+</script>

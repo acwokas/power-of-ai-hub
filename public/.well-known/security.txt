@@ -1,0 +1,7 @@
+# Security policy for democratising.ai
+# Spec: https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:hello@democratising.ai
+Expires: 2027-05-16T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://democratising.ai/.well-known/security.txt

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import ConversationSimulator from '../../components/tools/ConversationSimulator.tsx';
+---
+<BaseLayout
+  title="Conversation Simulator - EDGE Define - DEMOCRATISING.AI"
+  description="Rehearse a difficult conversation before it happens for real. AI plays the other side in character; resolution must be earned. Privacy first, no signup."
+>
+  <main>
+    <section class="bg-background border-b border-border/60">
+      <div class="container mx-auto px-6 max-w-3xl py-16 md:py-24">
+        <p class="eyebrow mb-5">
+          <a href="/" class="hover:text-foreground/80 transition-colors">DEMOCRATISING.AI</a>
+          <span class="text-foreground/40 mx-1">/</span>
+          <a href="/tools" class="hover:text-foreground/80 transition-colors">EDGE</a>
+          <span class="text-foreground/40 mx-1">/</span>
+          Define
+        </p>
+        <div class="flex items-start gap-4 mb-6">
+          <img
+            src="/brand/edge-mark-define.svg"
+            alt="EDGE Framework mark, Define pillar"
+            width="40"
+            height="40"
+            class="shrink-0 mt-2 md:w-12 md:h-12"
+          />
+          <h1 class="font-serif text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.05]">
+            Conversation Simulator
+          </h1>
+        </div>
+        <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-6">
+          Rehearse before it matters. The AI plays the other person in character and pushes back realistically. Resolution must be earned through clarity, empathy, or firmness.
+        </p>
+        <div class="flex items-start gap-3 text-sm text-foreground/60">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 text-accent/70 shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Your inputs and transcript are only used to generate this conversation and reflection. Nothing is stored on a server. Form drafts and notes live in your browser only.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <ConversationSimulator client:load />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,143 @@
+---
+const regions = [
+  {
+    region: 'Asia',
+    title: 'AI in Asia',
+    description:
+      'Insight, context, and perspective on AI, business, regulation, and culture. For people who want understanding before action.',
+    url: 'https://www.aiinasia.com',
+  },
+  {
+    region: 'Arabia',
+    title: 'AI in Arabia',
+    description:
+      "The Arab world's independent home for AI news, analysis, and practical guides. Written for the region, by people who understand it.",
+    url: 'https://www.aiinarabia.com',
+  },
+  {
+    region: 'Europe',
+    title: 'AI in Europe',
+    description:
+      "Europe's daily AI brief covering the EU, UK, and Switzerland. Primary sources, British English, no hype.",
+    url: 'https://www.aiineurope.co',
+  },
+];
+
+const tools = [
+  {
+    category: 'Prompt',
+    title: 'PromptAndGo',
+    description:
+      'AI prompts that speak Asia fluently. Built for every language. Cultural register, not just translation.',
+    cta: 'Use PromptAndGo',
+    url: 'https://promptandgo.ai',
+    external: true,
+  },
+  {
+    category: 'Framework',
+    title: 'EDGE Framework',
+    description:
+      'Applied intelligence, operationalised. Twelve session-based tools across Evaluate, Define, Govern, and Elevate. Diagnose maturity, simulate decisions, rehearse governance, engineer prompts. Privacy first, no signup.',
+    cta: 'Open the framework',
+    url: '/tools',
+    external: false,
+  },
+  {
+    category: 'Learn',
+    title: 'AIacademy',
+    description:
+      'Build real capability in AI, marketing, and strategy, grounded in real world use. For individuals and teams who want depth, not surface knowledge.',
+    cta: 'Visit AIacademy',
+    url: 'https://aiacademy.asia',
+    external: true,
+  },
+];
+---
+<section id="ecosystem" class="py-20 md:py-28 bg-background border-t border-border/60">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <header class="max-w-3xl mb-14 md:mb-20">
+      <p class="eyebrow mb-5">The ecosystem</p>
+      <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+        One ecosystem. Different roles.
+      </h2>
+      <div class="mt-6 text-lg md:text-xl text-foreground/80 leading-relaxed">
+        <p>Each part of the ecosystem serves a specific purpose.</p>
+      </div>
+    </header>
+
+    <div class="mb-20 md:mb-24">
+      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
+          The regional network
+        </h3>
+        <span class="eyebrow hidden md:block">Editorial</span>
+      </div>
+
+      <div class="grid gap-px bg-border md:grid-cols-3 border border-border">
+        {regions.map((region) => (
+          <a
+            href={region.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-background hover:bg-card transition-colors p-7 md:p-8 flex flex-col"
+          >
+            <p class="eyebrow mb-6">{region.region}</p>
+            <h4 class="font-serif text-3xl md:text-[2rem] font-black tracking-tight leading-[1.1] mb-4 text-foreground">
+              {region.title}
+            </h4>
+            <p class="text-foreground/80 leading-relaxed flex-grow mb-8">
+              {region.description}
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm font-semibold text-accent group-hover:gap-3 transition-all">
+              Read the publication
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
+          Tools and platforms
+        </h3>
+        <span class="eyebrow hidden md:block">Applied</span>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {tools.map((tool) => (
+          <div class="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors">
+            <p class="eyebrow mb-5">{tool.category}</p>
+            <div class="flex items-center gap-3 mb-4">
+              {tool.title === 'EDGE Framework' && (
+                <img
+                  src="/brand/edge-mark-transparent.svg"
+                  alt="EDGE Framework mark"
+                  width="40"
+                  height="40"
+                  class="shrink-0"
+                />
+              )}
+              <h4 class="font-serif text-2xl md:text-3xl font-black tracking-tight text-foreground">
+                {tool.title}
+              </h4>
+            </div>
+            <p class="text-base text-foreground/80 leading-relaxed flex-grow mb-6">
+              {tool.description}
+            </p>
+            <a
+              href={tool.url}
+              target={tool.external ? '_blank' : undefined}
+              rel={tool.external ? 'noopener noreferrer' : undefined}
+              class="self-start inline-flex items-center text-foreground hover:text-accent font-semibold transition-colors"
+            >
+              {tool.cta}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
