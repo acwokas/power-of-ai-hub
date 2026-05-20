@@ -35,7 +35,7 @@ export const tools: Tool[] = [
     title: 'Brand Palette',
     pillar: 'Define',
     description: 'Lock the visual language of your brand into one source of truth.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'brand-profile-generator',
