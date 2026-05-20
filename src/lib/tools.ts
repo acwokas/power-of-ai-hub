@@ -42,7 +42,7 @@ export const tools: Tool[] = [
     title: 'Brand Profile Generator',
     pillar: 'Define',
     description: 'Define how your brand thinks, sounds, and behaves.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'conversation-simulator',
