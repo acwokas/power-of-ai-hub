@@ -84,7 +84,7 @@ export const tools: Tool[] = [
     title: 'Content Sprint Generator',
     pillar: 'Elevate',
     description: 'Plan a focused content sprint with a clear narrative spine.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'negotiation-simulator',
