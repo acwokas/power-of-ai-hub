@@ -63,7 +63,7 @@ export const tools: Tool[] = [
     title: 'Ethical Dilemma',
     pillar: 'Govern',
     description: 'Work through a values-driven tradeoff with structured prompts.',
-    status: 'coming-soon',
+    status: 'live',
   },
   {
     slug: 'red-team-simulation',
