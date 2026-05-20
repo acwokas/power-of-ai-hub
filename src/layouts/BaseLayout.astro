@@ -76,5 +76,18 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
   </head>
   <body class="min-h-screen bg-background text-foreground">
     <slot />
+
+    <script is:inline>
+      // Defensive: ensure mailto: anchors always navigate to the OS mail handler
+      // even if a downstream listener (analytics tag, future script, etc.) calls preventDefault.
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href^="mailto:"]');
+        if (!a) return;
+        if (e.defaultPrevented) {
+          e.stopImmediatePropagation();
+          window.location.href = a.href;
+        }
+      }, true);
+    </script>
   </body>
 </html>
