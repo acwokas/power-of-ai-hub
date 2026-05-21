@@ -28,7 +28,13 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#14264C" />
     <link rel="canonical" href={canonicalUrl} />
 
     <title>{title}</title>
@@ -59,7 +65,6 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
       '@type': 'Organization',
       name: 'DEMOCRATISING.AI',
       url: 'https://democratising.ai/',
-      logo: `${SITE_URL}/favicon.png`,
       description: 'An ecosystem of editorial and applied AI, helping people think clearly, act deliberately, and execute with confidence.',
       sameAs: [
         'https://www.aiinasia.com',
