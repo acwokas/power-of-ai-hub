@@ -296,7 +296,7 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {section.content}
           </div>
         </CollapsibleContent>
@@ -551,7 +551,7 @@ function GovernanceContent() {
               <label className="text-sm font-medium text-foreground">
                 Who is reviewing this? <span className="text-accent ml-0.5">*</span>
               </label>
-              <p className="text-xs text-muted-foreground/70">
+              <p className="text-xs text-muted-foreground">
                 Select 1 or 2. Shapes the types of question you will face.
               </p>
               <div className="space-y-2 pt-1">
@@ -603,7 +603,7 @@ function GovernanceContent() {
             <span className="text-xs text-muted-foreground flex items-center gap-1.5">
               <ShieldCheck className="h-3 w-3" /> Question {questionCount}, Answer {answerCount}
             </span>
-            <span className="text-xs text-muted-foreground/50">{setup.reviewers.join(', ')}</span>
+            <span className="text-xs text-muted-foreground">{setup.reviewers.join(', ')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Button
@@ -700,7 +700,7 @@ function GovernanceContent() {
             className="min-h-[80px] bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
           />
           <div className="flex items-center justify-between">
-            <p className="text-[10px] text-muted-foreground/50">
+            <p className="text-xs text-muted-foreground">
               Press Enter to submit. 50 to 500 characters recommended.
             </p>
             <Button
@@ -722,7 +722,7 @@ function GovernanceContent() {
       {isReflecting && reflectionSections.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Generating governance analysis and frameworks...</p>
-          <p className="text-xs text-muted-foreground/50">
+          <p className="text-xs text-muted-foreground">
             Reviewed {answerCount} answers across {questionCount} questions
           </p>
           {[1, 2, 3, 4].map((i) => (
@@ -737,7 +737,7 @@ function GovernanceContent() {
 
       {isReflecting && reflectionRaw.length > 0 && reflectionSections.length === 0 && (
         <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {reflectionRaw}
             <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
           </div>

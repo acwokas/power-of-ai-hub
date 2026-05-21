@@ -127,7 +127,7 @@ function CopyButton({ text, label }: { text: string; label: string }) {
     <button
       type="button"
       onClick={handle}
-      className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/60 hover:text-accent transition-colors"
+      className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground hover:text-accent transition-colors"
       aria-label={`Copy ${label}`}
     >
       {copied ? 'Copied' : 'Copy'}
@@ -185,7 +185,7 @@ export default function PromptEngineer() {
               placeholder="Paste any prompt here. We'll rewrite it for the platform you pick."
               className="min-h-[160px] w-full rounded-sm border border-border bg-secondary/30 px-4 py-3 text-base text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
             />
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-foreground/50">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-foreground">
               <button
                 type="button"
                 onClick={handleLoadExample}
@@ -220,23 +220,23 @@ export default function PromptEngineer() {
                       <span
                         className={
                           'text-sm font-semibold ' +
-                          (isActive ? 'text-foreground' : 'text-foreground/80')
+                          (isActive ? 'text-foreground' : 'text-foreground')
                         }
                       >
                         {p.id}
                       </span>
                       <span
                         className={
-                          'text-[10px] uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ' +
+                          'text-xs uppercase tracking-[0.18em] rounded-full border px-2 py-0.5 ' +
                           (isActive
                             ? 'bg-accent/10 text-accent border-accent/30'
-                            : 'bg-secondary/40 text-foreground/50 border-border/40')
+                            : 'bg-secondary/40 text-foreground border-border/40')
                         }
                       >
                         {p.badge}
                       </span>
                     </div>
-                    <p className="text-xs text-foreground/70">{p.description}</p>
+                    <p className="text-xs text-foreground">{p.description}</p>
                   </button>
                 );
               })}
@@ -264,7 +264,7 @@ export default function PromptEngineer() {
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-4">
             <div>
               <p className="eyebrow mb-2">Adapted</p>
-              <p className="text-sm text-foreground/70">
+              <p className="text-sm text-foreground">
                 Optimised for <span className="text-foreground font-semibold">{platform}</span>
               </p>
             </div>
@@ -279,7 +279,7 @@ export default function PromptEngineer() {
               <button
                 type="button"
                 onClick={handleStartOver}
-                className="inline-flex items-center gap-2 rounded-sm px-4 py-2 text-sm font-semibold text-foreground/70 hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-2 rounded-sm px-4 py-2 text-sm font-semibold text-foreground hover:text-foreground transition-colors"
               >
                 Start over
               </button>
@@ -289,10 +289,10 @@ export default function PromptEngineer() {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-sm border border-border/40 bg-secondary/20 overflow-hidden">
               <div className="flex items-center justify-between border-b border-border/40 px-4 py-2.5">
-                <span className="eyebrow text-foreground/60">Original</span>
+                <span className="eyebrow text-foreground">Original</span>
                 <CopyButton text={adaptedOriginal} label="original prompt" />
               </div>
-              <div className="whitespace-pre-wrap p-4 text-sm text-foreground/80 leading-relaxed max-h-[400px] overflow-y-auto">
+              <div className="whitespace-pre-wrap p-4 text-sm text-foreground leading-relaxed max-h-[400px] overflow-y-auto">
                 {adaptedOriginal}
               </div>
             </div>
@@ -311,7 +311,7 @@ export default function PromptEngineer() {
           {activePlatform && (
             <div className="flex items-start gap-3 rounded-sm border border-border/40 bg-secondary/30 p-4">
               <span className="text-accent font-bold">{platform} tip:</span>
-              <p className="text-sm text-foreground/80">{activePlatform.tip}</p>
+              <p className="text-sm text-foreground">{activePlatform.tip}</p>
             </div>
           )}
         </div>

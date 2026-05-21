@@ -308,7 +308,7 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {section.content}
           </div>
         </CollapsibleContent>
@@ -661,7 +661,7 @@ function NegotiationContent() {
             <Send className="h-4 w-4" />
           </Button>
         </div>
-        <p className="text-[10px] text-muted-foreground/50 text-center">
+        <p className="text-xs text-muted-foreground text-center">
           Press Enter to send. Use "Pause and strategise" to think. Click "End negotiation" for coaching.
         </p>
       </div>
@@ -673,7 +673,7 @@ function NegotiationContent() {
       {isReflecting && reflectionSections.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Analysing negotiation...</p>
-          <p className="text-xs text-muted-foreground/50">Reviewing {turnCount} rounds</p>
+          <p className="text-xs text-muted-foreground">Reviewing {turnCount} rounds</p>
           {[1, 2, 3].map((i) => (
             <div key={i} className="border border-border/30 bg-card rounded-sm p-4 space-y-3">
               <Skeleton className="h-4 w-1/3" />
@@ -686,7 +686,7 @@ function NegotiationContent() {
 
       {isReflecting && reflectionRaw.length > 0 && reflectionSections.length === 0 && (
         <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {reflectionRaw}
             <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
           </div>

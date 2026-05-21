@@ -229,7 +229,7 @@ function PlatformPost({
 
             {platform.whyItWorks && (
               <Collapsible>
-                <CollapsibleTrigger className="text-xs text-muted-foreground/60 hover:text-muted-foreground flex items-center gap-1">
+                <CollapsibleTrigger className="text-xs text-muted-foreground hover:text-muted-foreground flex items-center gap-1">
                   <ChevronDown className="h-3 w-3" /> Why this works
                 </CollapsibleTrigger>
                 <CollapsibleContent>
@@ -623,7 +623,7 @@ export default function ContentSprintGenerator() {
                 Using profile for:{' '}
                 <span className="text-accent">{profileData.formData.productName || 'unnamed product'}</span>
               </p>
-              <p className="text-xs text-muted-foreground/60 mt-0.5">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 Generated {new Date(profileData.generatedAt).toLocaleDateString('en-GB')}
               </p>
             </div>
@@ -643,7 +643,7 @@ export default function ContentSprintGenerator() {
         ) : (
           <div className="border border-border/30 bg-card rounded-sm p-4 space-y-3">
             <p className="text-sm font-medium">Quick brand context</p>
-            <p className="text-xs text-muted-foreground/60">
+            <p className="text-xs text-muted-foreground">
               Without a saved brand profile, give the generator a few essentials to keep the content on-message.
             </p>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -724,7 +724,7 @@ export default function ContentSprintGenerator() {
               </button>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground">
             Longer sprints give more variety but take longer to generate.
           </p>
         </div>
@@ -742,7 +742,7 @@ export default function ContentSprintGenerator() {
               </label>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground">
             Content will be optimised for each platform&apos;s format and audience.
           </p>
         </div>
@@ -758,7 +758,7 @@ export default function ContentSprintGenerator() {
                 </label>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground/60">Leave blank to balance all pillars equally.</p>
+            <p className="text-xs text-muted-foreground">Leave blank to balance all pillars equally.</p>
           </div>
         )}
 
@@ -770,7 +770,7 @@ export default function ContentSprintGenerator() {
             placeholder="e.g., Product launch on Day 5, conference attendance Day 10 to 12"
             className="min-h-[80px] bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
           />
-          <p className="text-xs text-muted-foreground/60">The generator will weave these into the calendar.</p>
+          <p className="text-xs text-muted-foreground">The generator will weave these into the calendar.</p>
         </div>
 
         <div className="space-y-3">
@@ -785,14 +785,14 @@ export default function ContentSprintGenerator() {
             className="w-full accent-accent"
             aria-label="Tone slider"
           />
-          <div className="flex justify-between text-xs text-muted-foreground/60">
+          <div className="flex justify-between text-xs text-muted-foreground">
             <span>More professional</span>
             <span>More conversational</span>
           </div>
         </div>
 
-        <div className="flex items-start gap-2 text-xs text-muted-foreground/60 bg-card border border-border/20 rounded-sm p-3">
-          <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-accent/60" />
+        <div className="flex items-start gap-2 text-xs text-muted-foreground bg-card border border-border/20 rounded-sm p-3">
+          <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-accent" />
           <span>
             Your brand context is used to generate the sprint and is not stored on a server. The result is cached
             in your browser only.
@@ -827,14 +827,14 @@ export default function ContentSprintGenerator() {
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
-          <p className="text-xs text-muted-foreground/40">
+          <p className="text-xs text-muted-foreground">
             Estimated: {duration === 7 ? '60 to 90' : '90 to 120'} seconds
           </p>
         </div>
 
         {sprintText && (
           <div className="border border-border/20 rounded-sm p-4 max-h-60 overflow-y-auto">
-            <p className="text-xs text-muted-foreground/40 mb-2">Live preview:</p>
+            <p className="text-xs text-muted-foreground mb-2">Live preview:</p>
             <div className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">
               {sprintText.slice(-500)}
             </div>
@@ -851,7 +851,7 @@ export default function ContentSprintGenerator() {
           <h2 className="text-xl font-semibold">
             {profileData?.formData?.productName || inlineProfile.productName || 'Content'} sprint
           </h2>
-          <p className="text-xs text-muted-foreground/60 mt-0.5">
+          <p className="text-xs text-muted-foreground mt-0.5">
             Generated {generatedAt ? new Date(generatedAt).toLocaleString('en-GB') : ''}
           </p>
         </div>
@@ -890,7 +890,7 @@ export default function ContentSprintGenerator() {
                     )}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-muted-foreground/40">
+                    <span className="text-xs text-muted-foreground">
                       {day.platforms.length} platform{day.platforms.length !== 1 ? 's' : ''}
                     </span>
                     <ChevronDown className="h-4 w-4 text-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
@@ -922,7 +922,7 @@ export default function ContentSprintGenerator() {
                 <span className="text-xs font-semibold text-accent">Day {day.dayNumber}</span>
               </div>
               {day.theme && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-sm bg-accent/10 text-accent block truncate">
+                <span className="text-xs px-1.5 py-0.5 rounded-sm bg-accent/10 text-accent block truncate">
                   {day.theme}
                 </span>
               )}
@@ -933,7 +933,7 @@ export default function ContentSprintGenerator() {
                     onClick={() => {
                       copyToClipboard(p.content, `Day ${day.dayNumber} ${p.name}`);
                     }}
-                    className="w-full text-left text-[10px] text-muted-foreground hover:text-foreground truncate transition-colors"
+                    className="w-full text-left text-xs text-muted-foreground hover:text-foreground truncate transition-colors"
                     title={p.content.slice(0, 100)}
                   >
                     {p.name}
@@ -978,14 +978,14 @@ export default function ContentSprintGenerator() {
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-medium text-accent">Day {post.dayNumber}</span>
-                        {post.theme && <span className="text-[10px] text-muted-foreground/60">{post.theme}</span>}
+                        {post.theme && <span className="text-xs text-muted-foreground">{post.theme}</span>}
                       </div>
                       <p className="text-sm text-foreground whitespace-pre-line leading-relaxed">{post.content}</p>
                       <div className="flex gap-1.5">
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-6 text-[10px]"
+                          className="h-6 text-xs"
                           onClick={() => copyToClipboard(post.content, `Day ${post.dayNumber}`)}
                         >
                           <Copy className="h-2.5 w-2.5 mr-1" /> Copy
@@ -993,7 +993,7 @@ export default function ContentSprintGenerator() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-6 text-[10px]"
+                          className="h-6 text-xs"
                           onClick={() => handleOptimise(platformName, post.content, post.dayNumber)}
                           disabled={isOptimising === `${post.dayNumber}-${platformName}`}
                         >

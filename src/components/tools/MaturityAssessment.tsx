@@ -365,9 +365,9 @@ export default function MaturityAssessment() {
           <ol className="space-y-2">
             {dimensions.map((d, i) => (
               <li key={d} className="text-sm text-muted-foreground flex items-start gap-3 pl-4">
-                <span className="text-accent/60 font-medium shrink-0">{i + 1}.</span>
+                <span className="text-accent font-medium shrink-0">{i + 1}.</span>
                 <span>
-                  <span className="font-medium text-foreground/80">{d}</span>: {descs[i]}
+                  <span className="font-medium text-foreground">{d}</span>: {descs[i]}
                 </span>
               </li>
             ))}
@@ -375,8 +375,8 @@ export default function MaturityAssessment() {
           <p className="text-sm text-muted-foreground leading-relaxed">
             Takes 5 to 10 minutes. Results are private and provide a personalised roadmap.
           </p>
-          <div className="flex items-start gap-2 text-sm text-muted-foreground/70">
-            <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-accent/60" />
+          <div className="flex items-start gap-2 text-sm text-muted-foreground">
+            <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-accent" />
             <span>Assessment scores are calculated in your browser and never stored on servers.</span>
           </div>
         </div>
@@ -394,7 +394,7 @@ export default function MaturityAssessment() {
           <span>
             Question {currentQ + 1} of {questions.length}
           </span>
-          <span className="text-accent/70">{q.dimension}</span>
+          <span className="text-accent">{q.dimension}</span>
         </div>
         <div className="w-full h-1 bg-secondary/50 rounded-full overflow-hidden">
           <div
@@ -405,7 +405,7 @@ export default function MaturityAssessment() {
 
         <div className="p-6 md:p-8 bg-card border border-border/30 space-y-5">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center text-[10px] tracking-wide uppercase font-normal text-muted-foreground border border-border/40 rounded-sm px-2 py-1">
+            <span className="inline-flex items-center text-xs tracking-wide uppercase font-normal text-muted-foreground border border-border/40 rounded-sm px-2 py-1">
               {q.dimension}
             </span>
           </div>
@@ -422,7 +422,7 @@ export default function MaturityAssessment() {
                     : 'border-border/30 text-muted-foreground hover:border-border/60 hover:text-foreground',
                 )}
               >
-                <span className="font-medium text-accent/60 mr-2">Level {opt.level}</span>
+                <span className="font-medium text-accent mr-2">Level {opt.level}</span>
                 {opt.label}
               </button>
             ))}
@@ -447,7 +447,7 @@ export default function MaturityAssessment() {
                   answer(q.id, 1);
                   if (currentQ < questions.length - 1) setCurrentQ((p) => p + 1);
                 }}
-                className="text-muted-foreground/50"
+                className="text-muted-foreground"
               >
                 Skip
               </Button>
@@ -489,7 +489,7 @@ export default function MaturityAssessment() {
   return (
     <div className="space-y-8">
       <div className="p-6 md:p-8 bg-card border border-border/30 text-center space-y-4">
-        <p className="text-xs uppercase tracking-widest text-muted-foreground/50">Your AI Governance Maturity</p>
+        <p className="text-xs uppercase tracking-widest text-muted-foreground">Your AI Governance Maturity</p>
         <div className="space-y-1">
           <p className={cn('text-5xl md:text-6xl font-bold', scoreColor(overallScore))}>{overallScore}</p>
           <p className="text-sm text-muted-foreground">out of 5.0</p>
@@ -503,7 +503,7 @@ export default function MaturityAssessment() {
       </div>
 
       <div className="p-6 md:p-8 bg-card border border-border/30 space-y-5">
-        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground/50">Dimension Breakdown</h3>
+        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Dimension Breakdown</h3>
         <div className="space-y-4">
           {dimensions.map((dim, i) => {
             const score = dimensionScores[i];
@@ -511,7 +511,7 @@ export default function MaturityAssessment() {
             return (
               <div key={dim} className="space-y-1.5">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-foreground/80 font-medium">{dim}</span>
+                  <span className="text-foreground font-medium">{dim}</span>
                   <span className={cn('font-medium', scoreColor(score))}>{score} / 5.0</span>
                 </div>
                 <div className="w-full h-2 bg-secondary/50 rounded-full overflow-hidden">
@@ -520,7 +520,7 @@ export default function MaturityAssessment() {
                     style={{ width: `${(score / 5) * 100}%` }}
                   />
                 </div>
-                <p className="text-xs text-muted-foreground/50">
+                <p className="text-xs text-muted-foreground">
                   Level {lvl}: {maturityLevels[lvl].label}
                 </p>
               </div>
@@ -530,7 +530,7 @@ export default function MaturityAssessment() {
       </div>
 
       <div className="p-6 md:p-8 bg-card border border-border/30 space-y-5">
-        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground/50">Personalised Roadmap</h3>
+        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Personalised Roadmap</h3>
 
         <div className="p-4 border border-accent/20 bg-accent/5 rounded-sm space-y-2">
           <p className="text-xs uppercase tracking-widest text-accent font-medium">Start here</p>
@@ -547,7 +547,7 @@ export default function MaturityAssessment() {
 
         {dimensionScores.some((s) => s >= 2 && s < 3) && (
           <div className="space-y-2">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50">Quick wins</p>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground">Quick wins</p>
             <p className="text-sm text-muted-foreground">
               These dimensions are partially developed and are easiest to improve:
             </p>
@@ -557,7 +557,7 @@ export default function MaturityAssessment() {
                   <li key={d} className="text-sm text-muted-foreground flex items-start gap-2 pl-4">
                     <span className="w-1 h-1 rounded-full bg-yellow-400 shrink-0 mt-2" />
                     <span>
-                      <span className="font-medium text-foreground/80">{d}</span>: {dimensionScores[i]} / 5.0
+                      <span className="font-medium text-foreground">{d}</span>: {dimensionScores[i]} / 5.0
                     </span>
                   </li>
                 ) : null,
@@ -568,14 +568,14 @@ export default function MaturityAssessment() {
 
         {dimensionScores.some((s) => s > 0 && s < 2) && (
           <div className="space-y-2">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50">Critical gaps</p>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground">Critical gaps</p>
             <ul className="space-y-1.5">
               {dimensions.map((d, i) =>
                 dimensionScores[i] > 0 && dimensionScores[i] < 2 ? (
                   <li key={d} className="text-sm text-muted-foreground flex items-start gap-2 pl-4">
                     <span className="w-1 h-1 rounded-full bg-red-400 shrink-0 mt-2" />
                     <span>
-                      <span className="font-medium text-foreground/80">{d}</span>, {dimensionScores[i]} / 5.0, requires investment
+                      <span className="font-medium text-foreground">{d}</span>, {dimensionScores[i]} / 5.0, requires investment
                     </span>
                   </li>
                 ) : null,
@@ -586,7 +586,7 @@ export default function MaturityAssessment() {
       </div>
 
       <div className="p-6 md:p-8 bg-card border border-border/30 space-y-4">
-        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground/50">Recommended Tools</h3>
+        <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Recommended Tools</h3>
         <div className="grid sm:grid-cols-2 gap-4">
           {(dimensionScores[0] < 3 || dimensionScores[2] < 3 || dimensionScores[4] < 3) && (
             <a
@@ -652,7 +652,7 @@ export default function MaturityAssessment() {
         </Button>
       </div>
 
-      <p className="text-xs text-muted-foreground/60 flex items-center gap-2 pt-2">
+      <p className="text-xs text-muted-foreground flex items-center gap-2 pt-2">
         <ClipboardCheck className="h-3.5 w-3.5" />
         Results are not saved between sessions. Download the report if you want to keep them.
       </p>

@@ -277,7 +277,7 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {section.content}
           </div>
         </CollapsibleContent>
@@ -515,7 +515,7 @@ function RedTeamContent() {
       {isStreaming && rawText.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Running three-pass analysis...</p>
-          <p className="text-xs text-muted-foreground/50">This takes 45 to 90 seconds.</p>
+          <p className="text-xs text-muted-foreground">This takes 45 to 90 seconds.</p>
           {[1, 2, 3].map((i) => (
             <div key={i} className="border border-border/30 bg-card rounded-sm p-4 space-y-3">
               <Skeleton className="h-4 w-1/3" />
@@ -528,7 +528,7 @@ function RedTeamContent() {
 
       {isStreaming && rawText.length > 0 && sections.length === 0 && (
         <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {rawText}
             <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
           </div>
@@ -566,7 +566,7 @@ function RedTeamContent() {
                 <h3 className="text-sm font-medium text-accent">Synthesis</h3>
                 {synthesisText && <CopyBtn text={synthesisText} />}
               </div>
-              <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+              <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
                 {synthesisText}
                 {isSynthesizing && (
                   <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
@@ -590,7 +590,7 @@ function RedTeamContent() {
               return (
                 <div key={cId} className="border border-border/20 rounded-sm p-3 space-y-2">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-xs text-foreground/80">{cleanConcern}</p>
+                    <p className="text-xs text-foreground">{cleanConcern}</p>
                     {!mitigationTexts[cId] && mitigatingId !== cId && (
                       <Button
                         variant="ghost"
@@ -603,7 +603,7 @@ function RedTeamContent() {
                     )}
                   </div>
                   {(mitigatingId === cId || mitigationTexts[cId]) && (
-                    <div className="text-xs text-foreground/80 whitespace-pre-wrap leading-relaxed bg-secondary/30 p-2 rounded-sm">
+                    <div className="text-xs text-foreground whitespace-pre-wrap leading-relaxed bg-secondary/30 p-2 rounded-sm">
                       {mitigationTexts[cId]}
                       {mitigatingId === cId && (
                         <span className="inline-block w-0.5 h-3 bg-accent animate-pulse ml-0.5 align-text-bottom" />

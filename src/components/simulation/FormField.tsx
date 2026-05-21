@@ -83,7 +83,7 @@ export function FormField({ config, value, onChange }: FormFieldProps) {
             <span
               className={cn(
                 'absolute bottom-2 right-3 text-xs',
-                charCount > config.maxLength * 0.9 ? 'text-destructive' : 'text-muted-foreground/50',
+                charCount > config.maxLength * 0.9 ? 'text-destructive' : 'text-muted-foreground',
               )}
             >
               {charCount}/{config.maxLength}

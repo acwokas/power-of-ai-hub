@@ -9,21 +9,22 @@ import { PrivacyNotice } from '@/components/simulation/PrivacyNotice';
 import {
   ArrowLeft,
   ArrowRight,
+  CheckCircle2,
   ChevronDown,
   Copy,
   Check,
   Download,
-  FileJson,
+  FileText,
   Loader2,
   Pencil,
   RefreshCw,
   RotateCcw,
   ShieldCheck,
   Sparkles,
-  UserCircle,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
+import { downloadBrandPdf, type BrandPdfFieldGroup } from '@/lib/brand-pdf';
 
 const STORAGE_KEY = 'define-brand-profile-data';
 const PROFILE_STORAGE_KEY = 'define-brand-profile-latest';
@@ -347,15 +348,8 @@ export default function BrandProfileGenerator() {
     toast({ title: 'Example data loaded' });
   };
 
-  const handleSaveDraft = () => {
-    const blob = new Blob([JSON.stringify(formData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'brand-profile-draft.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+  // Drafts auto-save to localStorage on every formData change (see useEffect above).
+  // The old Save Draft button dumped raw JSON, which confused users. Removed.
 
   const handleRefine = async (type: 'problem' | 'differentiators', fieldKey: string) => {
     const text = getVal(fieldKey);
@@ -531,21 +525,38 @@ export default function BrandProfileGenerator() {
     }
   };
 
-  const handleSaveJson = () => {
+  const handleDownloadPdf = () => {
     const sections = parseProfile(profileText);
-    const payload = {
-      formData,
-      profile: profileText,
-      generatedAt,
-      sections: sections.map((s) => ({ key: s.key, title: s.title, content: s.content })),
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${(formData.productName || 'brand').toLowerCase().replace(/\s+/g, '-')}-profile.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const productName = formData.productName || 'Brand';
+    const inputs: BrandPdfFieldGroup[] = reviewSections.map((g) => ({
+      label: g.label,
+      items: g.items
+        .map((it) => {
+          const raw = getVal(it.key);
+          if (!raw) return null;
+          const transform = (it as { transform?: (v: string) => string }).transform;
+          const value = transform ? transform(raw) : raw;
+          return { label: it.label, value };
+        })
+        .filter((x): x is { label: string; value: string } => !!x),
+    }));
+    try {
+      downloadBrandPdf({
+        toolName: 'Brand Profile Generator',
+        documentTitle: `${productName} brand profile`,
+        subtitle: getVal('productDescription'),
+        generatedAt,
+        sections: sections.map((s) => ({ title: s.title, content: s.content })),
+        inputs,
+        footerNote:
+          'Generated with the EDGE Framework Brand Profile Generator. AI assisted. Review before using in market.',
+        fileName: `${productName.toLowerCase().replace(/\s+/g, '-')}-brand-profile.pdf`,
+      });
+      toast({ title: 'PDF download started' });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'PDF generation failed';
+      toast({ title: 'PDF generation failed', description: message, variant: 'destructive' });
+    }
   };
 
   const handleDownloadMarkdown = () => {
@@ -632,7 +643,7 @@ export default function BrandProfileGenerator() {
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
-          <p className="text-xs text-muted-foreground/50">{loadingProgress}%</p>
+          <p className="text-xs text-muted-foreground">{loadingProgress}%</p>
         </div>
         {profileText && (
           <div className="text-left max-w-[700px] mx-auto mt-8 p-5 bg-card border border-border/30 rounded-sm">
@@ -659,7 +670,7 @@ export default function BrandProfileGenerator() {
             <h2 className="text-xl font-semibold">
               {formData.productName || 'Brand'} brand profile
             </h2>
-            <p className="text-xs text-muted-foreground/60 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Generated {generatedAt ? new Date(generatedAt).toLocaleString('en-GB') : ''}
             </p>
           </div>
@@ -697,14 +708,14 @@ export default function BrandProfileGenerator() {
 
         <div className="border-t border-border/20 pt-6 space-y-4">
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" size="sm" onClick={handleDownloadMarkdown}>
-              <Download className="h-3.5 w-3.5 mr-1.5" /> Download markdown
+            <Button variant="hero" size="sm" onClick={handleDownloadPdf}>
+              <FileText className="h-3.5 w-3.5 mr-1.5" /> Download branded PDF
             </Button>
             <Button variant="outline" size="sm" onClick={() => copyToClipboard(profileText, 'Full profile')}>
               <Copy className="h-3.5 w-3.5 mr-1.5" /> Copy all sections
             </Button>
-            <Button variant="outline" size="sm" onClick={handleSaveJson}>
-              <FileJson className="h-3.5 w-3.5 mr-1.5" /> Save as JSON
+            <Button variant="outline" size="sm" onClick={handleDownloadMarkdown}>
+              <Download className="h-3.5 w-3.5 mr-1.5" /> Download markdown
             </Button>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -761,8 +772,8 @@ export default function BrandProfileGenerator() {
                     : val;
                   return (
                     <div key={item.key}>
-                      <p className="text-xs text-muted-foreground/60">{item.label}</p>
-                      <p className="text-sm text-foreground/90 whitespace-pre-line">{display}</p>
+                      <p className="text-xs text-muted-foreground">{item.label}</p>
+                      <p className="text-sm text-foreground whitespace-pre-line">{display}</p>
                     </div>
                   );
                 })}
@@ -832,12 +843,12 @@ export default function BrandProfileGenerator() {
               onClick={() => handleGoToStep(i)}
               disabled={i > currentStep}
               className={cn(
-                'text-[10px] px-2 py-0.5 rounded-sm border transition-colors',
+                'text-xs px-2 py-0.5 rounded-sm border transition-colors',
                 i === currentStep
                   ? 'border-accent text-accent bg-accent/10'
                   : i < currentStep
                     ? 'border-border/40 text-muted-foreground hover:text-foreground'
-                    : 'border-border/20 text-muted-foreground/40 cursor-not-allowed',
+                    : 'border-border/20 text-muted-foreground cursor-not-allowed',
               )}
             >
               {i + 1}. {label}
@@ -866,7 +877,7 @@ export default function BrandProfileGenerator() {
                 maxLength={50}
                 className="bg-secondary/30 border-border/40 focus-visible:ring-accent"
               />
-              <p className="text-[10px] text-muted-foreground/60 text-right">
+              <p className="text-xs text-muted-foreground text-right">
                 {getVal('productName').length}/50
               </p>
             </div>
@@ -883,7 +894,7 @@ export default function BrandProfileGenerator() {
                 rows={4}
                 className="bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
               />
-              <p className="text-xs text-muted-foreground/60">
+              <p className="text-xs text-muted-foreground">
                 One clear sentence. What problem does it solve? Minimum 30 characters (
                 {getVal('productDescription').length}/500).
               </p>
@@ -944,7 +955,7 @@ export default function BrandProfileGenerator() {
                 rows={3}
                 className="bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
               />
-              <p className="text-xs text-muted-foreground/60">
+              <p className="text-xs text-muted-foreground">
                 Their priorities, pressures, what keeps them up at night.
               </p>
             </div>
@@ -971,7 +982,7 @@ export default function BrandProfileGenerator() {
                 rows={2}
                 className="bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
               />
-              <p className="text-xs text-muted-foreground/60">Where most of your customers are or will be.</p>
+              <p className="text-xs text-muted-foreground">Where most of your customers are or will be.</p>
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium" htmlFor="marketNotes">
@@ -1010,7 +1021,7 @@ export default function BrandProfileGenerator() {
                 rows={4}
                 className="bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
               />
-              <p className="text-xs text-muted-foreground/60">
+              <p className="text-xs text-muted-foreground">
                 Be specific. Quantify if possible. What pain are you removing? Minimum 40 characters (
                 {getVal('coreProblem').length}/600).
               </p>
@@ -1052,7 +1063,7 @@ export default function BrandProfileGenerator() {
                 rows={4}
                 className="bg-secondary/30 border-border/40 focus-visible:ring-accent resize-y"
               />
-              <p className="text-xs text-muted-foreground/60">
+              <p className="text-xs text-muted-foreground">
                 What do you do that others do not? What do you do better? Minimum 10 characters.
               </p>
             </div>
@@ -1122,7 +1133,7 @@ export default function BrandProfileGenerator() {
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Preferred tone</label>
-              <p className="text-xs text-muted-foreground/60">Select 2 to 4 that feel right for your audience.</p>
+              <p className="text-xs text-muted-foreground">Select 2 to 4 that feel right for your audience.</p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
                 {toneOptions.map((tone) => (
                   <label
@@ -1174,7 +1185,7 @@ export default function BrandProfileGenerator() {
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Primary platforms</label>
-              <p className="text-xs text-muted-foreground/60">Where does your audience spend time?</p>
+              <p className="text-xs text-muted-foreground">Where does your audience spend time?</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
                 {platformOptions.map((p) => (
                   <label
@@ -1213,19 +1224,16 @@ export default function BrandProfileGenerator() {
           <ArrowLeft className="h-3.5 w-3.5 mr-1.5" /> Back
         </Button>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={handleSaveDraft} className="text-muted-foreground">
-            <Download className="h-3.5 w-3.5 mr-1.5" /> Save draft
-          </Button>
           <Button onClick={handleNext} disabled={!isStepValid(currentStep)} variant="hero" size="sm">
             {currentStep === TOTAL_STEPS - 1 ? 'Review' : 'Next'} <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
           </Button>
         </div>
       </div>
 
-      <div className="flex items-start gap-2 text-xs text-muted-foreground/60">
-        <UserCircle className="h-3.5 w-3.5 shrink-0 mt-0.5 text-accent/60" />
+      <div className="flex items-start gap-2 text-xs text-muted-foreground">
+        <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5 text-accent" />
         <span>
-          Your draft is saved in your browser only. Close the tab and come back later, your progress will be here.
+          Your progress saves automatically in this browser. Close and return any time.
         </span>
       </div>
     </div>

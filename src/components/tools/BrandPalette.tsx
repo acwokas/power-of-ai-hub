@@ -367,7 +367,7 @@ export default function BrandPalette() {
         {canRemove && (
           <button
             onClick={() => removeSwatch(mode, swatch.id)}
-            className="text-muted-foreground/50 hover:text-destructive transition-colors shrink-0"
+            className="text-muted-foreground hover:text-destructive transition-colors shrink-0"
             aria-label="Remove swatch"
           >
             <Trash2 className="h-3.5 w-3.5" />
@@ -391,7 +391,7 @@ export default function BrandPalette() {
           maxLength={80}
           className="bg-secondary/30 border-border/40 focus-visible:ring-accent"
         />
-        <p className="text-xs text-muted-foreground/60">
+        <p className="text-xs text-muted-foreground">
           The brand name shows up on the downloaded swatch sheet, the JSON, and the CSS variable file.
         </p>
       </div>
@@ -399,7 +399,7 @@ export default function BrandPalette() {
       <div className="flex items-center justify-between gap-3 border border-border/30 bg-card rounded-sm p-4">
         <div>
           <p className="text-sm font-medium">Include a dark mode pair</p>
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground">
             Disable if you only want a single light palette.
           </p>
         </div>
@@ -425,7 +425,7 @@ export default function BrandPalette() {
       <section className="space-y-4">
         <div className="flex items-center justify-between border-b border-border/40 pb-2">
           <h2 className="text-lg font-semibold">Light mode</h2>
-          <span className="text-xs text-muted-foreground/60">
+          <span className="text-xs text-muted-foreground">
             {palette.light.length} swatch{palette.light.length === 1 ? '' : 'es'}
           </span>
         </div>
@@ -449,7 +449,7 @@ export default function BrandPalette() {
         <section className="space-y-4">
           <div className="flex items-center justify-between border-b border-border/40 pb-2">
             <h2 className="text-lg font-semibold">Dark mode</h2>
-            <span className="text-xs text-muted-foreground/60">
+            <span className="text-xs text-muted-foreground">
               {palette.dark.length} swatch{palette.dark.length === 1 ? '' : 'es'}
             </span>
           </div>
@@ -474,7 +474,7 @@ export default function BrandPalette() {
         <h2 className="text-lg font-semibold">Preview</h2>
         <div className="space-y-6">
           <div>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/60 mb-3">Light mode</p>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Light mode</p>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
               {palette.light.map((s) => (
                 <div key={s.id} className="space-y-1">
@@ -483,7 +483,7 @@ export default function BrandPalette() {
                     style={{ backgroundColor: isValidHex(s.hex) ? expandHex(s.hex) : '#cccccc' }}
                   />
                   <p className="text-xs font-medium text-foreground truncate">{s.name || 'Unnamed'}</p>
-                  <p className="text-[10px] text-muted-foreground font-mono">
+                  <p className="text-xs text-muted-foreground font-mono">
                     {isValidHex(s.hex) ? expandHex(s.hex) : 'invalid'}
                   </p>
                 </div>
@@ -493,7 +493,7 @@ export default function BrandPalette() {
 
           {includeDark && (
             <div>
-              <p className="text-xs uppercase tracking-widest text-muted-foreground/60 mb-3">Dark mode</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Dark mode</p>
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
                 {palette.dark.map((s) => (
                   <div key={s.id} className="space-y-1">
@@ -502,7 +502,7 @@ export default function BrandPalette() {
                       style={{ backgroundColor: isValidHex(s.hex) ? expandHex(s.hex) : '#cccccc' }}
                     />
                     <p className="text-xs font-medium text-foreground truncate">{s.name || 'Unnamed'}</p>
-                    <p className="text-[10px] text-muted-foreground font-mono">
+                    <p className="text-xs text-muted-foreground font-mono">
                       {isValidHex(s.hex) ? expandHex(s.hex) : 'invalid'}
                     </p>
                   </div>
@@ -534,7 +534,7 @@ export default function BrandPalette() {
         </div>
         <details className="border border-border/30 bg-card rounded-sm p-3 text-xs">
           <summary className="cursor-pointer text-muted-foreground">Preview the CSS variables</summary>
-          <pre className="mt-3 whitespace-pre-wrap text-foreground/90 font-mono">{buildCssVariables()}</pre>
+          <pre className="mt-3 whitespace-pre-wrap text-foreground font-mono">{buildCssVariables()}</pre>
         </details>
       </section>
 
@@ -549,7 +549,7 @@ export default function BrandPalette() {
         </Button>
       </section>
 
-      <p className="text-xs text-muted-foreground/60 flex items-start gap-2">
+      <p className="text-xs text-muted-foreground flex items-start gap-2">
         <X className="h-3 w-3 mt-0.5 shrink-0" />
         Your palette lives in your browser only. Refreshing keeps it. Clearing site data resets it.
       </p>

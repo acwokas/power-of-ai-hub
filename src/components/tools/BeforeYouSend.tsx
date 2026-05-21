@@ -202,7 +202,7 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {section.content}
           </div>
         </CollapsibleContent>
@@ -417,7 +417,7 @@ function BeforeYouSendContent() {
                     {audiences.length > 2 && (
                       <button
                         onClick={() => removeAudience(i)}
-                        className="text-muted-foreground/50 hover:text-destructive transition-colors"
+                        className="text-muted-foreground hover:text-destructive transition-colors"
                         aria-label="Remove audience"
                       >
                         <X className="h-3.5 w-3.5" />
@@ -472,13 +472,13 @@ function BeforeYouSendContent() {
           <span className="text-xs font-medium text-accent">Your message</span>
           <CopyBtn text={formData.message || ''} />
         </div>
-        <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">{formData.message}</p>
+        <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">{formData.message}</p>
       </div>
 
       {isStreaming && rawText.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Analysing interpretations...</p>
-          <p className="text-xs text-muted-foreground/50">
+          <p className="text-xs text-muted-foreground">
             Considering each audience perspective, usually 30 to 45 seconds.
           </p>
           {[1, 2, 3].map((i) => (
@@ -494,7 +494,7 @@ function BeforeYouSendContent() {
 
       {isStreaming && rawText.length > 0 && sections.length === 0 && (
         <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {rawText}
             <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
           </div>
@@ -548,7 +548,7 @@ function BeforeYouSendContent() {
                     const match = s.content.match(regex);
                     const excerpt = match ? match[1].trim().slice(0, 200) : '...';
                     return (
-                      <td key={s.id} className="p-3 text-xs text-foreground/80 align-top whitespace-pre-wrap">
+                      <td key={s.id} className="p-3 text-xs text-foreground align-top whitespace-pre-wrap">
                         {excerpt}
                         {excerpt.length >= 200 ? '...' : ''}
                       </td>

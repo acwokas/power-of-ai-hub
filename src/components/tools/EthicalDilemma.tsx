@@ -302,7 +302,7 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {section.content}
           </div>
         </CollapsibleContent>
@@ -542,7 +542,7 @@ function EthicalContent() {
               <label className="text-sm font-medium text-foreground">
                 What is the ethical tension? <span className="text-accent ml-0.5">*</span>
               </label>
-              <p className="text-xs text-muted-foreground/70">Select 1 to 3. What values are in tension?</p>
+              <p className="text-xs text-muted-foreground">Select 1 to 3. What values are in tension?</p>
               <div className="space-y-2 pt-1">
                 {tensionOptions.map((opt) => (
                   <label key={opt.id} className="flex items-start gap-3 text-sm cursor-pointer group">
@@ -675,7 +675,7 @@ function EthicalContent() {
         <ScrollArea className="h-[400px] border border-border/30 bg-card rounded-sm">
           <div className="p-5 space-y-4">
             {scenarioRaw && (
-              <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+              <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
                 {scenarioRaw.replace(/\*\*[A-E]\.\*\*.+/g, '').replace(/## DECISION POINT.+/g, '').trim()}
               </div>
             )}
@@ -691,7 +691,7 @@ function EthicalContent() {
             ))}
 
             {responseRaw && (
-              <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed pt-3 border-t border-border/20">
+              <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed pt-3 border-t border-border/20">
                 {responseRaw.replace(/\*\*[A-E]\.\*\*.+/g, '').replace(/## DECISION POINT.+/g, '').trim()}
                 {isStreaming && (
                   <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
@@ -771,7 +771,7 @@ function EthicalContent() {
 
         {simulationComplete && !isStreaming && (
           <div className="border border-accent/30 bg-accent/5 rounded-sm p-4 text-center space-y-3">
-            <Scale className="h-8 w-8 mx-auto text-accent/60" />
+            <Scale className="h-8 w-8 mx-auto text-accent" />
             <p className="text-sm font-medium">Simulation complete</p>
             <p className="text-xs text-muted-foreground">
               You navigated {decisions.length} ethical decision points.
@@ -790,7 +790,7 @@ function EthicalContent() {
       {isReflecting && reflectionSections.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Analysing ethical framework and generating policies...</p>
-          <p className="text-xs text-muted-foreground/50">Reviewed {decisions.length} decisions</p>
+          <p className="text-xs text-muted-foreground">Reviewed {decisions.length} decisions</p>
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="border border-border/30 bg-card rounded-sm p-4 space-y-3">
               <Skeleton className="h-4 w-1/3" />
@@ -803,7 +803,7 @@ function EthicalContent() {
 
       {isReflecting && reflectionRaw.length > 0 && reflectionSections.length === 0 && (
         <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {reflectionRaw}
             <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
           </div>

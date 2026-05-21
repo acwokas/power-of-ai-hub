@@ -253,7 +253,7 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {section.content}
           </div>
         </CollapsibleContent>
@@ -408,7 +408,7 @@ ${reflection || '(No reflection recorded)'}`;
       {isStreaming && rawText.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Analysing decision...</p>
-          <p className="text-xs text-muted-foreground/50">This takes 30 to 60 seconds.</p>
+          <p className="text-xs text-muted-foreground">This takes 30 to 60 seconds.</p>
           {[1, 2, 3].map((i) => (
             <div key={i} className="border border-border/30 bg-card rounded-sm p-4 space-y-3">
               <Skeleton className="h-4 w-1/3" />
@@ -422,7 +422,7 @@ ${reflection || '(No reflection recorded)'}`;
 
       {isStreaming && rawText.length > 0 && sections.length === 0 && (
         <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground/90 leading-relaxed">
+          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
             {rawText}
             <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
           </div>

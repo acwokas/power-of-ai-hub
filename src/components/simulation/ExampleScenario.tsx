@@ -55,7 +55,7 @@ export function ExampleScenario({ examples }: ExampleScenarioProps) {
             >
               <ChevronLeft className="h-3.5 w-3.5" />
             </button>
-            <span className="text-xs text-muted-foreground/60">
+            <span className="text-xs text-muted-foreground">
               {currentIndex + 1}/{examples.length}
             </span>
             <button
