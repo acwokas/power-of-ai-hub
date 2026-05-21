@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import {
   SimulationProvider,
   SimulationLayout,
@@ -24,6 +24,8 @@ import {
   Columns2,
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { BrandMarkdown } from '@/lib/render-markdown';
+import { BrandPdf, type ColumnBlock } from '@/lib/brand-pdf';
 
 const examples = [
   {
@@ -223,6 +225,17 @@ function parseIntoSections(text: string): ResultSection[] {
   return sections;
 }
 
+// Heuristics to classify sections so we can style them
+function classify(id: string): 'pathA' | 'pathB' | 'blind' | 'second' | 'insight' | 'question' | 'other' {
+  if (id.startsWith('path-a')) return 'pathA';
+  if (id.startsWith('path-b')) return 'pathB';
+  if (id.includes('blind')) return 'blind';
+  if (id.includes('second-order') || id.includes('second-order-effects')) return 'second';
+  if (id.includes('uncomfortable')) return 'insight';
+  if (id.includes('question')) return 'question';
+  return 'other';
+}
+
 function CopyBtn({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
@@ -241,20 +254,53 @@ function CopyBtn({ text }: { text: string }) {
   );
 }
 
-function SectionCard({ section, defaultOpen }: { section: ResultSection; defaultOpen?: boolean }) {
+function SectionCard({
+  section,
+  defaultOpen,
+  variant,
+}: {
+  section: ResultSection;
+  defaultOpen?: boolean;
+  variant?: 'default' | 'insight' | 'question' | 'tight';
+}) {
+  if (variant === 'insight') {
+    return (
+      <div className="brand-md-callout-cream rounded-sm overflow-hidden border border-border/20">
+        <div className="px-4 py-3 flex items-center justify-between border-b border-[#D89A55]/30 bg-[#F4ECD8]">
+          <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-[#14264C]">
+            {section.title}
+          </h3>
+          <CopyBtn text={section.content} />
+        </div>
+        <BrandMarkdown text={section.content} />
+      </div>
+    );
+  }
+
+  if (variant === 'question') {
+    return (
+      <div className="brand-md-callout-navy border border-border/20">
+        <h3>{section.title}</h3>
+        <BrandMarkdown text={section.content} />
+      </div>
+    );
+  }
+
   return (
     <Collapsible defaultOpen={defaultOpen}>
-      <div className="border border-border/30 bg-card rounded-sm overflow-hidden">
-        <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left hover:bg-secondary/30 transition-colors group">
-          <h3 className="text-sm font-medium">{section.title}</h3>
+      <div className="border border-border/30 rounded-sm overflow-hidden bg-[#F4ECD8]">
+        <CollapsibleTrigger className="flex items-center justify-between w-full p-4 text-left hover:bg-[#EBE0C6] transition-colors group">
+          <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-[#14264C]">
+            {section.title}
+          </h3>
           <div className="flex items-center gap-2">
             <CopyBtn text={section.content} />
-            <ChevronDown className="h-3.5 w-3.5 text-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
+            <ChevronDown className="h-3.5 w-3.5 text-[#14264C] transition-transform group-data-[state=open]:rotate-180" />
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="px-4 pb-4 border-t border-border/20 pt-3 whitespace-pre-wrap text-sm text-foreground leading-relaxed">
-            {section.content}
+          <div className={variant === 'tight' ? 'brand-md-tight' : ''}>
+            <BrandMarkdown text={section.content} />
           </div>
         </CollapsibleContent>
       </div>
@@ -262,11 +308,207 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
   );
 }
 
+// Helper - strip markdown decorations for PDF column blocks
+function stripMd(s: string): string {
+  return s
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/^- /gm, '')
+    .replace(/`/g, '')
+    .trim();
+}
+
+// Extract "field: value" patterns from a path section. The LLM emits
+// **Best-case outcome:** value, **Most likely outcome:** value, etc.
+function extractFields(content: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  const re = /\*\*([^*]+?):\*\*\s*([\s\S]*?)(?=\n\s*\*\*[^*]+?:\*\*|$)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(content)) !== null) {
+    const key = m[1].trim().toLowerCase();
+    const val = stripMd(m[2]).replace(/\s+\n/g, '\n').trim();
+    out[key] = val;
+  }
+  return out;
+}
+
+function buildPdf(args: {
+  rawText: string;
+  formData: Record<string, string>;
+  reflection: string;
+}): void {
+  const { rawText, formData, reflection } = args;
+  const sections = parseIntoSections(rawText);
+  const pathA = sections.find((s) => s.id.startsWith('path-a'));
+  const pathB = sections.find((s) => s.id.startsWith('path-b'));
+  const blind = sections.find((s) => s.id.includes('blind'));
+  const second = sections.find((s) => s.id.includes('second-order'));
+  const insight = sections.find((s) => s.id.includes('uncomfortable'));
+  const question = sections.find((s) => s.id.includes('question'));
+
+  const decisionLine = (formData.decision || 'Your decision')
+    .replace(/\s+/g, ' ')
+    .slice(0, 140);
+  const date = new Date();
+  const dateStr = date.toISOString().slice(0, 10);
+  const humanDate = date.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const pdf = new BrandPdf({
+    toolTitle: 'Decision Simulation',
+    subtitle: decisionLine,
+    completedDate: humanDate,
+    userContext: formData.stakes,
+    filename: 'decision-simulation-' + dateStr + '.pdf',
+    footerNote: 'democratising.ai',
+  });
+
+  // ---- Page 2: side-by-side path comparison ----
+  const labels: Array<{ key: string; label: string; italic?: boolean; tint?: boolean }> = [
+    { key: 'best-case outcome', label: 'Best-case outcome' },
+    { key: 'most likely outcome', label: 'Most likely outcome' },
+    { key: 'worst-case outcome', label: 'Worst-case outcome' },
+    { key: '1-3 year second-order effects', label: '1-3 year second-order effects' },
+    { key: 'second-order effects', label: '1-3 year second-order effects' },
+    { key: 'identity implication', label: 'Identity implication', italic: true, tint: true },
+  ];
+
+  const buildPathBlocks = (sectionContent: string): ColumnBlock[] => {
+    const fields = extractFields(sectionContent);
+    const blocks: ColumnBlock[] = [];
+    const seenLabels = new Set<string>();
+    for (const def of labels) {
+      const text = fields[def.key];
+      if (!text) continue;
+      if (seenLabels.has(def.label)) continue;
+      seenLabels.add(def.label);
+      blocks.push({ kind: 'label', text: def.label });
+      blocks.push({
+        kind: 'body',
+        text: stripMd(text),
+        italic: def.italic,
+        tint: def.tint,
+      });
+    }
+    if (blocks.length === 0) {
+      // Fallback: dump whole content as body
+      blocks.push({ kind: 'body', text: stripMd(sectionContent) });
+    }
+    return blocks;
+  };
+
+  const pathATitle = pathA ? pathA.title.replace(/^Path A:?\s*/i, 'Path A: ') : 'Path A';
+  const pathBTitle = pathB ? pathB.title.replace(/^Path B:?\s*/i, 'Path B: ') : 'Path B';
+
+  if (pathA || pathB) {
+    pdf.twoColumn(
+      pathA ? buildPathBlocks(pathA.content) : [{ kind: 'body', text: 'No content' }],
+      pathB ? buildPathBlocks(pathB.content) : [{ kind: 'body', text: 'No content' }],
+      pathATitle,
+      pathBTitle,
+    );
+  }
+
+  // ---- Page: Blind spots ----
+  if (blind) {
+    pdf.newPage();
+    pdf.h1('What you might be missing');
+    const subs = blind.content.split(/^### /m).filter(Boolean);
+    if (subs.length > 1) {
+      for (const sub of subs) {
+        const nl = sub.indexOf('\n');
+        const t = (nl > -1 ? sub.slice(0, nl) : sub).trim();
+        const body = nl > -1 ? sub.slice(nl + 1).trim() : '';
+        pdf.h3(t);
+        // Bullet detection
+        if (/^[-*]\s/m.test(body)) {
+          const items = body
+            .split(/\n/)
+            .filter((l) => /^[-*]\s/.test(l))
+            .map((l) => stripMd(l.replace(/^[-*]\s/, '')));
+          pdf.bullets(items);
+          // any prose
+          const prose = body.replace(/^[-*]\s.*$/gm, '').trim();
+          if (prose) pdf.paragraph(stripMd(prose));
+        } else {
+          pdf.paragraph(stripMd(body));
+        }
+      }
+    } else {
+      pdf.paragraph(stripMd(blind.content));
+    }
+  }
+
+  // ---- Page: Second-order effects ----
+  if (second) {
+    pdf.newPage();
+    pdf.h1('Second-order effects');
+    const subs = second.content.split(/^### /m).filter(Boolean);
+    if (subs.length > 1) {
+      for (const sub of subs) {
+        const nl = sub.indexOf('\n');
+        const t = (nl > -1 ? sub.slice(0, nl) : sub).trim();
+        const body = nl > -1 ? sub.slice(nl + 1).trim() : '';
+        pdf.h3(t);
+        pdf.paragraph(stripMd(body));
+      }
+    } else {
+      pdf.paragraph(stripMd(second.content));
+    }
+  }
+
+  // ---- Page: insight + question ----
+  if (insight || question) {
+    pdf.newPage();
+    if (insight) {
+      pdf.calloutCream('The uncomfortable insight', stripMd(insight.content));
+    }
+    pdf.spacer(12);
+    if (question) {
+      pdf.calloutNavy('A question worth sitting with', stripMd(question.content));
+    }
+  }
+
+  // ---- Page: reflection + CTAs ----
+  pdf.newPage();
+  if (reflection && reflection.trim()) {
+    pdf.h1('Your reflection');
+    pdf.paragraph(reflection.trim(), { italic: false });
+    pdf.spacer(10);
+  }
+
+  pdf.h2('Where to next');
+  pdf.ctaCard(
+    'Run another decision through the simulator',
+    'Test a different choice or rerun this one with adjusted constraints.',
+    'democratising.ai/tools/decision-simulation',
+  );
+  pdf.ctaCard(
+    'Apply the EDGE framework to your career',
+    'A practical, repeatable approach to using AI well in your daily work.',
+    'democratising.ai/edge',
+  );
+  pdf.ctaCard(
+    'Subscribe to the daily AI briefing',
+    'Three things worth knowing about AI, in your inbox before nine.',
+    'withthepowerof.ai',
+  );
+
+  pdf.brandFooter();
+  pdf.save();
+}
+
 function DecisionContent() {
   const { phase, formData, setFormValue, setPhase, currentStep, nextStep, prevStep, reset } = useSimulation();
   const [rawText, setRawText] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
-  const [sideBySide, setSideBySide] = useState(false);
+  const [sideBySide, setSideBySide] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth >= 900;
+  });
   const [reflection, setReflection] = useState(() => {
     try {
       return localStorage.getItem('simulate-decision-reflection') || '';
@@ -275,6 +517,15 @@ function DecisionContent() {
     }
   });
   const abortRef = useRef<AbortController | null>(null);
+
+  // Auto-toggle side-by-side at the 900px breakpoint
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(min-width: 900px)');
+    const apply = () => setSideBySide(mq.matches);
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   const sections = parseIntoSections(rawText);
   const pathA = sections.find((s) => s.id.startsWith('path-a'));
@@ -319,24 +570,17 @@ function DecisionContent() {
   };
 
   const handleDownload = () => {
-    const content = `# Decision Simulation
-
-Generated: ${new Date().toISOString()}
-
-${rawText}
-
----
-
-## Personal Reflection
-
-${reflection || '(No reflection recorded)'}`;
-    const blob = new Blob([content], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `decision-analysis-${new Date().toISOString().slice(0, 10)}.md`;
-    a.click();
-    URL.revokeObjectURL(url);
+    try {
+      buildPdf({ rawText, formData, reflection });
+    } catch (e) {
+      toast({
+        title: 'Could not build PDF',
+        description: 'Your browser blocked the download. Try the Copy all button instead.',
+        variant: 'destructive',
+      });
+      // eslint-disable-next-line no-console
+      console.error(e);
+    }
   };
 
   const handleCopyAll = async () => {
@@ -421,11 +665,8 @@ ${reflection || '(No reflection recorded)'}`;
       )}
 
       {isStreaming && rawText.length > 0 && sections.length === 0 && (
-        <div className="border border-border/30 bg-card rounded-sm p-4">
-          <div className="whitespace-pre-wrap text-sm text-foreground leading-relaxed">
-            {rawText}
-            <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />
-          </div>
+        <div className="brand-md">
+          <BrandMarkdown text={rawText} />
         </div>
       )}
 
@@ -444,7 +685,7 @@ ${reflection || '(No reflection recorded)'}`;
       )}
 
       {sideBySide && pathA && pathB ? (
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 min-[900px]:grid-cols-2 gap-4">
           <SectionCard section={pathA} defaultOpen />
           <SectionCard section={pathB} defaultOpen />
         </div>
@@ -455,9 +696,19 @@ ${reflection || '(No reflection recorded)'}`;
         </>
       )}
 
-      {otherSections.map((s) => (
-        <SectionCard key={s.id} section={s} defaultOpen={false} />
-      ))}
+      {otherSections.map((s) => {
+        const cls = classify(s.id);
+        if (cls === 'insight') {
+          return <SectionCard key={s.id} section={s} variant="insight" />;
+        }
+        if (cls === 'question') {
+          return <SectionCard key={s.id} section={s} variant="question" />;
+        }
+        if (cls === 'blind' || cls === 'second') {
+          return <SectionCard key={s.id} section={s} defaultOpen variant="tight" />;
+        }
+        return <SectionCard key={s.id} section={s} defaultOpen={false} />;
+      })}
 
       {isStreaming && sections.length > 0 && (
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -478,7 +729,7 @@ ${reflection || '(No reflection recorded)'}`;
             value={reflection}
             onChange={(e) => handleReflectionChange(e.target.value)}
             placeholder="What stands out? What feels surprising? What needs more thought?"
-            className="min-h-[100px] bg-secondary/30 border-border/40 focus-visible:ring-accent"
+            className="min-h-[120px] brand-reflection-textarea"
           />
         </div>
       )}
@@ -507,7 +758,7 @@ ${reflection || '(No reflection recorded)'}`;
               </Button>
               <Button variant="outline" size="sm" onClick={handleDownload}>
                 <Download className="h-3.5 w-3.5 mr-1.5" />
-                Download
+                Download PDF
               </Button>
             </div>
           </div>
