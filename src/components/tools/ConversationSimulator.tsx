@@ -21,7 +21,7 @@ import {
   Check,
   ChevronDown,
   RotateCcw,
-  Download,
+  FileDown,
   Send,
   MessageCircle,
   User,
@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
+import { BrandPdf, isoDate } from '@/lib/brand-pdf';
 
 const examples = [
   {
@@ -303,6 +304,186 @@ function SectionCard({ section, defaultOpen }: { section: ResultSection; default
   );
 }
 
+const TONE_LABELS: Record<string, string> = {
+  'difficult-professional': 'Difficult but professional',
+  'emotionally-charged': 'Emotionally charged',
+  'passive-aggressive': 'Passive-aggressive',
+  'defensive': 'Defensive',
+  'collaborative-cautious': 'Collaborative but cautious',
+};
+
+function stripMd(s: string): string {
+  return (s || '')
+    .replace(/\*\*([^*]+?)\*\*/g, '$1')
+    .replace(/(^|[^*])\*([^*\n]+?)\*([^*]|$)/g, '$1$2$3')
+    .replace(/`([^`]+?)`/g, '$1')
+    .replace(/^#+\s*/gm, '')
+    .replace(/—|–/g, ', ')
+    .replace(/\r\n/g, '\n')
+    .trim();
+}
+
+function truncate(s: string, n: number): string {
+  const t = (s || '').replace(/\s+/g, ' ').trim();
+  if (t.length <= n) return t;
+  return t.slice(0, n - 1).trimEnd() + '...';
+}
+
+async function buildConversationPdf(args: {
+  setup: SetupData;
+  messages: ChatMessage[];
+  reflectionSections: ResultSection[];
+  reflectionRaw: string;
+  personalNotes: string;
+}): Promise<void> {
+  const { setup, messages, reflectionSections, reflectionRaw, personalNotes } = args;
+  const date = new Date();
+  const humanDate = date.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const dateStr = isoDate(date);
+
+  const toneLabel = TONE_LABELS[setup.tone] || setup.tone || 'Not specified';
+  const objectiveExcerpt = truncate(setup.objective || '', 220);
+
+  const pdf = new BrandPdf({
+    toolTitle: 'Conversation Simulator',
+    subtitle: 'Practice Run',
+    completedDate: humanDate,
+    userContext: objectiveExcerpt,
+    filename: 'conversation-simulator-' + dateStr + '.pdf',
+    footerNote: 'democratising.ai',
+  });
+
+  // ---- Page 2: The scenario ----
+  pdf.newPage();
+  pdf.h1('The scenario');
+
+  pdf.h3('Your role');
+  pdf.paragraph(stripMd(setup.yourRole || 'Not specified'));
+
+  pdf.h3('Their role');
+  pdf.paragraph(stripMd(setup.theirRole || 'Not specified'));
+
+  if (setup.relationship && setup.relationship.trim()) {
+    pdf.h3('Relationship context');
+    pdf.paragraph(stripMd(setup.relationship));
+  }
+
+  pdf.h3('What is at stake');
+  pdf.paragraph(stripMd(setup.stakes || 'Not specified'));
+
+  pdf.h3('What you are trying to achieve');
+  pdf.paragraph(stripMd(setup.objective || 'Not specified'));
+
+  pdf.h3('Conversation tone');
+  pdf.paragraph(toneLabel);
+
+  pdf.brandFooter();
+
+  // ---- Pages: The conversation ----
+  pdf.newPage();
+  pdf.h1('The conversation');
+
+  if (messages.length === 0) {
+    pdf.paragraph('No conversation was recorded.', { italic: true });
+  } else {
+    const yourLabel = 'You · ' + truncate(setup.yourRole || 'You', 60);
+    const theirLabel = truncate(setup.theirRole || 'Counterpart', 80);
+
+    for (const msg of messages) {
+      const content = stripMd(msg.content || '');
+      if (!content) continue;
+      if (msg.role === 'user') {
+        // Navy bubble for user lines
+        pdf.calloutNavy(yourLabel, content);
+      } else {
+        // Cream bubble with gold rail for counterpart lines
+        pdf.calloutCream(theirLabel, content);
+      }
+      pdf.spacer(4);
+    }
+  }
+  pdf.brandFooter();
+
+  // ---- Pages: Insights from the reflection ----
+  if (reflectionSections.length > 0 || (reflectionRaw && reflectionRaw.trim())) {
+    pdf.newPage();
+    pdf.h1('Insights');
+
+    if (reflectionSections.length > 0) {
+      for (const section of reflectionSections) {
+        pdf.h2(stripMd(section.title));
+        const body = stripMd(section.content || '');
+        const lines = body.split('\n').map((l) => l.trim()).filter(Boolean);
+        const bulletItems: string[] = [];
+        const proseLines: string[] = [];
+        for (const ln of lines) {
+          const m = ln.match(/^[-*]\s+(.*)$/);
+          if (m) {
+            bulletItems.push(m[1]);
+          } else if (/^\d+\.\s+/.test(ln)) {
+            bulletItems.push(ln.replace(/^\d+\.\s+/, ''));
+          } else {
+            proseLines.push(ln);
+          }
+        }
+        if (proseLines.length > 0) {
+          pdf.paragraph(proseLines.join(' '));
+        }
+        if (bulletItems.length > 0) {
+          pdf.bullets(bulletItems);
+        }
+      }
+    } else {
+      pdf.paragraph(stripMd(reflectionRaw));
+    }
+    pdf.brandFooter();
+  }
+
+  // ---- Page: Personal reflection ----
+  if (personalNotes && personalNotes.trim()) {
+    pdf.newPage();
+    pdf.h1('Your reflection');
+    pdf.paragraph(stripMd(personalNotes));
+    pdf.brandFooter();
+  }
+
+  // ---- Final page: Where to next ----
+  pdf.newPage();
+  pdf.h1('Where to next');
+
+  pdf.calloutCream(
+    'Three questions to sit with',
+    '1. Which moment in this conversation felt most under my control, and which felt least?\n' +
+      '2. What is the single thing I would say differently if I ran this for real tomorrow?\n' +
+      '3. Whose voice was I missing from this room, and how would it have changed what I said?',
+  );
+  pdf.spacer(8);
+
+  pdf.h2('Continue with EDGE');
+  pdf.ctaCard(
+    'Before You Send',
+    'Pressure test a message before you send it, across the audiences who will actually read it.',
+    'democratising.ai/tools/before-you-send',
+  );
+  pdf.ctaCard(
+    'Decision Simulation',
+    'Run a tough decision through three lenses before you commit to it.',
+    'democratising.ai/tools/decision-simulation',
+  );
+  pdf.ctaCard(
+    'The EDGE Framework',
+    'Evaluate, Define, Govern, Elevate. The framework behind every tool on this site.',
+    'democratising.ai/edge',
+  );
+
+  pdf.brandFooter();
+  pdf.save();
+}
+
 function ConversationContent() {
   const { phase, formData, setFormValue, setPhase, currentStep, nextStep, prevStep, reset } = useSimulation();
 
@@ -421,22 +602,25 @@ function ConversationContent() {
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = useCallback(async () => {
     if (!setup) return;
-    const transcript = messages
-      .map((m) => `[${m.role === 'user' ? setup.yourRole : setup.theirRole}]: ${m.content}`)
-      .join('\n\n');
-    let content = `# Conversation Simulator\n\nGenerated: ${new Date().toISOString()}\n\n## SCENARIO\n\nYour role: ${setup.yourRole}\nTheir role: ${setup.theirRole}\nRelationship: ${setup.relationship || 'Not specified'}\nStakes: ${setup.stakes}\nObjective: ${setup.objective}\nTone: ${setup.tone}\n\n## TRANSCRIPT\n\n${transcript}`;
-    if (reflectionRaw) content += `\n\n---\n\n${reflectionRaw}`;
-    if (personalNotes) content += `\n\n---\n\n## PERSONAL NOTES\n\n${personalNotes}`;
-    const blob = new Blob([content], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `conversation-sim-${new Date().toISOString().slice(0, 10)}.md`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+    try {
+      await buildConversationPdf({
+        setup,
+        messages,
+        reflectionSections,
+        reflectionRaw,
+        personalNotes,
+      });
+    } catch (err) {
+      console.error('PDF generation failed', err);
+      toast({
+        title: 'PDF generation failed',
+        description: 'Sorry, the PDF could not be generated. Please try again.',
+        variant: 'destructive',
+      });
+    }
+  }, [setup, messages, reflectionSections, reflectionRaw, personalNotes]);
 
   const handleStartOver = () => {
     abortRef.current?.abort();
@@ -468,7 +652,7 @@ function ConversationContent() {
 
         {currentStep === 0 && (
           <>
-            <p className="text-xs text-muted-foreground">Step 1 of 2: the scenario</p>
+            <p className="text-xs text-slate-700 font-medium">Step 1 of 2: the scenario</p>
             {fields.step1.map((f) => (
               <FormField key={f.id} config={f} value={formData[f.id] || ''} onChange={(v) => setFormValue(f.id, v)} />
             ))}
@@ -482,7 +666,7 @@ function ConversationContent() {
 
         {currentStep === 1 && (
           <>
-            <p className="text-xs text-muted-foreground">Step 2 of 2: stakes and objective</p>
+            <p className="text-xs text-slate-700 font-medium">Step 2 of 2: stakes and objective</p>
             {fields.step2.map((f) => (
               <FormField key={f.id} config={f} value={formData[f.id] || ''} onChange={(v) => setFormValue(f.id, v)} />
             ))}
@@ -622,7 +806,7 @@ function ConversationContent() {
           </Button>
         </div>
 
-        <p className="text-xs text-muted-foreground text-center">
+        <p className="text-xs text-slate-700 text-center">
           Press Enter to send. Click "End and reflect" when you are ready for coaching feedback.
         </p>
       </div>
@@ -633,8 +817,8 @@ function ConversationContent() {
     <div className="space-y-6">
       {isReflecting && reflectionSections.length === 0 && (
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">Analysing conversation...</p>
-          <p className="text-xs text-muted-foreground">Reviewing {turnCount} turns</p>
+          <p className="text-sm text-slate-700">Analysing conversation...</p>
+          <p className="text-xs text-slate-700">Reviewing {turnCount} turns</p>
           {[1, 2, 3].map((i) => (
             <div key={i} className="border border-border/30 bg-card rounded-sm p-4 space-y-3">
               <Skeleton className="h-4 w-1/3" />
@@ -669,7 +853,7 @@ function ConversationContent() {
         <div className="space-y-4 pt-6 border-t border-border/20">
           <div>
             <h3 className="text-base font-medium mb-1">Your reflection</h3>
-            <p className="text-xs text-muted-foreground">Private. Saved in your browser only, never sent anywhere.</p>
+            <p className="text-xs text-slate-700">Private. Saved in your browser only, never sent anywhere.</p>
           </div>
           <Textarea
             value={personalNotes}
@@ -690,7 +874,7 @@ function ConversationContent() {
               <MessageCircle className="h-3.5 w-3.5 mr-1.5" /> New scenario
             </Button>
             <Button variant="outline" size="sm" onClick={handleDownload}>
-              <Download className="h-3.5 w-3.5 mr-1.5" /> Download transcript
+              <FileDown className="h-3.5 w-3.5 mr-1.5" /> Download branded PDF
             </Button>
           </div>
         </div>
