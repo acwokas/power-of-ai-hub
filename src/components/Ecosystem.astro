@@ -41,16 +41,28 @@ const tools = [
     cta: 'Open the framework',
     url: '/tools',
     external: false,
+    logo: '/brand/edge-mark-transparent.svg',
   },
   {
-    category: 'Learn',
-    title: 'AIacademy',
+    category: 'Platform',
+    title: 'UrbanDogOwner',
     description:
-      'Build real capability in AI, marketing, and strategy, grounded in real world use. For individuals and teams who want depth, not surface knowledge.',
-    cta: 'Visit AIacademy',
-    url: 'https://aiacademy.asia',
+      'A Singapore-first platform for dog owners. Practical guides, local services, and the day to day of raising a dog in the city.',
+    cta: 'Visit UrbanDogOwner',
+    url: 'https://urbandogowner.com',
     external: true,
+    logo: '/brand/udo-badge-white.svg',
   },
+  // Hidden for now (2026-06-03). Restore by uncommenting.
+  // {
+  //   category: 'Learn',
+  //   title: 'AIacademy',
+  //   description:
+  //     'Build real capability in AI, marketing, and strategy, grounded in real world use. For individuals and teams who want depth, not surface knowledge.',
+  //   cta: 'Visit AIacademy',
+  //   url: 'https://aiacademy.asia',
+  //   external: true,
+  // },
 ];
 ---
 <section id="ecosystem" class="py-20 md:py-28 bg-background border-t border-border/60">
@@ -110,10 +122,11 @@ const tools = [
           <div class="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors">
             <p class="eyebrow mb-5">{tool.category}</p>
             <div class="flex items-center gap-3 mb-4">
-              {tool.title === 'EDGE Framework' && (
+              {tool.logo && (
                 <img
-                  src="/brand/edge-mark-transparent.svg"
-                  alt="EDGE Framework mark"
+                  src={tool.logo}
+                  alt=""
+                  aria-hidden="true"
                   width="40"
                   height="40"
                   class="shrink-0"
