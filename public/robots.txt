@@ -36,4 +36,4 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-Sitemap: https://power-of-ai-hub-astro.pages.dev/sitemap-index.xml
+Sitemap: https://democratising.ai/sitemap-index.xml

@@ -1,7 +1,13 @@
 ---
 import '../styles/global.css';
 
-const SITE_URL = (Astro.site?.toString() || 'https://power-of-ai-hub-astro.pages.dev').replace(/\/$/, '');
+const SITE_URL = (Astro.site?.toString() || 'https://democratising.ai').replace(/\/$/, '');
+
+// Analytics: Google Tag Manager ONLY. The GA4 Measurement ID is configured
+// INSIDE the GTM container (the "GA4 Configuration" / Google Tag, firing on all
+// pages), never as a separate GA4_ID env var. The site only ever needs the GTM
+// container ID, exposed at build time via PUBLIC_GTM_ID. Locked cross-site rule.
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 
 interface Props {
   title: string;
@@ -19,8 +25,12 @@ const {
   ogType = 'website',
 } = Astro.props;
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const canonicalUrl = canonical || `${SITE_URL}${path === '/' ? '' : path}`;
+// Strip the build's `.html` suffix (build.format: 'file') and any trailing slash
+// so the canonical matches the clean URL CF Pages serves and the sitemap emits.
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+// Homepage canonical keeps the root slash (https://democratising.ai/); subpages
+// stay slash-less to match trailingSlash: 'never' (https://democratising.ai/slug).
+const canonicalUrl = canonical || `${SITE_URL}${path === '/' ? '/' : path}`;
 const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 ---
 <!doctype html>
@@ -28,6 +38,13 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {GTM_ID && (
+      <!-- Google Tag Manager (GA4 is configured inside the container, not a separate env var) -->
+      <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`} />
+      <!-- End Google Tag Manager -->
+    )}
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -81,6 +98,12 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
     </style>
   </head>
   <body class="min-h-screen bg-background text-foreground">
+    {GTM_ID && (
+      <!-- Google Tag Manager (noscript) -->
+      <noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
+      <!-- End Google Tag Manager (noscript) -->
+    )}
+
     <slot />
 
     <script is:inline>
