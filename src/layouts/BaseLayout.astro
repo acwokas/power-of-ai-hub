@@ -28,6 +28,20 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Analytics 4 (gtag.js) — direct GA4, stopgap.
+         The locked cross-site pattern is a GTM container with GA4 configured
+         inside it, but no GTM container exists for democratising.ai yet, so the
+         GA4 Measurement ID is wired directly here. Migrate this into a GTM
+         container (PUBLIC_GTM_ID, see the gtm-canonical-fix branch) once one exists. -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-G1SF1BVH86"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G1SF1BVH86');
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
