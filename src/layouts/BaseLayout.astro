@@ -7,7 +7,11 @@ const SITE_URL = (Astro.site?.toString() || 'https://democratising.ai').replace(
 // INSIDE the GTM container (the "GA4 Configuration" / Google Tag, firing on all
 // pages), never as a separate GA4_ID env var. The site only ever needs the GTM
 // container ID, exposed at build time via PUBLIC_GTM_ID. Locked cross-site rule.
-const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+// Default to the live democratising.ai container so analytics work on a plain
+// deploy; a PUBLIC_GTM_ID Cloudflare Pages env var still overrides this for
+// preview or staging builds. The container ID is public (it ships in the HTML),
+// so it is safe to commit as a production default.
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID || 'GTM-KV37H5CZ';
 
 interface Props {
   title: string;
