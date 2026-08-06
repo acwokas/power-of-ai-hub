@@ -56,6 +56,7 @@ const tools = [
     url: 'https://urbandogowner.com',
     external: true,
     logo: '/brand/sites/urbandogowner.png',
+    logoSize: 48,
   },
 ];
 ---
@@ -133,8 +134,8 @@ const tools = [
                   src={tool.logo}
                   alt=""
                   aria-hidden="true"
-                  width="40"
-                  height="40"
+                  width={tool.logoSize ?? 40}
+                  height={tool.logoSize ?? 40}
                   class="shrink-0"
                 />
               )}
