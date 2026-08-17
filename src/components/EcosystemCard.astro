@@ -1,0 +1,97 @@
+---
+// Shared card used by every rail on the homepage except the regional
+// network, which keeps its own distinct borderless treatment by design.
+// Also used by /data, so the two pages can't drift apart the way the
+// homepage rails and /data drifted before: this is the single place the
+// "logo + wordmark, descriptor, description, stat, source, CTA" layout
+// lives. Stat and source are optional; a rail with no natural stat (the
+// consumer network, PromptAndGo, EDGE Framework) simply omits them.
+interface Props {
+  logo?: string;
+  logoSize?: number;
+  name: string;
+  descriptor?: string;
+  description: string;
+  stat?: string;
+  statLabel?: string;
+  coverageNote?: string;
+  sourceName?: string;
+  sourceUrl?: string;
+  verifiedDate?: string;
+  cta: string;
+  url: string;
+  external?: boolean;
+}
+
+const {
+  logo,
+  logoSize = 40,
+  name,
+  descriptor,
+  description,
+  stat,
+  statLabel,
+  coverageNote,
+  sourceName,
+  sourceUrl,
+  verifiedDate,
+  cta,
+  url,
+  external = true,
+} = Astro.props;
+---
+<div class="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors">
+  <div class="flex items-center gap-3 mb-4">
+    {logo && (
+      <img
+        src={logo}
+        alt=""
+        aria-hidden="true"
+        width={logoSize}
+        height={logoSize}
+        class="shrink-0"
+      />
+    )}
+    <div>
+      <h4 class="font-serif text-xl md:text-2xl font-black tracking-tight text-foreground leading-tight">
+        {name}
+      </h4>
+      {descriptor && <p class="text-sm text-foreground/70">{descriptor}</p>}
+    </div>
+  </div>
+
+  <p class="text-base text-foreground leading-relaxed mb-6">
+    {description}
+  </p>
+
+  {stat && (
+    <div class="mb-6 pb-6 border-b border-border/60">
+      <p class="font-serif text-3xl font-black text-accent leading-none mb-1">{stat}</p>
+      {statLabel && <p class="text-sm text-foreground/70">{statLabel}</p>}
+    </div>
+  )}
+
+  {coverageNote && (
+    <p class="text-sm text-foreground/70 leading-relaxed mb-6">
+      {coverageNote}
+    </p>
+  )}
+
+  <div class="mt-auto flex flex-wrap items-center justify-between gap-3">
+    {sourceName && (
+      <p class="text-xs text-foreground/60">
+        Source: <a href={sourceUrl} target="_blank" rel="noopener noreferrer" class="underline hover:text-accent">{sourceName}</a>,
+        read {verifiedDate}
+      </p>
+    )}
+    <a
+      href={url}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      class="inline-flex items-center text-foreground hover:text-accent font-semibold transition-colors"
+    >
+      {cta}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    </a>
+  </div>
+</div>

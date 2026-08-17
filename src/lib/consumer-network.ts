@@ -17,7 +17,9 @@ export const consumerSites: ConsumerSite[] = [
     description:
       'HDB-approved breeds, dog-friendly places, vetted clinics, the paperwork, and weekend itineraries. A publication for dog people, not a directory.',
     url: 'https://urbandogowner.com',
-    logo: '/brand/udo-badge-white.svg',
+    // Restored from the unmerged sites-own-favicons branch, not re-sourced.
+    // See the comment in Ecosystem.astro for the full story.
+    logo: '/brand/sites/urbandogowner.png',
   },
   {
     slug: 'urbancatowner',
