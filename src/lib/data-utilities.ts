@@ -57,12 +57,12 @@ export const dataUtilities: DataUtility[] = [
       'Statutory ACRA and IRAS deadlines for Singapore SMEs, each dated and linked to the agency page it was checked against, alongside an archived slice of the ACRA entity register.',
     url: 'https://duedate.sg',
     logo: '/brand/duedate-mark.svg',
-    stat: '1,000',
-    statLabel: 'ACRA entities archived so far',
+    stat: '2,000',
+    statLabel: 'ACRA entities archived',
     sourceName: 'data.gov.sg (ACRA entity register)',
     sourceUrl: 'https://data.gov.sg',
-    verifiedDate: '2026-08-07',
+    verifiedDate: '2026-08-17',
     coverageNote:
-      "That's an archived slice, not the register: the full ACRA entity list runs to roughly 2.1 million and loads over successive runs. DueDate says so on its own sectors page rather than implying full coverage.",
+      'The full register runs to roughly 2.1 million; this archive currently holds a fixed subset.',
   },
 ];
