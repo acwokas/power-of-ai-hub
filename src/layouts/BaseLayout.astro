@@ -129,5 +129,10 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
         }
       }, true);
     </script>
+
+    <script>
+      import { initEcosystemTrackers } from '../lib/analytics/trackers';
+      initEcosystemTrackers();
+    </script>
   </body>
 </html>
