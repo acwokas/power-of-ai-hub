@@ -1,2 +1,7 @@
 /edge          /tools          301
 /edge/*        /tools          301
+
+# @astrojs/sitemap emits an index file, not /sitemap.xml directly. Alias the
+# conventional URL so it isn't a 404-that-looks-like-200 for anyone or
+# anything that checks the default path instead of reading robots.txt first.
+/sitemap.xml   /sitemap-index.xml   301
