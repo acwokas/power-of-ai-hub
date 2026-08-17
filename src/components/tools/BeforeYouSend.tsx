@@ -861,7 +861,7 @@ function BeforeYouSendContent() {
           )}
 
           {rewrites.overall && (
-            <div className="mt-6 rounded-sm p-5" style={{ background: '#F4ECD8', borderLeft: '8px solid #D89A55' }}>
+            <div className="mt-6 rounded-sm p-5" style={{ background: '#F4ECD8', border: '1px solid rgba(216, 154, 85, 0.45)' }}>
               <h3 className="text-sm font-semibold uppercase tracking-wider mb-2" style={{ color: '#D89A55' }}>
                 Overall rewrite
               </h3>

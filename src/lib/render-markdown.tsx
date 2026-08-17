@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 // Handles: ## h2, ### h3, **bold** as h4-style label, bullet lists ("- " or "* "),
 // numbered lists ("1. "), inline **bold**, inline *italic*, paragraphs, line breaks.
 // Designed to match the brand: navy serif h2, gold accent h4 labels, cream cards,
-// gold left rule per audience section.
+// full gold border per audience section (no left rule: banned estate-wide).
 
 const COLOR_NAVY = '#14264C';
 const COLOR_CREAM = '#F4ECD8';
@@ -141,7 +141,7 @@ interface BrandMarkdownProps {
 }
 
 // Render a markdown blob. If audienceCards is true, we split at each H2 and wrap
-// each block in a cream card with a gold left border.
+// each block in a cream card with a full gold border.
 export function BrandMarkdown({ markdown, text, className, audienceCards }: BrandMarkdownProps) {
   const source = markdown ?? text ?? '';
   if (!audienceCards) {
@@ -255,9 +255,10 @@ export const BRAND_MARKDOWN_CSS = `
   margin: 4px 0;
   color: #14264c;
 }
+/* Cream surface plus a full border defines the card. No left rule. */
 .bys-audience-card {
   background: ${COLOR_CREAM};
-  border-left: 8px solid ${COLOR_GOLD};
+  border: 1px solid rgba(216, 154, 85, 0.45);
   border-radius: 6px;
   padding: 24px 28px;
   margin: 0 0 16px;

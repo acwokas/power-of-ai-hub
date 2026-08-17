@@ -135,10 +135,14 @@
   margin: 22px 0;
 }
 
+/* No left rule: the quote is set apart by a tinted surface and a full border.
+   A bar down the left edge of a content block is banned estate-wide. */
 .brand-md blockquote {
-  border-left: 3px solid #D89A55;
+  background: rgba(216, 154, 85, 0.09);
+  border: 1px solid rgba(216, 154, 85, 0.34);
+  border-radius: 4px;
   margin: 14px 0;
-  padding: 8px 16px;
+  padding: 12px 16px;
   font-style: italic;
   color: #14264C;
 }
@@ -152,9 +156,12 @@
 
 /* Special callout: "uncomfortable insight" - cream w/ gold left border,
    italic body, padded.  Applied via `.brand-md-callout-cream` wrapper. */
+/* The cream surface is what sets this callout apart, not a bar down its left
+   edge. Full border keeps the block defined against the page. */
 .brand-md-callout-cream .brand-md {
-  border-left: 4px solid #D89A55;
   background: #F4ECD8;
+  border: 1px solid rgba(216, 154, 85, 0.45);
+  border-radius: 4px;
 }
 .brand-md-callout-cream .brand-md p,
 .brand-md-callout-cream .brand-md em {
@@ -287,10 +294,14 @@
   margin: 22px 0;
 }
 
+/* No left rule: the quote is set apart by a tinted surface and a full border.
+   A bar down the left edge of a content block is banned estate-wide. */
 .brand-md blockquote {
-  border-left: 3px solid #D89A55;
+  background: rgba(216, 154, 85, 0.09);
+  border: 1px solid rgba(216, 154, 85, 0.34);
+  border-radius: 4px;
   margin: 14px 0;
-  padding: 8px 16px;
+  padding: 12px 16px;
   font-style: italic;
   color: #14264C;
 }
@@ -304,9 +315,12 @@
 
 /* Special callout: "uncomfortable insight" - cream w/ gold left border,
    italic body, padded.  Applied via `.brand-md-callout-cream` wrapper. */
+/* The cream surface is what sets this callout apart, not a bar down its left
+   edge. Full border keeps the block defined against the page. */
 .brand-md-callout-cream .brand-md {
-  border-left: 4px solid #D89A55;
   background: #F4ECD8;
+  border: 1px solid rgba(216, 154, 85, 0.45);
+  border-radius: 4px;
 }
 .brand-md-callout-cream .brand-md p,
 .brand-md-callout-cream .brand-md em {
