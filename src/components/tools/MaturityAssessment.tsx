@@ -1189,7 +1189,7 @@ export default function MaturityAssessment() {
           className="rounded-sm overflow-hidden"
           style={{
             background: '#F4ECD8',
-            borderLeft: '2px solid #D89A55',
+            border: '1px solid rgba(216, 154, 85, 0.45)',
             padding: '16px',
             borderRadius: '4px',
             color: '#14264C',

@@ -255,9 +255,10 @@ export const BRAND_MARKDOWN_CSS = `
   margin: 4px 0;
   color: #14264c;
 }
+/* Cream surface plus a full border defines the card. No left rule. */
 .bys-audience-card {
   background: ${COLOR_CREAM};
-  border-left: 8px solid ${COLOR_GOLD};
+  border: 1px solid rgba(216, 154, 85, 0.45);
   border-radius: 6px;
   padding: 24px 28px;
   margin: 0 0 16px;
