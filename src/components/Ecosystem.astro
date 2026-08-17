@@ -1,5 +1,6 @@
 ---
 import { dataUtilities } from '../lib/data-utilities';
+import { consumerSites } from '../lib/consumer-network';
 
 const regions = [
   {
@@ -46,14 +47,14 @@ const tools = [
     logo: '/brand/edge-mark-transparent.svg',
   },
   {
-    category: 'Platform',
-    title: 'UrbanDogOwner',
+    category: 'Verify',
+    title: 'TradeChecked',
     description:
-      'A Singapore-first platform for dog owners. Practical guides, local services, and the day to day of raising a dog in the city.',
-    cta: 'Visit UrbanDogOwner',
-    url: 'https://urbandogowner.com',
+      'Reads the same BCA and NEA public registers as the data utility layer, but built to answer one lookup rather than to browse a dataset: enter a UEN, get back whether that contractor holds a current licence, right now.',
+    cta: 'Check a licence',
+    url: 'https://tradechecked.sg',
     external: true,
-    logo: '/brand/udo-badge-white.svg',
+    logo: '/brand/tradechecked-mark.svg',
   },
 ];
 ---
@@ -101,6 +102,98 @@ const tools = [
       </div>
     </div>
 
+    <div class="mb-20 md:mb-24">
+      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
+          Life with pets in the city
+        </h3>
+        <span class="eyebrow hidden md:block">Consumer</span>
+      </div>
+      <p class="max-w-3xl text-foreground/85 leading-relaxed mb-8">
+        Three Singapore publications for pet owners: what to feed, where to go, and which places
+        actually welcome a dog or a cat, hand-checked rather than scraped from a directory.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {consumerSites.map((site) => (
+          <a
+            href={site.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <img
+                src={site.logo}
+                alt=""
+                aria-hidden="true"
+                width="36"
+                height="36"
+                class="shrink-0 rounded-sm"
+              />
+              <h4 class="font-serif text-xl md:text-2xl font-black tracking-tight text-foreground leading-tight">
+                {site.name}
+              </h4>
+            </div>
+            <p class="text-base text-foreground leading-relaxed flex-grow mb-6">
+              {site.description}
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm font-semibold text-accent group-hover:gap-3 transition-all">
+              Read {site.name}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="mb-20 md:mb-24">
+      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
+          <a href="/data" class="hover:text-accent transition-colors">The data utility layer</a>
+        </h3>
+        <span class="eyebrow hidden md:block">Verified</span>
+      </div>
+      <p class="max-w-3xl text-foreground/85 leading-relaxed mb-8">
+        Three independent Singapore sites, each reading one named public register: hiring data,
+        COE results, statutory deadlines. Datasets you browse, dated and sourced, not asserted.
+        <a href="/data" class="text-accent hover:underline">Read how each one works</a>.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {dataUtilities.map((site) => (
+          <a
+            href={site.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex flex-col p-6 border border-border bg-card/40 hover:border-accent/60 transition-colors"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <img
+                src={site.logo}
+                alt=""
+                aria-hidden="true"
+                width="32"
+                height="32"
+                class="shrink-0"
+              />
+              <h4 class="font-serif text-xl font-black tracking-tight text-foreground">
+                {site.name}
+              </h4>
+            </div>
+            <p class="text-sm text-foreground leading-relaxed flex-grow mb-5">
+              {site.tagline}
+            </p>
+            <p class="font-serif text-2xl font-black text-accent leading-none mb-1">{site.stat}</p>
+            <span class="inline-flex items-center gap-2 text-xs font-semibold text-foreground/70 group-hover:text-accent group-hover:gap-3 transition-all">
+              Visit site
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+
     <div>
       <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
         <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
@@ -108,6 +201,10 @@ const tools = [
         </h3>
         <span class="eyebrow hidden md:block">Applied</span>
       </div>
+      <p class="max-w-3xl text-foreground/85 leading-relaxed mb-8">
+        Three tools you use rather than browse: put in a question, a prompt, or a UEN, and get a
+        specific answer back, not a dataset to explore.
+      </p>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => (
@@ -141,53 +238,6 @@ const tools = [
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
             </a>
           </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="mt-20 md:mt-24">
-      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
-        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
-          <a href="/data" class="hover:text-accent transition-colors">The data utility layer</a>
-        </h3>
-        <span class="eyebrow hidden md:block">Verified</span>
-      </div>
-      <p class="max-w-3xl text-foreground/85 leading-relaxed mb-8">
-        Four independent Singapore sites, each reading one named public register: hiring data,
-        COE results, contractor licences, statutory deadlines. Dated and sourced, not asserted.
-        <a href="/data" class="text-accent hover:underline">Read how each one works</a>.
-      </p>
-
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {dataUtilities.map((site) => (
-          <a
-            href={site.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex flex-col p-6 border border-border bg-card/40 hover:border-accent/60 transition-colors"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <img
-                src={site.logo}
-                alt=""
-                aria-hidden="true"
-                width="32"
-                height="32"
-                class="shrink-0"
-              />
-              <h4 class="font-serif text-xl font-black tracking-tight text-foreground">
-                {site.name}
-              </h4>
-            </div>
-            <p class="text-sm text-foreground leading-relaxed flex-grow mb-5">
-              {site.tagline}
-            </p>
-            <p class="font-serif text-2xl font-black text-accent leading-none mb-1">{site.stat}</p>
-            <span class="inline-flex items-center gap-2 text-xs font-semibold text-foreground/70 group-hover:text-accent group-hover:gap-3 transition-all">
-              Visit site
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </span>
-          </a>
         ))}
       </div>
     </div>

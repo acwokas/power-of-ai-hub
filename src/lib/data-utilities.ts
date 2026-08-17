@@ -14,8 +14,12 @@ export interface DataUtility {
 }
 
 // Figures verified directly against each live site on 2026-08-17. PayLine's
-// count changes daily (its own spine); the other three are the row counts
+// count changes daily (its own spine); the other two are the row counts
 // live on the site as of the same date. Do not round these up for effect.
+// TradeChecked reads the same way (BCA/NEA registers via data.gov.sg) but
+// sits in Tools and platforms instead: it answers a lookup ("is this
+// contractor licensed") rather than presenting a dataset to browse. See
+// Ecosystem.astro.
 export const dataUtilities: DataUtility[] = [
   {
     slug: 'payline',
@@ -42,20 +46,6 @@ export const dataUtilities: DataUtility[] = [
     stat: '1,965',
     statLabel: 'bidding results, the full published LTA series',
     sourceName: 'data.gov.sg (LTA COE bidding results)',
-    sourceUrl: 'https://data.gov.sg',
-    verifiedDate: '2026-08-07',
-  },
-  {
-    slug: 'tradechecked',
-    name: 'TradeChecked',
-    tagline: 'Check the licence before you pay the deposit',
-    description:
-      'Singapore trade and contractor registrations from the BCA and NEA public registers, so you can check whether a firm holds a current licence before you pay it.',
-    url: 'https://tradechecked.sg',
-    logo: '/brand/tradechecked-mark.svg',
-    stat: '24,014',
-    statLabel: 'BCA registrations, plus 290 NEA-registered pest control operators',
-    sourceName: 'data.gov.sg (BCA and NEA public registers)',
     sourceUrl: 'https://data.gov.sg',
     verifiedDate: '2026-08-07',
   },

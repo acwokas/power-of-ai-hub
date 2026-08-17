@@ -9,7 +9,7 @@ const jsonLd = {
   name: 'The data utility layer',
   url: 'https://democratising.ai/data',
   description:
-    'Four independent Singapore data sites built on named public registers, each dated and sourced rather than asserted.',
+    'Three independent Singapore data sites built on named public registers, each dated and sourced rather than asserted.',
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: dataUtilities.map((site, index) => ({
@@ -29,7 +29,7 @@ const jsonLd = {
 ---
 <BaseLayout
   title="The data utility layer - DEMOCRATISING.AI"
-  description="Four independent Singapore data sites built on named public registers: PayLine, COEwatch, TradeChecked and DueDate. Real figures, dated and sourced, not marketing copy."
+  description="Three independent Singapore data sites built on named public registers: PayLine, COEwatch and DueDate. Real figures, dated and sourced, not marketing copy."
 >
   <main>
     <section class="bg-background border-b border-border/60">
@@ -39,18 +39,22 @@ const jsonLd = {
           The data utility layer
         </h1>
         <p class="max-w-3xl text-lg md:text-xl text-foreground/85 leading-relaxed">
-          Four independent Singapore sites, each built to answer one narrow question from a named
+          Three independent Singapore sites, each built to answer one narrow question from a named
           public register: what a job actually pays, what a COE category actually cleared for,
-          whether a contractor actually holds the licence it claims, when a filing is actually due.
-          No aggregation, no averages standing in for the source. Every figure below is dated and
-          linked back to where it came from.
+          when a filing is actually due. No aggregation, no averages standing in for the source.
+          Every figure below is dated and linked back to where it came from.
+        </p>
+        <p class="max-w-3xl text-base text-foreground/70 leading-relaxed mt-4">
+          A fourth site, <a href="/#ecosystem" class="underline hover:text-accent">TradeChecked</a>,
+          reads the same public registers but is built to answer a single lookup rather than to
+          browse. It sits with <a href="/tools" class="underline hover:text-accent">Tools and platforms</a>.
         </p>
       </div>
     </section>
 
     <section class="py-14 md:py-20">
       <div class="container mx-auto px-6 max-w-6xl">
-        <div class="grid gap-6 md:grid-cols-2">
+        <div class="grid gap-6 md:grid-cols-3">
           {dataUtilities.map((site) => (
             <div class="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors">
               <div class="flex items-center gap-3 mb-4">
@@ -119,9 +123,9 @@ const jsonLd = {
           </p>
           <p>
             That means coverage varies. PayLine's job postings refresh daily because MyCareersFuture
-            publishes daily. COEwatch and TradeChecked hold the full published series from their
-            sources. DueDate's entity register is a partial, growing archive of a 2.1 million row
-            dataset, and says so on the page rather than rounding up.
+            publishes daily. COEwatch holds the full published series from its source. DueDate's
+            entity register is a partial, growing archive of a 2.1 million row dataset, and says so
+            on the page rather than rounding up.
           </p>
         </div>
       </div>
