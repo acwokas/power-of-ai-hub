@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../lib/site-meta';
 import Hero from '../components/Hero.astro';
 import SectionText from '../components/SectionText.astro';
 import SectionPrinciple from '../components/SectionPrinciple.astro';
@@ -10,8 +11,8 @@ import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
 ---
 <BaseLayout
-  title="DEMOCRATISING.AI - An ecosystem of editorial and applied AI"
-  description="An ecosystem of editorial and applied AI, helping people think clearly, act deliberately, and execute with confidence."
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
 >
   <main>
     <Hero />

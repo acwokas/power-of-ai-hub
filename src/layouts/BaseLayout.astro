@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE_DESCRIPTION } from '../lib/site-meta';
 
 const SITE_URL = (Astro.site?.toString() || 'https://democratising.ai').replace(/\/$/, '');
 
@@ -87,7 +88,7 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
       '@type': 'Organization',
       name: 'DEMOCRATISING.AI',
       url: 'https://democratising.ai/',
-      description: 'An ecosystem of editorial and applied AI, helping people think clearly, act deliberately, and execute with confidence.',
+      description: SITE_DESCRIPTION,
       sameAs: [
         'https://www.aiinasia.com',
         'https://www.aiinarabia.com',

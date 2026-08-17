@@ -1,6 +1,6 @@
 # DEMOCRATISING.AI
 
-> An ecosystem of editorial and applied AI. We help people think clearly, act deliberately, and execute with confidence, without handing over control. We are a venture, not a person.
+> An ecosystem of editorial, data and applied AI. We help people think clearly, act deliberately, and execute with confidence, without handing over control. We are a venture, not a person.
 
 DEMOCRATISING.AI brings together three regional editorial publications, the EDGE framework of twelve session-based tools, a prompt engineering platform, and a training academy. The work is grounded in British English and a refusal to confuse activity with progress.
 
