@@ -4,14 +4,14 @@ import { STRAPLINE } from '../lib/site-meta';
 <section class="relative bg-background border-b border-border/60" data-section="hero">
   <div class="container mx-auto px-6 max-w-6xl py-20 md:py-28 lg:py-32">
     <div class="max-w-5xl">
-      <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+      <div class="grid grid-cols-[auto_1fr] items-center gap-x-3 sm:gap-x-4 gap-y-2">
         <img
           src="/brand/democratising-mark-on-navy.svg"
           alt=""
           aria-hidden="true"
           width="64"
           height="64"
-          class="block shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16"
+          class="row-span-2 block shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16"
         />
         <p
           class="font-serif font-black tracking-tighter text-accent leading-none"
@@ -19,10 +19,10 @@ import { STRAPLINE } from '../lib/site-meta';
         >
           DEMOCRATISING.AI
         </p>
+        <p class="eyebrow text-foreground">
+          {STRAPLINE}
+        </p>
       </div>
-      <p class="mt-4 eyebrow text-foreground">
-        {STRAPLINE}
-      </p>
       <div class="mt-8 h-px w-20 bg-accent"></div>
 
       <h1 class="mt-10 font-serif font-black tracking-tight text-foreground text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.02]">
