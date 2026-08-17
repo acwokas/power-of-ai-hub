@@ -132,33 +132,6 @@ const tools = [
       </div>
     </div>
 
-    <div class="mb-20 md:mb-24" data-section="consumer-network">
-      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
-        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
-          Life with pets in the city
-        </h3>
-        <span class="eyebrow hidden md:block">Consumer</span>
-      </div>
-      <p class="max-w-3xl text-foreground/85 leading-relaxed mb-8">
-        Three Singapore publications for pet owners: what to feed, where to go, and which places
-        actually welcome a dog or a cat, hand-checked rather than scraped from a directory.
-      </p>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        {consumerSites.map((site) => (
-          <EcosystemCard
-            logo={site.logo}
-            logoSize={site.slug === 'urbandogowner' ? 56 : 40}
-            name={site.name}
-            descriptor={site.tagline}
-            description={site.description}
-            cta={`Read ${site.name}`}
-            url={site.url}
-          />
-        ))}
-      </div>
-    </div>
-
     <div class="mb-20 md:mb-24" data-section="data-utility">
       <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
         <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
@@ -192,7 +165,7 @@ const tools = [
       </div>
     </div>
 
-    <div data-section="tools-platforms">
+    <div class="mb-20 md:mb-24" data-section="tools-platforms">
       <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
         <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
           Tools and platforms
@@ -219,6 +192,33 @@ const tools = [
             cta={tool.cta}
             url={tool.url}
             external={tool.external}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div data-section="consumer-network">
+      <div class="flex items-baseline justify-between border-b border-border pb-4 mb-8">
+        <h3 class="font-serif text-2xl md:text-3xl font-bold tracking-tight">
+          Life with pets in the city
+        </h3>
+        <span class="eyebrow hidden md:block">Consumer</span>
+      </div>
+      <p class="max-w-3xl text-foreground/85 leading-relaxed mb-8">
+        Three Singapore publications for pet owners: what to feed, where to go, and which places
+        actually welcome a dog or a cat, hand-checked rather than scraped from a directory.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {consumerSites.map((site) => (
+          <EcosystemCard
+            logo={site.logo}
+            logoSize={site.slug === 'urbandogowner' ? 56 : 40}
+            name={site.name}
+            descriptor={site.tagline}
+            description={site.description}
+            cta={`Read ${site.name}`}
+            url={site.url}
           />
         ))}
       </div>
