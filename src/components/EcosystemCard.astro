@@ -21,6 +21,18 @@ interface Props {
   cta: string;
   url: string;
   external?: boolean;
+  /**
+   * Which site this card is quoting, when it quotes one.
+   *
+   * Rendered as data attributes on the stat so ai-factory's
+   * `pnpm gate:hub-figures` can read the declared figure rather than
+   * guessing it out of the prose. The first version of that gate matched
+   * on proximity to the site's hostname and read three of the four cards
+   * off by one, reporting COEwatch's figure as DueDate's. A number a
+   * machine has to infer from layout is a number it will eventually
+   * infer wrongly.
+   */
+  brand?: string;
 }
 
 const {
@@ -38,6 +50,7 @@ const {
   cta,
   url,
   external = true,
+  brand,
 } = Astro.props;
 ---
 <div class="group flex flex-col p-7 md:p-8 border border-border bg-card/40 hover:border-accent/60 transition-colors">
@@ -65,7 +78,13 @@ const {
   </p>
 
   {stat && (
-    <div class="mb-6 pb-6 border-b border-border/60">
+    <div
+      class="mb-6 pb-6 border-b border-border/60"
+      data-du-brand={brand}
+      data-du-stat={stat}
+      data-du-label={statLabel}
+      data-du-read-at={verifiedDate}
+    >
       <p class="font-serif text-3xl font-black text-accent leading-none mb-1">{stat}</p>
       {statLabel && <p class="text-sm text-foreground/70">{statLabel}</p>}
     </div>

@@ -2,7 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 import EcosystemCard from '../components/EcosystemCard.astro';
-import { dataUtilities } from '../lib/data-utilities';
+import { loadDataUtilities } from '../lib/data-utilities';
+
+// Build time, same source as the homepage rail. /data and the homepage
+// used to read the same hand-typed constant, which kept them consistent
+// with each other and wrong together.
+const dataUtilities = await loadDataUtilities();
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -70,6 +75,7 @@ const jsonLd = {
               verifiedDate={site.verifiedDate}
               cta={`Visit ${site.name}`}
               url={site.url}
+              brand={site.slug}
             />
           ))}
         </div>

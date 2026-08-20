@@ -1,5 +1,5 @@
 ---
-import { dataUtilities } from '../lib/data-utilities';
+import { loadDataUtilities, loadTradeChecked } from '../lib/data-utilities';
 import { consumerSites } from '../lib/consumer-network';
 import EcosystemCard from './EcosystemCard.astro';
 
@@ -44,11 +44,10 @@ const tools = [
     title: 'TradeChecked',
     description:
       'Reads the same BCA and NEA public registers as the data utility layer, but built to answer one lookup rather than to browse a dataset: enter a UEN, get back whether that contractor holds a current licence, right now.',
-    stat: '24,014',
-    statLabel: 'BCA registrations, plus 290 NEA-registered pest control operators',
-    sourceName: 'data.gov.sg (BCA and NEA public registers)',
-    sourceUrl: 'https://data.gov.sg',
-    verifiedDate: '2026-08-07',
+    // Figures come from tradechecked.sg/data/coverage.json at build time,
+    // spread in below. They were typed here until 2026-08-21, dated
+    // 7 August, and nothing on this site could tell whether they were
+    // still true. See src/lib/data-utilities.ts.
     cta: 'Check a licence',
     url: 'https://tradechecked.sg',
     external: true,
@@ -75,6 +74,23 @@ const tools = [
     logo: '/brand/edge-mark-transparent.svg',
   },
 ];
+/*
+ * Both awaited at the top of the component so the build fails here, in
+ * one place, if any of the four sites cannot be read. Astro renders this
+ * frontmatter at build time; nothing below reaches a browser.
+ */
+const [dataUtilities, tradechecked] = await Promise.all([
+  loadDataUtilities(),
+  loadTradeChecked(),
+]);
+
+// The tools rail carries one card with figures and two without. Merged
+// here rather than inside the literal above so the editorial copy and the
+// live numbers stay visibly separate.
+const toolCards = tools.map((tool) =>
+  tool.title === 'TradeChecked' ? { ...tool, ...tradechecked } : tool,
+);
+
 ---
 <section id="ecosystem" class="py-20 md:py-28 bg-background border-t border-border/60">
   <div class="container mx-auto px-6 max-w-6xl">
@@ -160,6 +176,7 @@ const tools = [
             verifiedDate={site.verifiedDate}
             cta={`Visit ${site.name}`}
             url={site.url}
+            brand={site.slug}
           />
         ))}
       </div>
@@ -178,7 +195,7 @@ const tools = [
       </p>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {tools.map((tool) => (
+        {toolCards.map((tool) => (
           <EcosystemCard
             logo={tool.logo}
             name={tool.title}
@@ -192,6 +209,7 @@ const tools = [
             cta={tool.cta}
             url={tool.url}
             external={tool.external}
+            brand={tool.title === 'TradeChecked' ? 'tradechecked' : undefined}
           />
         ))}
       </div>
