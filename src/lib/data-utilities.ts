@@ -167,10 +167,11 @@ export async function loadDataUtilities(): Promise<DataUtility[]> {
        */
       coverageNote:
         card.slug === 'duedate'
-          ? `The full ACRA register runs to roughly 2.1 million records, most of them struck off `
-            + `or dissolved. ${formatStat(
-              (p.figures.liveEntities as number) ?? p.headline.value,
-            )} of the entities held are ones the register currently lists as live.`
+          ? `DueDate archives close to the full ACRA register rather than a slice of it. `
+            + `${formatStat((p.figures.liveEntities as number) ?? 0)} of the entities held `
+            + `are ones the register currently lists as live; the rest are struck off, `
+            + `dissolved or otherwise no longer active, kept with the register's own status `
+            + `rather than dropped.`
           : undefined,
     };
   });
