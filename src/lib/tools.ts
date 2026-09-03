@@ -10,6 +10,13 @@ export interface Tool {
 
 export const tools: Tool[] = [
   {
+    slug: 'edge-diagnostic',
+    title: 'EDGE Diagnostic',
+    pillar: 'Evaluate',
+    description: 'Twenty questions, eight minutes, one board-ready memo on your AI governance maturity.',
+    status: 'live',
+  },
+  {
     slug: 'maturity-assessment',
     title: 'Maturity Assessment',
     pillar: 'Evaluate',

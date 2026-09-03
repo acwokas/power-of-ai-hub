@@ -31,3 +31,4 @@ dist-ssr
 .env
 .env.production
 .env.local
+.dev.vars

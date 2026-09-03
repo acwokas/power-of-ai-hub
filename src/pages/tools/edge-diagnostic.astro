@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import EdgeDiagnostic from '../../components/tools/EdgeDiagnostic.tsx';
+---
+<BaseLayout
+  title="EDGE Diagnostic - Board-ready AI capability memo - DEMOCRATISING.AI"
+  description="Twenty questions, eight minutes, one board-ready memo on your AI governance maturity. Built around the EDGE Framework. Free, private, no signup."
+>
+  <main>
+    <section class="bg-background border-b border-border/60">
+      <div class="container mx-auto px-6 max-w-3xl py-16 md:py-24">
+        <div class="flex items-center gap-3 mb-5">
+          <img src="/brand/edge-mark.svg" alt="EDGE mark" class="h-8 w-8" />
+          <p class="eyebrow m-0">
+            <a href="/" class="hover:text-foreground/80 transition-colors">DEMOCRATISING.AI</a>
+            <span class="text-foreground/40 mx-1">/</span>
+            <a href="/tools" class="hover:text-foreground/80 transition-colors">EDGE</a>
+            <span class="text-foreground/40 mx-1">/</span>
+            Diagnostic
+          </p>
+        </div>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.05] mb-6">
+          The EDGE Diagnostic
+        </h1>
+        <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-6">
+          Twenty structured questions, roughly eight minutes, one board-ready memo on where your organisation actually sits on AI governance maturity. Built around the five dimensions of the EDGE Framework: decision ownership, risk, performance oversight, ethical boundaries, and accountability.
+        </p>
+        <div class="flex items-start gap-3 text-sm text-foreground/60">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 text-accent/70 shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>We use your answers to generate this memo and to follow up if you ask. Stored on Adrian Watkins' systems. Not shared with third parties.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 md:py-20">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <EdgeDiagnostic client:load />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
