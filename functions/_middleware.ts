@@ -34,6 +34,18 @@ export const onRequest: PagesFunction<Env> = async context => {
    }
   }
  }else response=await context.next();
+ // Private aggregate diagnostics contain no input, output, IP or user identifier.
+ if(url.pathname.startsWith('/api/') && context.env.EDGE_USAGE){
+  const tool=live.has(url.pathname.slice(5))?url.pathname.slice(5):'retired';
+  const day=Math.floor(Date.now()/86400000)*86400;
+  const db=context.env.EDGE_USAGE;
+  context.waitUntil((async()=>{try{
+   await db.batch([
+    db.prepare('INSERT INTO daily_outcomes(day,tool,status,requests) VALUES(?1,?2,?3,1) ON CONFLICT(day,tool,status) DO UPDATE SET requests=requests+1').bind(day,tool,response.status),
+    db.prepare('DELETE FROM daily_outcomes WHERE day < ?1').bind(day-30*86400)
+   ]);
+  }catch{console.error('edge_diagnostics_write_failed');}})());
+ }
  const guarded=new Response(response.body,response);
  if(url.hostname.endsWith('.pages.dev'))guarded.headers.set('X-Robots-Tag','noindex, nofollow');
  if(url.pathname.startsWith('/api/'))guarded.headers.set('Cache-Control','no-store');
