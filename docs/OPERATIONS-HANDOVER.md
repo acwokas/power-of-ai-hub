@@ -42,4 +42,4 @@ Submission and discovery do not guarantee indexing or rankings. Bing is still pr
 
 Operational code release: `cb1f924`, deployed at `298f011c.power-of-ai-hub-astro.pages.dev` and published on democratising.ai. Source pushed to the existing `acwokas/power-of-ai-hub` repository on `astro-migration`. All 36 targeted automated tests passed; production and preview diagnostics migrations were applied. This documentation update does not require another site deployment.
 
-Human review can now focus on clarity, usefulness, tool outputs and the experience across devices. The temporary Comet exception still needs removal by Adrian because browser security policy blocked automated reopening of that settings page.
+Human review can now focus on clarity, usefulness, tool outputs and the experience across devices. Adrian confirmed removal of the temporary Comet exception and restoration of his original browser protection settings after the analytics test.
