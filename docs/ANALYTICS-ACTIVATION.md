@@ -1,4 +1,4 @@
-> Published as GTM version 4 on 11 September 2026. Public container definitions verified. GA4 DebugView receipt is still unverified. The preparation notes below describe the earlier staged state.
+> Published as GTM version 4 on 11 September 2026. Live GA4 Realtime receipt verified for EDGE request, response, completion and brief export events. Event-scoped tool and response-status dimensions are configured. The preparation notes below describe the earlier staged state. See OPERATIONS-HANDOVER.md for the current evidence and reporting limits.
 
 # EDGE analytics activation
 
