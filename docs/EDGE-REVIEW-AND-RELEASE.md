@@ -1,3 +1,5 @@
+> Published on 11 September 2026 after explicit approval. See docs/PRODUCTION-RELEASE-2026-09-11.md for current status; freeze statements below are historical.
+
 # EDGE review and release report
 
 11 September 2026. Review environment only.

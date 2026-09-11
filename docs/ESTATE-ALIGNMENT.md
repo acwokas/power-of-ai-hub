@@ -1,6 +1,6 @@
 # EDGE estate alignment after final testing
 
-Sequence: accept the toolkit, release democratising.ai, then align the rest of the estate in one coordinated pass. Preserve the four pillars and approved framework ownership. This is an implementation queue, not a claim that these updates have shipped.
+Published and aligned on 11 September 2026. See PRODUCTION-RELEASE-2026-09-11.md for completed scope. Original implementation queue follows. Preserve the four pillars and approved framework ownership. This is an implementation queue, not a claim that these updates have shipped.
 
 ## Canonical destinations
 
@@ -22,7 +22,7 @@ Confirm query parameters against the final redirect file before editing links. B
 - Review homepage EDGE section, speaking topics, About, relevant writing, resource pages, metadata, structured data and llms.txt for old names or claims.
 - /Users/adrian/adrian-2026/public/documents/EDGE-Framework-Whitepaper.pdf: update the tool map, examples and links. Keep the approved spinning-top mark, active hyperlinks and no em dashes.
 - /Users/adrian/adrian-2026/public/documents/EDGE-Decision-Worksheet.pdf and .docx: align stage handoffs, evidence language and review prompts. Preserve useful offline use.
-- White paper source located at /Users/adrian/Documents/Claude/Scheduled/edge-whitepaper-v2/build_whitepaper.py; verify that this is the latest generator before editing.
+- White paper source located at /Users/adrian/adrian-2026/scripts/build-edge-paper.py; verify that this is the latest generator before editing.
 - Executive CV and LinkedIn Featured/project descriptions: change only outdated EDGE/tool claims or links where needed. Preserve approved career facts. LinkedIn link previews may need refreshing after metadata changes.
 
 ## Wider estate pass

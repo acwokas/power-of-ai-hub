@@ -1,3 +1,5 @@
+> Published on 11 September 2026 after explicit approval. See docs/PRODUCTION-RELEASE-2026-09-11.md for current status; freeze statements below are historical.
+
 # Final product review
 
 Review only: https://ede3993b.power-of-ai-hub-astro.pages.dev/

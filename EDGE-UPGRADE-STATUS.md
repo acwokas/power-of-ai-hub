@@ -1,3 +1,5 @@
+> Published on 11 September 2026 after explicit approval. See docs/PRODUCTION-RELEASE-2026-09-11.md for current status; freeze statements below are historical.
+
 # Before You Send upgrade
 
 11 September 2026. Branch: codex/edge-before-you-send. Not published.

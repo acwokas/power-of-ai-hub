@@ -1,3 +1,5 @@
+> Published as GTM version 4 on 11 September 2026. Public container definitions verified. GA4 DebugView receipt is still unverified. The preparation notes below describe the earlier staged state.
+
 # EDGE analytics activation
 
 Imported and staged for release, not published.

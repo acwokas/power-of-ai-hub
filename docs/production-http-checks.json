@@ -1,0 +1,77 @@
+[
+  {
+    "path": "/",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools/edge-journey",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools/edge-practice",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools/before-you-send",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools/brand-content",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools/maturity-assessment",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/privacy",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/sitemap-index.xml",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/robots.txt",
+    "result": "200 ",
+    "error": ""
+  },
+  {
+    "path": "/tools/decision-simulation",
+    "result": "302 https://democratising.ai/tools/edge-journey#evaluate",
+    "error": ""
+  },
+  {
+    "path": "/tools/conversation-simulator",
+    "result": "302 https://democratising.ai/tools/edge-practice?mode=conversation",
+    "error": ""
+  },
+  {
+    "path": "/tools/negotiation-simulator",
+    "result": "302 https://democratising.ai/tools/edge-practice?mode=negotiation",
+    "error": ""
+  },
+  {
+    "path": "/release-nonexistent-check",
+    "result": "404 ",
+    "error": ""
+  },
+  {
+    "path": "/api/decision-analysis",
+    "result": "410 ",
+    "error": ""
+  }
+]
