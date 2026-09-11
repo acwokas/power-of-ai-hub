@@ -1,3 +1,5 @@
+import { draftStorage } from '@/lib/draft-storage';
+import { parseBrandContentHandoff } from '@/lib/brand-workspace-handoff';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -95,7 +97,7 @@ const loadingPhases = [
 function loadData(): Record<string, string> {
   if (typeof window === 'undefined') return {};
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = draftStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : {};
   } catch {
     return {};
@@ -104,7 +106,7 @@ function loadData(): Record<string, string> {
 
 function saveData(data: Record<string, string>) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    draftStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {
     // ignore
   }
@@ -222,7 +224,7 @@ function SectionCard({
             <h3 className="text-base font-semibold truncate">{section.title}</h3>
           </CollapsibleTrigger>
           <div className="flex items-center gap-1.5 shrink-0">
-            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleCopy} title="Copy section">
+            <Button variant="ghost" size="icon" className="h-7 w-7" data-edge-event="edge_copy_requested" onClick={handleCopy} title="Copy section">
               {copied ? <Check className="h-3.5 w-3.5 text-accent" /> : <Copy className="h-3.5 w-3.5" />}
             </Button>
             <Button
@@ -248,6 +250,7 @@ function SectionCard({
 }
 
 export default function BrandProfileGenerator() {
+  const [incoming, setIncoming] = useState<Record<string,string>|null>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Record<string, string>>(() => loadData());
   const [isRefining, setIsRefining] = useState(false);
@@ -260,9 +263,10 @@ export default function BrandProfileGenerator() {
   const [regeneratingKey, setRegeneratingKey] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
+  useEffect(()=>{try{const raw=sessionStorage.getItem('edge-brand-profile-handoff-v1');sessionStorage.removeItem('edge-brand-profile-handoff-v1');setIncoming(parseBrandContentHandoff(raw)?.fields||null);}catch{}},[]);
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(PROFILE_STORAGE_KEY);
+      const saved = draftStorage.getItem(PROFILE_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed.profile && parsed.generatedAt) {
@@ -348,7 +352,7 @@ export default function BrandProfileGenerator() {
     toast({ title: 'Example data loaded' });
   };
 
-  // Drafts auto-save to localStorage on every formData change (see useEffect above).
+  // Drafts auto-save to the selected tab or seven-day storage on every formData change (see useEffect above).
   // The old Save Draft button dumped raw JSON, which confused users. Removed.
 
   const handleRefine = async (type: 'problem' | 'differentiators', fieldKey: string) => {
@@ -475,7 +479,7 @@ export default function BrandProfileGenerator() {
         }
         setProfileText(newText);
         try {
-          localStorage.setItem(
+          draftStorage.setItem(
             PROFILE_STORAGE_KEY,
             JSON.stringify({ formData, profile: newText, generatedAt: now }),
           );
@@ -486,7 +490,7 @@ export default function BrandProfileGenerator() {
         setProfileText(accumulated);
         setGeneratedAt(now);
         try {
-          localStorage.setItem(
+          draftStorage.setItem(
             PROFILE_STORAGE_KEY,
             JSON.stringify({ formData, profile: accumulated, generatedAt: now }),
           );
@@ -518,8 +522,8 @@ export default function BrandProfileGenerator() {
     setProfileText('');
     setGeneratedAt('');
     try {
-      localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(PROFILE_STORAGE_KEY);
+      draftStorage.removeItem(STORAGE_KEY);
+      draftStorage.removeItem(PROFILE_STORAGE_KEY);
     } catch {
       // ignore
     }
@@ -628,6 +632,7 @@ export default function BrandProfileGenerator() {
     },
   ];
 
+  if(incoming) return <section className="space-y-5" aria-labelledby="brand-context-title"><h2 id="brand-context-title" className="text-2xl">Review the context you selected</h2><p>No AI request has been made. Using these notes starts a fresh brand form. This tool keeps form inputs in this tab unless you enable seven-day saving.</p><pre className="whitespace-pre-wrap">{Object.entries(incoming).map(([k,v])=>k+': '+v).join('\n\n')}</pre><Button onClick={()=>{setFormData({audienceRole:incoming.audience||'',productDescription:incoming.offer||'',audienceCares:incoming.need||'',toneNotes:incoming.voice||'',marketNotes:Object.entries(incoming).filter(([k])=>['ideas','checks','plan'].includes(k)).map(([k,v])=>k+': '+v).join('\n\n'),differentiators:[incoming.evidence,incoming.proof].filter(Boolean).join('\n\n')});setCurrentStep(0);setPhase('wizard');setIncoming(null);}}>Use selected context</Button><Button variant="outline" onClick={()=>setIncoming(null)}>Keep existing context</Button><p><a href="/tools/brand-content" className="underline">Return to your brand working brief</a></p></section>;
   if (phase === 'loading') {
     return (
       <div className="py-12 space-y-8 text-center">
@@ -708,13 +713,13 @@ export default function BrandProfileGenerator() {
 
         <div className="border-t border-border/20 pt-6 space-y-4">
           <div className="flex flex-wrap gap-2">
-            <Button variant="hero" size="sm" onClick={handleDownloadPdf}>
+            <Button variant="hero" size="sm" data-edge-event="edge_export_requested" onClick={handleDownloadPdf}>
               <FileText className="h-3.5 w-3.5 mr-1.5" /> Download branded PDF
             </Button>
             <Button variant="outline" size="sm" onClick={() => copyToClipboard(profileText, 'Full profile')}>
               <Copy className="h-3.5 w-3.5 mr-1.5" /> Copy all sections
             </Button>
-            <Button variant="outline" size="sm" onClick={handleDownloadMarkdown}>
+            <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleDownloadMarkdown}>
               <Download className="h-3.5 w-3.5 mr-1.5" /> Download markdown
             </Button>
           </div>
@@ -783,7 +788,7 @@ export default function BrandProfileGenerator() {
         </div>
         <div className="flex items-center gap-2 p-3 border border-accent/20 bg-accent/5 rounded-sm text-xs text-muted-foreground">
           <ShieldCheck className="h-3.5 w-3.5 text-accent shrink-0" />
-          Your inputs are sent to AI for analysis but not stored. The generated profile stays in your browser.
+          Your inputs are sent through our server to OpenAI for analysis. Provider retention policies apply. Your local draft stays in this tab unless you choose seven-day saving.
         </div>
         <div className="flex items-center justify-between pt-4 border-t border-border/20">
           <Button variant="ghost" size="sm" onClick={handleBack} className="text-muted-foreground">
@@ -808,7 +813,7 @@ export default function BrandProfileGenerator() {
           <ol className="mt-4 space-y-2 text-sm text-muted-foreground list-none">
             {[
               'Complete each step with as much detail as you can.',
-              'Your progress saves automatically to your browser.',
+              'Your progress stays in this tab unless you choose seven-day saving.',
               'AI refinement is available on the problem and differentiators steps.',
               'On the final review you can tweak any answer before generating.',
             ].map((s, i) => (
@@ -1233,7 +1238,7 @@ export default function BrandProfileGenerator() {
       <div className="flex items-start gap-2 text-xs text-muted-foreground">
         <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5 text-accent" />
         <span>
-          Your progress saves automatically in this browser. Close and return any time.
+          Your progress stays in this tab. Choose Remember future edits below to keep drafts for seven days.
         </span>
       </div>
     </div>

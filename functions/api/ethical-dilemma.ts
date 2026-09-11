@@ -26,7 +26,7 @@ interface ChatBody {
 }
 
 function scenarioSystemPrompt(setup: SetupData): string {
-  return `You are facilitating an ethical dilemma simulation about AI deployment. You write in natural contemporary British English.
+  return `You are facilitating an ethical dilemma simulation about AI deployment. You write in natural contemporary British English. Do not use em dashes. This is a fictional learning exercise. Label invented details, stakeholder reactions and outcomes as simulated. Do not present regulatory claims as verified law or infer real-world permission to deploy.
 
 Use case: ${setup.useCase || 'not specified'}
 Ethical tensions: ${(setup.tensions || []).join(', ') || 'not specified'}
@@ -41,8 +41,8 @@ Generate the opening of an ethical dilemma simulation. Format your response EXAC
 Write a 3 to 4 paragraph realistic scenario narrative that:
 - Describes the specific situation with concrete details
 - Introduces the stakeholders and their positions
-- Presents data and evidence that makes the tension real
-- Notes regulatory context and business pressures
+- Clearly labels any invented data as fictional scenario assumptions, not observed evidence
+- Identifies questions about obligations to verify separately, without inventing legal requirements; labels simulated business pressures
 
 ## DECISION POINT 1: DEPLOYMENT SCOPE
 
@@ -58,7 +58,7 @@ Make options represent a genuine spectrum from most aggressive to most cautious.
 }
 
 function chatSystemPrompt(setup: SetupData): string {
-  return `You are facilitating an ethical dilemma simulation about AI deployment. You write in natural contemporary British English.
+  return `You are facilitating an ethical dilemma simulation about AI deployment. You write in natural contemporary British English. Do not use em dashes. This is a fictional learning exercise. Label invented details, stakeholder reactions and outcomes as simulated. Do not present regulatory claims as verified law or infer real-world permission to deploy.
 
 Use case: ${setup.useCase || 'not specified'}
 Ethical tensions: ${(setup.tensions || []).join(', ') || 'not specified'}
@@ -106,21 +106,23 @@ Write a brief 2 sentence closing that sets up the reflection phase.
 Keep a professional, exploratory tone. Do not judge. Help them see trade-offs.`;
 }
 
-const REFLECTION_SYSTEM = `You are a senior ethics advisor analysing an ethical dilemma simulation about AI deployment. You write in British English.
+const REFLECTION_SYSTEM = `You are a senior ethics advisor analysing an ethical dilemma simulation about AI deployment. You write in British English. Do not use em dashes. This report concerns a fictional exercise, not observed organisational performance or a policy approval.
+
+Keep recommendations proportionate to the stated setting. A small student or community trial usually needs a named organiser and a simple review, not a new committee. Do not introduce business leadership, regulators or formal approval bodies unless their relevance is established by the scenario. Do not label an absent corporate perspective a blind spot in a non-corporate setting.
 
 Output an H2-sectioned report in this exact order. Each H2 heading must start with "## " on its own line.
 
 ## Your ethical framework
-What values did the user consistently prioritise? What trade-offs did they make? Identify their decision-making pattern. Are they more utilitarian, rights-based, justice-oriented, or care-focused? Use specific examples from their decisions.
+What values did the user consistently prioritise? What trade-offs did they make? Identify their decision-making pattern. Describe perspectives used in this exercise only. Do not infer a stable personality or ethical identity. Use specific examples from their decisions.
 
 ## Consistency analysis
-Where were their decisions consistent? Where did they waver or contradict earlier positions? Do not judge. Explore the tensions constructively.
+Describe consistency supported by the transcript. Only describe wavering or contradiction if you can quote TWO actual conflicting user statements verbatim. Otherwise explicitly say no contradiction is established from the supplied statements. An ordinary trade-off is not a contradiction.
 
 ## Blind spots
-What perspectives or stakeholder groups did they under-consider? What risks did they not address? What long-term consequences did they miss? Frame constructively.
+Identify any perspectives not addressed in the transcript. Do not manufacture omissions. If the transcript does not support a concern, say so. Ask useful questions for further reflection.
 
 ## Stakeholder impact
-How did their collective decisions affect each stakeholder group? Be specific about winners and losers.
+Explain possible effects within the fictional scenario, preserving uncertainty. Distinguish simulated reactions from observed real-world outcomes.
 
 ## Risk exposure checklist
 For this type of AI use case, generate a practical markdown checklist organised under these subheadings (use "- [ ] ..." items):
@@ -129,23 +131,23 @@ For this type of AI use case, generate a practical markdown checklist organised 
 - Brand risks
 - Ethical risks
 - Operational risks
-Customise items to the specific use case.
+Frame items as discussion prompts for the fictional use case, not a complete risk or compliance assessment. Do not name legislation unless the user supplied the jurisdiction and law. Ask which obligations apply instead.
 
 ## Decision escalation matrix
-A markdown table showing when AI should decide versus when humans should intervene:
+A draft discussion table exploring who might need to be involved. It grants no decision authority and is not an approved organisational matrix:
 
-| Scenario | AI Autonomy | Human Review | Senior Approval | Ethics Committee |
-|----------|-------------|--------------|-----------------|------------------|
+| Proposed situation | Open question | Who should confirm? |
+|--------------------|---------------|---------------------|
 
-Include 6 to 8 rows customised to their use case and the risk tolerance they showed.
+Include only rows supported by the scenario. Mark authority, permissions and ownership as needing confirmation. Do not derive permitted autonomy from how bold the user was in the exercise.
 
 ## Experimentation policy
 Three subsections with bullet lists:
-- Green zone (allowed without special approval)
-- Yellow zone (allowed with oversight)
-- Red zone (prohibited)
+- Proposals to discuss
+- Questions requiring more context
+- Actions to defer until conditions are clarified
 
-Customise to their decisions and stated values. Be specific. Make every framework immediately usable. British English throughout.`;
+Keep the heading "## Experimentation policy" for compatibility, then begin the section body "Discussion draft for the fictional exercise, not an approved policy." Treat each zone as a proposal requiring evidence and organisational review. Do not authorise deployment, prohibit actual activities or claim legal compliance from simulated choices. End with questions to take to accountable people before applying any learning. British English throughout.`;
 
 function jsonError(status: number, error: string): Response {
   return new Response(JSON.stringify({ error }), {
@@ -159,7 +161,7 @@ async function streamFromOpenAI(
   messages: { role: string; content: string }[],
   temperature: number,
 ): Promise<Response> {
-  const model = env.OPENAI_MODEL || 'gpt-4o-mini';
+  const model = 'gpt-4o-mini';
   let upstream: Response;
   try {
     upstream = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -168,7 +170,7 @@ async function streamFromOpenAI(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${env.OPENAI_API_KEY}`,
       },
-      body: JSON.stringify({ model, stream: true, temperature, messages }),
+      body: JSON.stringify({ model, max_tokens: 6000, stream: true, temperature, messages }),
     });
   } catch {
     return jsonError(502, 'Could not reach the simulator provider.');

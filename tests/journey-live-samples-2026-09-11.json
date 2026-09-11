@@ -1,0 +1,105 @@
+[
+  {
+    "input": {
+      "stage": 0,
+      "values": {
+        "situation": "Choose between a limited reporting pilot and an immediate rollout.",
+        "facts": "Two customers requested reports. Delivery effort and willingness to pay are unknown.",
+        "options": "Pilot with two customers, or rollout to all 30.",
+        "unknowns": "What delivery effort would be sustainable?"
+      }
+    },
+    "output": {
+      "suggestions": {
+        "situation": "",
+        "facts": "Two customers requested reports. Delivery effort and willingness to pay are unknown.",
+        "options": "",
+        "unknowns": "What are the specific reporting needs of the two customers? What resources are available for delivery?"
+      },
+      "questions": [
+        "What are the potential risks of an immediate rollout?",
+        "How critical are the reports to the two customers?",
+        "What feedback mechanisms will be in place for the pilot?"
+      ],
+      "note": "Understanding the delivery effort required and customer needs is crucial for making an informed choice."
+    }
+  },
+  {
+    "input": {
+      "stage": 1,
+      "values": {},
+      "context": [
+        {
+          "label": "Direction",
+          "value": "Run a limited pilot with two customers before deciding on a rollout.",
+          "source": "User-confirmed direction"
+        },
+        {
+          "label": "Unknowns",
+          "value": "Delivery effort and willingness to pay have not been measured.",
+          "source": "User draft"
+        }
+      ]
+    },
+    "output": {
+      "suggestions": {
+        "outcome": "",
+        "direction": "Run a limited pilot with two customers before deciding on a rollout.",
+        "success": "",
+        "scope": ""
+      },
+      "questions": [
+        "What specific metrics will you use to measure delivery effort?",
+        "How will you assess the willingness to pay from the two customers?",
+        "What timeframe do you have in mind for the pilot?"
+      ],
+      "note": "Clarifying the metrics for success and the timeframe for the pilot will help define the outcome and scope more effectively."
+    }
+  },
+  {
+    "input": {
+      "stage": 2,
+      "values": {
+        "actions": "Run a reporting pilot with two willing customers. No owners or dates agreed yet.",
+        "boundaries": "Do not displace existing contracted work."
+      }
+    },
+    "output": {
+      "suggestions": {
+        "actions": "Identify two customers willing to participate in the reporting pilot and confirm their commitment.",
+        "boundaries": "Ensure that the pilot does not interfere with any ongoing contractual obligations.",
+        "check": "Establish criteria for evaluating the success of the pilot.",
+        "review": "Schedule a review meeting after the pilot to assess outcomes and gather feedback."
+      },
+      "questions": [
+        "Who will be responsible for reaching out to the customers?",
+        "What specific outcomes are expected from the pilot?",
+        "When do you plan to conduct the review meeting?"
+      ],
+      "note": "Clarifying roles and expected outcomes will help in structuring the pilot effectively."
+    }
+  },
+  {
+    "input": {
+      "stage": 3,
+      "values": {
+        "observations": "Two reports were delivered. One customer replied positively. The other has not replied. Delivery time was not recorded.",
+        "review": "Review the reporting pilot."
+      }
+    },
+    "output": {
+      "suggestions": {
+        "observations": "Two reports were delivered. One customer replied positively. The other has not replied. Delivery time was not recorded.",
+        "difference": "",
+        "learning": "",
+        "nexttest": "Consider sending a follow-up message to the customer who has not replied. Record the delivery time for future reference."
+      },
+      "questions": [
+        "What was the content of the reports?",
+        "What is the expected response time from customers?",
+        "Have there been any previous interactions with these customers?"
+      ],
+      "note": "The lack of recorded delivery time may hinder understanding of response patterns."
+    }
+  }
+]

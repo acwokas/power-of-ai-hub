@@ -1,0 +1,13 @@
+---
+const current=Astro.url.pathname.replace(/\.html$/,'').replace(/\/$/,'');
+---
+<a class="edge-skip" href="#edge-main">Skip to tool</a>
+<nav class="edge-global-nav" aria-label="EDGE navigation">
+ <a class="edge-home" href="/"><img src="/brand/democratising-mark.svg" width="30" height="30" alt=""/>democratising.ai</a>
+ <div class="edge-nav-links"><a href="/tools" aria-current={current==='/tools'?'page':undefined}>EDGE toolkit</a><a href="/tools/edge-journey" aria-current={current==='/tools/edge-journey'?'page':undefined}>Working brief</a><a href="https://adrianwatkins.com/edge" target="_blank" rel="noopener noreferrer">About EDGE ↗</a></div>
+</nav>
+<script is:inline>document.addEventListener('DOMContentLoaded',()=>{const main=document.querySelector('main');if(main){main.id='edge-main';main.tabIndex=-1;}});</script>
+<style>
+.edge-skip{position:absolute;left:16px;top:-100px;background:#152b39;color:white;padding:12px;z-index:100}.edge-skip:focus{top:12px}.edge-nav-links a{display:inline-flex;align-items:center;min-height:44px}
+.edge-global-nav{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:88px;height:auto;padding:20px 0;border-bottom:1px solid #ccd2cc;color:#152b39;font:14px/1.4 'DM Sans',Arial,sans-serif}.edge-global-nav a{text-decoration:none;color:inherit;max-width:none!important}.edge-home{display:flex;align-items:center;gap:10px;font-size:21px!important;font-weight:700;letter-spacing:-.6px}.edge-nav-links{display:flex;gap:24px;align-items:center}.edge-nav-links a[aria-current=page]{text-decoration:underline;text-underline-offset:6px}.edge-global-nav a:focus-visible{outline:3px solid #9c571f;outline-offset:5px}@media(max-width:650px){.edge-global-nav{align-items:flex-start;flex-direction:column;gap:16px}.edge-nav-links{gap:20px;flex-wrap:wrap}.edge-nav-links a{font-size:12px!important;text-align:left!important}.edge-home{font-size:19px!important}}
+</style>

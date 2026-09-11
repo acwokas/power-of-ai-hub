@@ -1,3 +1,4 @@
+import { draftStorage } from '@/lib/draft-storage';
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -105,7 +106,7 @@ function slugify(s: string): string {
 function loadStored(): StoredPalette | null {
   if (typeof window === 'undefined') return null;
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = draftStorage.getItem(STORAGE_KEY);
     if (!saved) return null;
     const parsed = JSON.parse(saved) as StoredPalette;
     if (parsed.palette && Array.isArray(parsed.palette.light)) return parsed;
@@ -179,7 +180,7 @@ export default function BrandPalette() {
 
   useEffect(() => {
     try {
-      localStorage.setItem(
+      draftStorage.setItem(
         STORAGE_KEY,
         JSON.stringify({ brandName, includeDark, palette } satisfies StoredPalette),
       );
@@ -212,7 +213,7 @@ export default function BrandPalette() {
     setIncludeDark(true);
     setPalette({ light: defaultLight, dark: defaultDark });
     try {
-      localStorage.removeItem(STORAGE_KEY);
+      draftStorage.removeItem(STORAGE_KEY);
     } catch {
       // ignore
     }
@@ -519,16 +520,16 @@ export default function BrandPalette() {
           A PNG swatch sheet for sharing, a JSON file for design tools, and CSS variables for the codebase.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Button variant="hero" size="sm" onClick={downloadPNG}>
+          <Button variant="hero" size="sm" data-edge-event="edge_export_requested" onClick={downloadPNG}>
             <ImageIcon className="h-3.5 w-3.5 mr-1.5" /> Download PNG sheet
           </Button>
-          <Button variant="outline" size="sm" onClick={downloadJson}>
+          <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={downloadJson}>
             <FileJson className="h-3.5 w-3.5 mr-1.5" /> Download JSON
           </Button>
-          <Button variant="outline" size="sm" onClick={copyCss}>
+          <Button variant="outline" size="sm" data-edge-event="edge_copy_requested" onClick={copyCss}>
             <Copy className="h-3.5 w-3.5 mr-1.5" /> Copy CSS variables
           </Button>
-          <Button variant="outline" size="sm" onClick={copyHexList}>
+          <Button variant="outline" size="sm" data-edge-event="edge_copy_requested" onClick={copyHexList}>
             <Copy className="h-3.5 w-3.5 mr-1.5" /> Copy hex list
           </Button>
         </div>
@@ -551,7 +552,7 @@ export default function BrandPalette() {
 
       <p className="text-xs text-muted-foreground flex items-start gap-2">
         <X className="h-3 w-3 mt-0.5 shrink-0" />
-        Your palette lives in your browser only. Refreshing keeps it. Clearing site data resets it.
+        Your palette stays in this tab. Choose Remember future edits below to keep it for seven days.
       </p>
     </div>
   );

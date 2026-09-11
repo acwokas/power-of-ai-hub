@@ -1,0 +1,19 @@
+{
+  "production_database": {
+    "name": "edge-production-usage",
+    "id": "b36d910f-b599-468d-b2d1-c4831d8456c5",
+    "migration": "0001_usage.sql",
+    "reservations_after_creation": 0
+  },
+  "preview_database": "1cf8ccf8-237f-4832-96c4-a12f57be8e54",
+  "production_secret_name_verified": "OPENAI_API_KEY",
+  "gtm_workspace": "https://tagmanager.google.com/#/container/accounts/6361848611/containers/256008917/workspaces/5",
+  "gtm_changes": {
+    "added": 4,
+    "modified": 0,
+    "deleted": 0,
+    "published": false
+  },
+  "production_deployment": "ed7e4b51-4863-49ab-9131-d6a8f668a350",
+  "review_url": "https://ede3993b.power-of-ai-hub-astro.pages.dev/"
+}

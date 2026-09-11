@@ -1,3 +1,4 @@
+import { jsPDF } from 'jspdf';
 // Shared branded PDF builder for democratising.ai EDGE tools.
 //
 // Brand palette: navy #14264C, cream #F4ECD8, gold #D89A55.

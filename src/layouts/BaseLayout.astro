@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import DraftPreferences from '../components/DraftPreferences.astro';
+import ToolNavigation from '../components/ToolNavigation.astro';
 import { SITE_DESCRIPTION } from '../lib/site-meta';
 
 const SITE_URL = (Astro.site?.toString() || 'https://democratising.ai').replace(/\/$/, '');
@@ -46,7 +48,7 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
 
     {GTM_ID && (
       <!-- Google Tag Manager (GA4 is configured inside the container, not a separate env var) -->
-      <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`} />
+      <script is:inline set:html={`(function(w,d,s,l,i){if(!['democratising.ai','www.democratising.ai'].includes(w.location.hostname))return;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`} />
       <!-- End Google Tag Manager -->
     )}
 
@@ -109,14 +111,16 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
       html { scroll-behavior: smooth; }
     </style>
   </head>
-  <body class="min-h-screen bg-background text-foreground">
-    {GTM_ID && (
+  <body class="min-h-screen bg-background text-foreground" data-edge-tool={path === '/tools' || path.startsWith('/tools/') ? 'true' : undefined}>
+    {path.startsWith('/tools/') && <><link rel="stylesheet" href="/journey/tool-shell.css"/><div class="edge-tool-navigation"><ToolNavigation/></div></>}
+    {GTM_ID && import.meta.env.CF_PAGES_BRANCH === 'astro-migration' && (
       <!-- Google Tag Manager (noscript) -->
       <noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
       <!-- End Google Tag Manager (noscript) -->
     )}
 
     <slot />
+{['/tools/brand-profile-generator','/tools/brand-palette','/tools/content-sprint-generator','/tools/ethical-dilemma'].includes(path) && <DraftPreferences/>}
 
     <script is:inline>
       // Defensive: ensure mailto: anchors always navigate to the OS mail handler
@@ -135,5 +139,5 @@ const absoluteOg = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}
       import { initEcosystemTrackers } from '../lib/analytics/trackers';
       initEcosystemTrackers();
     </script>
-  </body>
+  <script is:inline src="/edge-events.js"></script></body>
 </html>

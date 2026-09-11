@@ -32,7 +32,7 @@ export function PrivacyNotice({ className }: PrivacyNoticeProps) {
     return (
       <div className={cn('flex items-center gap-1.5 text-xs text-muted-foreground', className)}>
         <ShieldCheck className="h-3 w-3" />
-        <span>Private by design. Nothing stored on servers.</span>
+        <span>AI processing: use anonymised context.</span>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export function PrivacyNotice({ className }: PrivacyNoticeProps) {
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-2 text-sm font-medium text-foreground">
           <ShieldCheck className="h-4 w-4 text-accent shrink-0" />
-          <span>Private by design</span>
+          <span>About your information</span>
         </div>
         <button
           onClick={handleDismiss}
@@ -54,7 +54,7 @@ export function PrivacyNotice({ className }: PrivacyNoticeProps) {
       </div>
       <div className="space-y-1 text-xs text-muted-foreground pl-6">
         <p>Don't paste confidential information. Use general descriptions instead.</p>
-        <p>Analysis runs via AI and is never stored on servers. Form inputs are saved locally in your browser only.</p>
+        <p>Your inputs are sent to our server and OpenAI to generate a response. Browser drafts may remain on this device until cleared.</p>
       </div>
     </div>
   );

@@ -1,3 +1,7 @@
+import { draftStorage } from '@/lib/draft-storage';
+import { csvRows } from '@/lib/csv';
+import { contentReviewPrompts, replaceContentPost } from '@/lib/content-draft-review';
+import { BRAND_CONTENT_HANDOFF_KEY, parseBrandContentHandoff, type BrandContentHandoff } from '@/lib/brand-workspace-handoff';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -45,7 +49,7 @@ interface InlineProfileFields {
 
 function loadProfile(): ProfileData | null {
   try {
-    const saved = localStorage.getItem(PROFILE_STORAGE_KEY);
+    const saved = draftStorage.getItem(PROFILE_STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
       if (parsed.formData && parsed.profile) return parsed;
@@ -81,9 +85,9 @@ const allPlatforms = ['LinkedIn', 'X (Twitter)', 'Reddit', 'Company blog', 'News
 const loadingPhases = [
   'Analysing your brand profile...',
   'Planning content across platforms...',
-  'Writing Day 1...',
-  'Writing Day 2...',
-  'Writing Day 3...',
+  'Drafting your selected ideas...',
+  'Adapting the useful ideas for each channel...',
+  'Preparing drafts for your review...',
   'Polishing content...',
 ];
 
@@ -171,13 +175,19 @@ function PlatformPost({
   platform,
   onOptimise,
   isOptimising,
+  onEdit,
 }: {
   platform: DayContent['platforms'][0];
   onOptimise: () => void;
   isOptimising: boolean;
+  onEdit: (content: string) => void;
 }) {
   const [open, setOpen] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(platform.content);
+  const [editError, setEditError] = useState('');
+  const reviewPrompts = contentReviewPrompts(platform.content);
 
   const handleCopy = () => {
     copyToClipboard(platform.content, `${platform.name} post`);
@@ -204,6 +214,14 @@ function PlatformPost({
             <div className="bg-background/50 border border-border/20 rounded-sm p-3">
               <p className="text-sm text-foreground whitespace-pre-line leading-relaxed">{platform.content}</p>
             </div>
+
+            {reviewPrompts.length > 0 && <div className="border-l-2 border-accent pl-3 text-sm space-y-2"><strong>Check before using</strong>{reviewPrompts.map(p=><p key={p}>{p}</p>)}<p className="text-xs text-muted-foreground">These wording checks can miss claims or flag supported ones. They do not verify facts.</p></div>}
+            {editing && <div className="space-y-2">
+              <Textarea aria-label={'Edit '+platform.name+' draft'} value={draft} maxLength={12000} onChange={e=>setDraft(e.target.value)} className="min-h-[180px]" />
+              <p role="status" className="text-sm">{editError}</p>
+              <Button size="sm" data-edge-event="edge_draft_edit" onClick={()=>{try{onEdit(draft);setEditing(false);setEditError('')}catch(e){setEditError(e instanceof Error?e.message:'Could not update this draft.')}}}>Save wording</Button>
+              <Button size="sm" variant="ghost" onClick={()=>setEditing(false)}>Cancel edit</Button>
+            </div>}
 
             {platform.hashtags && (
               <div className="flex flex-wrap gap-1.5">
@@ -239,16 +257,17 @@ function PlatformPost({
             )}
 
             <div className="flex items-center gap-1.5 pt-1">
-              <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={handleCopy}>
+              <Button variant="ghost" size="sm" className="h-7 text-xs" data-edge-event="edge_copy_requested" onClick={handleCopy}>
                 {copied ? <Check className="h-3 w-3 mr-1" /> : <Copy className="h-3 w-3 mr-1" />}
                 Copy post
               </Button>
+              <Button variant="ghost" size="sm" className="h-7 text-xs" disabled={isOptimising} onClick={()=>{setDraft(platform.content);setEditError('');setEditing(true)}}>Edit draft</Button>
               <Button
                 variant="ghost"
                 size="sm"
                 className="h-7 text-xs"
                 onClick={onOptimise}
-                disabled={isOptimising}
+                disabled={isOptimising || editing}
               >
                 {isOptimising ? (
                   <Loader2 className="h-3 w-3 mr-1 animate-spin" />
@@ -269,6 +288,8 @@ export default function ContentSprintGenerator() {
   const [phase, setPhase] = useState<Phase>('config');
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [useProfile, setUseProfile] = useState(true);
+  const [workspaceHandoff, setWorkspaceHandoff] = useState<BrandContentHandoff | null>(null);
+  const [fromWorkspace, setFromWorkspace] = useState(false);
 
   const [inlineProfile, setInlineProfile] = useState<InlineProfileFields>({
     productName: '',
@@ -281,6 +302,9 @@ export default function ContentSprintGenerator() {
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [selectedThemes, setSelectedThemes] = useState<string[]>([]);
   const [events, setEvents] = useState('');
+  const [ideaCount, setIdeaCount] = useState(3);
+  const [objective, setObjective] = useState('');
+  const [evidence, setEvidence] = useState('');
   const [toneSlider, setToneSlider] = useState(50);
 
   const [sprintText, setSprintText] = useState('');
@@ -294,6 +318,12 @@ export default function ContentSprintGenerator() {
   const [pillars, setPillars] = useState<string[]>([]);
 
   useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(BRAND_CONTENT_HANDOFF_KEY);
+      sessionStorage.removeItem(BRAND_CONTENT_HANDOFF_KEY);
+      const handoff = parseBrandContentHandoff(raw);
+      if (handoff) { setWorkspaceHandoff(handoff); setFromWorkspace(true); }
+    } catch { /* Existing standalone use remains available. */ }
     const profile = loadProfile();
     if (profile) {
       setProfileData(profile);
@@ -305,7 +335,7 @@ export default function ContentSprintGenerator() {
     }
 
     try {
-      const saved = localStorage.getItem(SPRINT_STORAGE_KEY);
+      const saved = draftStorage.getItem(SPRINT_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed.sprintText && parsed.generatedAt) {
@@ -370,6 +400,9 @@ export default function ContentSprintGenerator() {
           profileData: buildRequestProfileData(),
           sprintConfig: {
             duration,
+            ideaCount,
+            objective,
+            evidence,
             platforms: selectedPlatforms,
             themes: selectedThemes,
             events,
@@ -425,7 +458,7 @@ export default function ContentSprintGenerator() {
       setSprintText(accumulated);
       setGeneratedAt(now);
       try {
-        localStorage.setItem(SPRINT_STORAGE_KEY, JSON.stringify({ sprintText: accumulated, generatedAt: now }));
+        draftStorage.setItem(SPRINT_STORAGE_KEY, JSON.stringify({ sprintText: accumulated, generatedAt: now }));
       } catch {
         // ignore
       }
@@ -492,7 +525,7 @@ export default function ContentSprintGenerator() {
         const updated = sprintText.replace(content, optimised.trim());
         setSprintText(updated);
         try {
-          localStorage.setItem(SPRINT_STORAGE_KEY, JSON.stringify({ sprintText: updated, generatedAt }));
+          draftStorage.setItem(SPRINT_STORAGE_KEY, JSON.stringify({ sprintText: updated, generatedAt }));
         } catch {
           // ignore
         }
@@ -511,7 +544,7 @@ export default function ContentSprintGenerator() {
       setSprintText('');
       setGeneratedAt('');
       try {
-        localStorage.removeItem(SPRINT_STORAGE_KEY);
+        draftStorage.removeItem(SPRINT_STORAGE_KEY);
       } catch {
         // ignore
       }
@@ -528,14 +561,14 @@ export default function ContentSprintGenerator() {
           `Day ${day.dayNumber}`,
           day.theme,
           p.name,
-          `"${p.content.replace(/"/g, '""')}"`,
+          p.content,
           p.hashtags,
           p.bestTime,
           p.cta,
         ]);
       });
     });
-    const csv = rows.map((r) => r.join(',')).join('\n');
+    const csv = csvRows(rows);
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -581,9 +614,29 @@ export default function ContentSprintGenerator() {
 
   const days = phase === 'results' ? parseSprintDays(sprintText) : [];
 
+  const workspaceReturn = fromWorkspace ? <a href="/tools/brand-content" className="block text-sm underline mb-4">Return to your Brand and Content brief (kept for two hours)</a> : null;
+  if (workspaceHandoff) {
+    return <section className="space-y-5">
+      {workspaceReturn}
+      <h2 className="text-xl font-semibold">Review the context you selected.</h2>
+      <p>These are your working notes, not verified evidence. Using them starts a fresh planning form; it does not delete your previously saved result or make an AI request.</p>
+      {Object.entries(workspaceHandoff.fields).map(([key,value]) => <div key={key}><h3 className="font-medium capitalize">{key}</h3><p className="whitespace-pre-wrap text-sm">{value}</p></div>)}
+      <Button onClick={() => {
+        const f=workspaceHandoff.fields;
+        setUseProfile(false);setProfileData(null);
+        setInlineProfile({productName:'',productDescription:f.offer||'',audienceRole:f.audience||'',tones:f.voice||''});
+        setObjective(f.need||'');
+        setEvidence(Object.entries(f).filter(([k])=>['evidence','proof','checks','ideas','plan'].includes(k)).map(([k,v])=>k+': '+v).join('\n\n'));
+        setSelectedPlatforms([]);setSelectedThemes([]);setEvents('');setIdeaCount(3);setDuration(7);setToneSlider(50);setSprintText('');setGeneratedAt('');setPhase('config');setWorkspaceHandoff(null);
+      }}>Use selected context</Button>
+      <Button variant="outline" onClick={() => setWorkspaceHandoff(null)}>Keep existing planning context</Button>
+    </section>;
+  }
+
   if (phase === 'no-profile') {
     return (
       <div className="space-y-6">
+        {workspaceReturn}
         <div className="border border-border/30 rounded-sm p-8 text-center space-y-4">
           <CalendarDays className="h-10 w-10 text-accent mx-auto" />
           <h2 className="text-xl font-semibold">Content sprints work best with a brand profile.</h2>
@@ -616,6 +669,7 @@ export default function ContentSprintGenerator() {
   if (phase === 'config') {
     return (
       <div className="space-y-6">
+        {workspaceReturn}
         {profileData && useProfile ? (
           <div className="border border-accent/20 bg-accent/5 rounded-sm p-4 flex items-center justify-between">
             <div>
@@ -706,7 +760,20 @@ export default function ContentSprintGenerator() {
         )}
 
         <div className="space-y-3">
-          <label className="text-sm font-medium">Sprint duration</label>
+          <label className="text-sm font-medium" htmlFor="csg-objective">What should this content help someone do?</label>
+          <Textarea id="csg-objective" value={objective} maxLength={6000} onChange={e => setObjective(e.target.value)} placeholder="For example: help student organisers choose a suitable workshop format." />
+          <label className="text-sm font-medium" htmlFor="csg-evidence">What can you substantiate?</label>
+          <Textarea id="csg-evidence" value={evidence} maxLength={6000} onChange={e => setEvidence(e.target.value)} placeholder="Add facts, examples you can share, source references and any claims to avoid." />
+          <p className="text-xs text-muted-foreground">Use anonymised details. References are passed as context, not independently checked. Missing evidence should remain visible in the drafts.</p>
+          <label className="text-sm font-medium" htmlFor="csg-count">How many distinct ideas can you use?</label>
+          <select id="csg-count" value={ideaCount} onChange={e => setIdeaCount(Number(e.target.value))} className="block rounded border p-2 bg-background">
+            {[1, 3, 5, 7].map(n => <option key={n} value={n}>{n} {n === 1 ? 'idea' : 'ideas'}</option>)}
+          </select>
+          <p className="text-xs text-muted-foreground">Each idea gets a version for your chosen channels. Select the versions worth using; there is no daily posting requirement.</p>
+        </div>
+
+        <div className="space-y-3">
+          <label className="text-sm font-medium">Planning window</label>
           <div className="flex gap-3">
             {([7, 14] as const).map((d) => (
               <button
@@ -725,7 +792,7 @@ export default function ContentSprintGenerator() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground">
-            Longer sprints give more variety but take longer to generate.
+            Spread your selected ideas across this window. All outputs are drafts for review.
           </p>
         </div>
 
@@ -794,8 +861,8 @@ export default function ContentSprintGenerator() {
         <div className="flex items-start gap-2 text-xs text-muted-foreground bg-card border border-border/20 rounded-sm p-3">
           <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-accent" />
           <span>
-            Your brand context is used to generate the sprint and is not stored on a server. The result is cached
-            in your browser only.
+            Your context is sent to our server and OpenAI to generate drafts. The latest result is saved
+            in this tab, or for seven days if you choose Remember future edits.
           </span>
         </div>
 
@@ -807,7 +874,7 @@ export default function ContentSprintGenerator() {
           variant="hero"
         >
           <Sparkles className="h-4 w-4 mr-2" />
-          Generate {duration}-day sprint
+          Draft {ideaCount} {ideaCount === 1 ? 'idea' : 'ideas'}
         </Button>
       </div>
     );
@@ -816,6 +883,7 @@ export default function ContentSprintGenerator() {
   if (phase === 'loading') {
     return (
       <div className="space-y-6">
+        {workspaceReturn}
         <div className="border border-border/30 rounded-sm p-8 space-y-6 text-center">
           <Loader2 className="h-8 w-8 text-accent animate-spin mx-auto" />
           <p className="text-sm text-muted-foreground transition-opacity duration-300">
@@ -846,6 +914,7 @@ export default function ContentSprintGenerator() {
 
   return (
     <div className="space-y-6">
+        {workspaceReturn}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-semibold">
@@ -877,6 +946,25 @@ export default function ContentSprintGenerator() {
         </div>
       </div>
 
+      <details className="border border-border/30 rounded-sm p-4">
+        <summary className="cursor-pointer font-medium">Use EDGE to turn these drafts into useful learning</summary>
+        <div className="mt-3 space-y-3 text-sm text-muted-foreground">
+          <p><strong>Evaluate:</strong> Does this address a real audience need? Check the evidence behind each claim.</p>
+          <p><strong>Define:</strong> Choose the ideas that serve your outcome. You do not need to publish every draft or use every channel.</p>
+          <p><strong>Govern:</strong> Confirm accuracy, permissions, confidentiality and who approves the final wording before publication.</p>
+          <p><strong>Elevate:</strong> After publishing, record what people actually did or said, what remains uncertain and what you will change. A useful conversation may matter more than reactions.</p>
+          <a href="/tools/edge-journey" className="underline">Work through the decision and review in your EDGE brief</a>
+          <p>No draft is sent to the brief automatically. Choose the context you want to take with you.</p>
+        </div>
+      </details>
+
+      <details className="border border-border/30 rounded-sm p-4">
+        <summary className="cursor-pointer font-medium">Your outcome and supporting context</summary>
+        <p className="mt-3 text-sm whitespace-pre-wrap">{objective || 'No outcome available in this session. Check it before using these drafts.'}</p>
+        <p className="mt-3 text-sm whitespace-pre-wrap">{evidence || 'No supporting evidence available in this session. Do not treat generated claims as substantiated.'}</p>
+        <p className="mt-3 text-xs text-muted-foreground">This is supplied context, not an independent fact check. Edit a post in Day view. Saved wording is used by copy and exports across all views.</p>
+      </details>
+
       {viewMode === 'day' && (
         <div className="space-y-4">
           {days.map((day) => (
@@ -902,6 +990,11 @@ export default function ContentSprintGenerator() {
                       <PlatformPost
                         key={platform.name}
                         platform={platform}
+                        onEdit={(content) => {
+                          const updated=replaceContentPost(sprintText,day.dayNumber,platform.name,content);
+                          setSprintText(updated);
+                          try { draftStorage.setItem(SPRINT_STORAGE_KEY,JSON.stringify({sprintText:updated,generatedAt})); } catch { toast({title:'Wording updated in this tab only. Download to keep it.'}); }
+                        }}
                         onOptimise={() => handleOptimise(platform.name, platform.content, day.dayNumber)}
                         isOptimising={isOptimising === `${day.dayNumber}-${platform.name}`}
                       />
@@ -947,6 +1040,7 @@ export default function ContentSprintGenerator() {
 
       {viewMode === 'platform' && (
         <div className="space-y-6">
+        {workspaceReturn}
           {selectedPlatforms.map((platformName) => {
             const platformPosts = days.flatMap((d) =>
               d.platforms
@@ -1016,13 +1110,13 @@ export default function ContentSprintGenerator() {
 
       <div className="border-t border-border/20 pt-6 space-y-4">
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" onClick={handleDownloadMarkdown}>
+          <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleDownloadMarkdown}>
             <Download className="h-3.5 w-3.5 mr-1.5" /> Download markdown
           </Button>
-          <Button variant="outline" size="sm" onClick={handleExportCsv}>
+          <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleExportCsv}>
             <Download className="h-3.5 w-3.5 mr-1.5" /> Export CSV
           </Button>
-          <Button variant="outline" size="sm" onClick={handleSaveJson}>
+          <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleSaveJson}>
             <FileJson className="h-3.5 w-3.5 mr-1.5" /> Save JSON
           </Button>
           {selectedPlatforms.map((p) => (

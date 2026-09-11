@@ -14,7 +14,7 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     react(),
-    sitemap(),
+    sitemap({filter: page => !['decision-simulation','red-team-simulation','conversation-simulator','negotiation-simulator','governance-review'].some(slug => page.replace(/\.html$/, '').endsWith('/tools/'+slug))}),
   ],
   trailingSlash: 'never',
   build: {

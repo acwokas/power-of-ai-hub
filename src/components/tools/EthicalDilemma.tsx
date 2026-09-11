@@ -1,3 +1,4 @@
+import { draftStorage } from '@/lib/draft-storage';
 import { useState, useCallback, useRef, useEffect } from 'react';
 import {
   SimulationProvider,
@@ -156,7 +157,7 @@ const howItWorks = [
   'You describe an AI use case with ethical tension: what is being built, who is affected, and what values compete.',
   'The simulation presents a realistic scenario with stakeholder perspectives and challenges you through 5 decision points.',
   'After each decision, stakeholders react and ethical frameworks challenge your reasoning.',
-  'When complete you can download governance policies: risk checklists, escalation matrices, and experimentation boundaries.',
+  'When complete you can download discussion drafts: questions, proposed safeguards and decisions to review with the relevant people. These are not approved policies.',
 ];
 
 interface SetupData {
@@ -261,7 +262,7 @@ function CopyBtn({ text }: { text: string }) {
   };
   return (
     <button
-      onClick={copy}
+      data-edge-event="edge_copy_requested" onClick={copy}
       className="text-muted-foreground hover:text-foreground transition-colors p-1"
       aria-label="Copy"
     >
@@ -335,7 +336,7 @@ function EthicalContent() {
   const [isReflecting, setIsReflecting] = useState(false);
   const [personalNotes, setPersonalNotes] = useState(() => {
     try {
-      return localStorage.getItem('simulate-ethical-notes') || '';
+      return draftStorage.getItem('simulate-ethical-notes') || '';
     } catch {
       return '';
     }
@@ -484,7 +485,7 @@ function EthicalContent() {
   const handleNotesChange = (v: string) => {
     setPersonalNotes(v);
     try {
-      localStorage.setItem('simulate-ethical-notes', v);
+      draftStorage.setItem('simulate-ethical-notes', v);
     } catch {
       // ignore
     }
@@ -495,7 +496,7 @@ function EthicalContent() {
     const transcript = decisions
       .map((d) => `## Decision ${d.point}: ${d.topic}\nChoice: ${d.choice}\nReasoning: ${d.reasoning}`)
       .join('\n\n');
-    let content = `# Ethical Dilemma Simulator\n\nGenerated: ${new Date().toISOString()}\n\n## SCENARIO\n\nUse case: ${setup.useCase}\nTensions: ${setup.tensions.join(', ')}\nAffected: ${setup.affected}\nStakeholders: ${setup.stakeholders}\n\n## DECISIONS\n\n${transcript}`;
+    let content = `# Ethical Dilemma Simulator\n\nFictional learning exercise. Outcomes are simulated. Any policy, safeguards or boundaries are discussion drafts, not approved instructions.\n\nGenerated: ${new Date().toISOString()}\n\n## SCENARIO\n\nUse case: ${setup.useCase}\nTensions: ${setup.tensions.join(', ')}\nAffected: ${setup.affected}\nStakeholders: ${setup.stakeholders}\n\n## DECISIONS\n\n${transcript}`;
     if (reflectionRaw) content += `\n\n---\n\n${reflectionRaw}`;
     if (personalNotes) content += `\n\n---\n\n## PERSONAL NOTES\n\n${personalNotes}`;
     const blob = new Blob([content], { type: 'text/markdown' });
@@ -520,7 +521,7 @@ function EthicalContent() {
     setSimulationComplete(false);
     setCurrentDecisionPoint(1);
     try {
-      localStorage.removeItem('simulate-ethical-notes');
+      draftStorage.removeItem('simulate-ethical-notes');
     } catch {
       // ignore
     }
@@ -825,7 +826,7 @@ function EthicalContent() {
         <div className="space-y-4 pt-6 border-t border-border/20">
           <div>
             <h3 className="text-base font-medium mb-1">Your notes</h3>
-            <p className="text-xs text-muted-foreground">Private. Saved in your browser only.</p>
+            <p className="text-xs text-muted-foreground">Saved in this tab unless you choose seven-day saving. AI processing uses our server and OpenAI.</p>
           </div>
           <Textarea
             value={personalNotes}
@@ -839,7 +840,7 @@ function EthicalContent() {
       {!isReflecting && reflectionSections.length > 0 && (
         <div className="space-y-3 pt-4 border-t border-border/20">
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" size="sm" onClick={handleDownload}>
+            <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleDownload}>
               <Download className="h-3.5 w-3.5 mr-1.5" /> Download all policies
             </Button>
             <Button variant="outline" size="sm" onClick={handleStartOver}>

@@ -1,0 +1,42 @@
+{
+  "engine": "axe-core 4.13.0",
+  "rules": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa"
+  ],
+  "routes": [
+    "/",
+    "/tools",
+    "/tools/edge-journey",
+    "/tools/edge-practice",
+    "/tools/brand-content",
+    "/tools/maturity-assessment",
+    "/tools/brand-profile-generator",
+    "/tools/brand-palette",
+    "/tools/content-sprint-generator",
+    "/tools/before-you-send",
+    "/tools/ethical-dilemma",
+    "/tools/prompt-engineer"
+  ],
+  "desktop_initial_violations": 0,
+  "mobile": {
+    "viewport": 390,
+    "max_scroll_width": 390,
+    "violations": 0
+  },
+  "enlarged_text_stress_test": {
+    "viewport": 1280,
+    "text_scale": 2,
+    "method": "All computed element font sizes doubled in a local QA fixture, not a native browser zoom test",
+    "max_scroll_width": 1280,
+    "violations": 0,
+    "incomplete": 0
+  },
+  "manual_followup": "Selected-stage small label contrast corrected after a pseudo-element prevented automatic measurement. Group labels now have explicit roles.",
+  "limitations": [
+    "Not WCAG certification",
+    "No complete VoiceOver session or physical-device matrix",
+    "Initial and selected working states, not every possible generated response"
+  ]
+}

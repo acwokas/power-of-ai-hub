@@ -5,7 +5,7 @@ import BrandProfileGenerator from '../../components/tools/BrandProfileGenerator.
 ---
 <BaseLayout
   title="Brand Profile Generator - EDGE Define - DEMOCRATISING.AI"
-  description="An 8-step guided process that generates your positioning summary, audience personas, brand voice guide, and content pillars. The output feeds straight into the Content Sprint Generator. Privacy first, no signup."
+  description="An 8-step guided process that generates your positioning summary, audience groups, brand voice guide, and content pillars. The output feeds straight into the Content Sprint Generator. Privacy first, no signup."
 >
   <main>
     <section class="bg-background border-b border-border/60">
@@ -30,18 +30,18 @@ import BrandProfileGenerator from '../../components/tools/BrandProfileGenerator.
           </h1>
         </div>
         <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-6">
-          A working profile you can hand to anyone making something on your behalf. Eight focused steps generate a positioning summary, audience personas, a brand voice guide, and content pillars. The output is the input for the Content Sprint Generator.
+          A working profile you can hand to anyone making something on your behalf. Eight focused steps generate a positioning summary, audience groups, a brand voice guide, and content pillars. The output is the input for the Content Sprint Generator.
         </p>
         <div class="flex items-start gap-3 text-sm text-foreground">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 text-accent shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Your inputs are sent to AI to generate the profile and are not stored on a server. Drafts and the final profile live in your browser only.</span>
+          <span>Your inputs are sent through our server to OpenAI when you request generation. Drafts and the final profile are saved in this browser. Avoid confidential information.</span>
         </div>
       </div>
     </section>
 
     <section class="py-12 md:py-20">
       <div class="container mx-auto px-6 max-w-3xl">
-        <BrandProfileGenerator client:load />
+        <p class="mb-5"><a href="/tools/brand-content" class="underline">Return to your brand working brief →</a></p><BrandProfileGenerator client:load />
       </div>
     </section>
   </main>

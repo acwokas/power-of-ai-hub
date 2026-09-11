@@ -1,0 +1,74 @@
+{
+  "preview": "https://4269d2cf.power-of-ai-hub-astro.pages.dev",
+  "samples": [
+    {
+      "name": "content-one",
+      "request": {
+        "profileData": {
+          "formData": {
+            "productName": "Fictional Workshop Circle",
+            "productDescription": "A fictional student society exploring practical photography workshops.",
+            "audienceRole": "Student organisers",
+            "tones": "Clear, helpful"
+          },
+          "profile": ""
+        },
+        "sprintConfig": {
+          "duration": 14,
+          "ideaCount": 1,
+          "platforms": [
+            "LinkedIn"
+          ],
+          "objective": "Help organisers ask students which practical skill they want to learn.",
+          "evidence": "No events have run yet. No attendance figures, testimonials or claims of demand are available. Do not imply otherwise."
+        }
+      },
+      "status": 200,
+      "stream_complete": true,
+      "output": "## Day 1\n\n**Theme**: Engagement and Feedback\n\n### LinkedIn\n\n**Post**:\nAs we prepare to launch our practical photography workshops, we want to hear from you! What practical skills in photography would you like to learn? Whether it's mastering the basics of composition, exploring advanced editing techniques, or understanding lighting, your input is invaluable. Let us know in the comments below!\n\n**Why this works**:\nThis approach fosters engagement by inviting the audience to share their preferences, making them feel involved in the planning process. It also helps us tailor our offerings to meet their needs.\n\n**Hashtags**: #PhotographyWorkshops #StudentEngagement #SkillBuilding\n\n**Best time to post**: Timing to test: choose using your audience analytics.\n\n**CTA**: Share your thoughts in the comments and help shape our workshops!\n\n**Notes**: Encourage responses by highlighting that their feedback will directly influence the workshop content."
+    },
+    {
+      "name": "content-three",
+      "request": {
+        "profileData": {
+          "formData": {
+            "productName": "Fictional Workshop Circle",
+            "productDescription": "A fictional student society considering photography workshops.",
+            "audienceRole": "Student organisers",
+            "tones": "Clear, helpful"
+          },
+          "profile": ""
+        },
+        "sprintConfig": {
+          "duration": 7,
+          "ideaCount": 3,
+          "platforms": [
+            "LinkedIn"
+          ],
+          "objective": "Help organisers compare workshop formats and ask potential attendees what they need.",
+          "evidence": "No events have run yet. No participant research or performance figures are available."
+        }
+      },
+      "status": 200,
+      "stream_complete": true,
+      "output": "## Day 1\n\n**Theme**: Workshop Formats Comparison\n\n### LinkedIn\n\n**Post**:\nAre you considering different formats for your photography workshops? From hands-on sessions to online tutorials, each format has its unique benefits. Join us in exploring these options and share your thoughts on what you believe would engage attendees the most. What do you think? \n\n**Why this works**:\nThis post encourages engagement and discussion among student organisers, allowing them to reflect on and share their preferences regarding workshop formats.\n\n**Hashtags**: #PhotographyWorkshops #StudentOrganisers #WorkshopFormats\n\n**Best time to post**: Timing to test: choose using your audience analytics.\n\n**CTA**: Share your preferred workshop format in the comments!\n\n**Notes**: Use a professional image related to photography workshops to enhance visual appeal.\n\n## Day 4\n\n**Theme**: Understanding Attendee Needs\n\n### LinkedIn\n\n**Post**:\nWhat do your potential attendees really want from a photography workshop? Understanding their needs is crucial for success. Consider conducting a quick survey or informal poll to gather insights. What questions would you ask to ensure your workshop meets their expectations?\n\n**Why this works**:\nThis post prompts organisers to actively engage with their audience, fostering a deeper connection and ensuring workshops are tailored to actual attendee desires.\n\n**Hashtags**: #AudienceEngagement #WorkshopPlanning #Photography\n\n**Best time to post**: Timing to test: choose using your audience analytics.\n\n**CTA**: Comment below with your ideas for survey questions!\n\n**Notes**: Include a graphic illustrating potential survey questions for visual interest.\n\n## Day 7\n\n**Theme**: Sharing Best Practices\n\n### LinkedIn\n\n**Post**:\nAs we wrap up our week of discussions on photography workshops, let\u2019s share best practices! What strategies have you found effective in planning and executing workshops? Your insights could help fellow organisers create memorable experiences for attendees. \n\n**Why this works**:\nThis post encourages knowledge sharing and positions the brand as a helpful resource within the student organiser community.\n\n**Hashtags**: #BestPractices #PhotographyCommunity #StudentWorkshops\n\n**Best time to post**: Timing to test: choose using your audience analytics.\n\n**CTA**: Share your best practices in the comments to inspire others!\n\n**Notes**: Consider tagging a few known organisers to encourage engagement and responses."
+    },
+    {
+      "name": "ethics-reflection",
+      "request": {
+        "mode": "reflection",
+        "setup": {
+          "useCase": "Fictional AI tool that suggests campus workshop topics",
+          "tensions": [
+            "Usefulness and privacy"
+          ],
+          "affected": "Fictional students and organisers"
+        },
+        "simulationTranscript": "Fictional exercise. User: I would first ask interested students to opt in, use anonymised feedback and ask an accountable organiser to review suggestions. I have not authorised a real deployment. User: I would pause if participants could be identified. There are no measured results yet."
+      },
+      "status": 200,
+      "stream_complete": true,
+      "output": "## Your ethical framework\nThe user consistently prioritised the values of privacy and accountability throughout the exercise. They demonstrated a clear inclination towards ensuring that students have the option to opt in, indicating a respect for individual autonomy and informed consent. The decision to use anonymised feedback further highlights their commitment to protecting the privacy of participants. Additionally, the user expressed a willingness to pause the deployment if there was a risk of identifying participants, suggesting a strong emphasis on ethical considerations over merely utilising the AI tool for its usefulness. This decision-making pattern reflects a cautious and responsible approach, favouring the protection of individual rights over potential benefits.\n\n## Consistency analysis\nNo contradiction is established from the supplied statements. The user's decisions were coherent, consistently prioritising privacy and accountability without wavering in their stance. Their commitment to seeking opt-in consent and using anonymised data aligns with their expressed concerns about participant identification.\n\n## Blind spots\nThe transcript does not address the potential implications of the AI tool on workshop quality or the diversity of topics suggested. There is also no discussion of the potential biases that may arise in the AI's suggestions based on the data it receives. Useful questions for further reflection could include: How will the AI ensure a diverse range of topics is suggested? What measures will be taken to mitigate any biases in the data used for suggestions?\n\n## Stakeholder impact\nWithin the fictional scenario, the deployment of the AI tool could have several effects. For students, the ability to suggest topics may enhance their engagement and satisfaction, leading to a more tailored educational experience. However, concerns about privacy could lead to reluctance in participation, potentially undermining the tool's effectiveness. Organisers may benefit from more relevant workshop topics but could face challenges in ensuring the ethical use of data. Simulated reactions may differ from real-world outcomes, where actual participant engagement and trust in the process could vary significantly.\n\n## Risk exposure checklist\n- Data risks\n  - [ ] How will student data be anonymised, and what measures are in place to prevent re-identification?\n  - [ ] What data retention policies will be implemented to protect privacy?\n- Compliance risks\n  - [ ] Which obligations apply regarding data protection and privacy in this context?\n  - [ ] Are there specific guidelines for handling feedback data from students?\n- Brand risks\n  - [ ] How could a breach of privacy impact the institution's reputation?\n  - [ ] What communication strategies will be used to address any concerns from students?\n- Ethical risks\n  - [ ] How will the tool ensure fairness and avoid bias in topic suggestions?\n  - [ ] What ethical guidelines will govern the use of the AI tool?\n- Operational risks\n  - [ ] What processes will be in place to manage and review suggestions effectively?\n  - [ ] How will the technical team address any issues that arise during implementation?\n\n## Decision escalation matrix\n\n| Proposed situation                                    | Open question                                            | Who should confirm?          |\n|------------------------------------------------------|---------------------------------------------------------|-------------------------------|\n| Use of AI tool for topic suggestions                  | What safeguards are needed to protect student privacy?  | Business leadership, technical team |\n| Implementation of anonymised feedback collection      | How will feedback be managed and reviewed?              | Accountable organiser          |\n| Opt-in participation model                             | What criteria will determine student interest?          | Affected individuals, organisers |\n\n## Experimentation policy\nDiscussion draft for the fictional exercise, not an approved policy.\n\n- Proposals to discuss\n  - Implement an opt-in model for student participation.\n  - Use anonymised feedback to protect participant identity.\n  - Establish a review process by an accountable organiser for suggested topics.\n\n- Questions requiring more context\n  - What specific measures will be taken to ensure the diversity of suggested topics?\n  - How will the AI tool be trained to avoid biases in its recommendations?\n\n- Actions to defer until conditions are clarified\n  - Finalising the deployment of the AI tool until privacy concerns are fully addressed.\n  - Commencing data collection until a clear data retention policy is established.\n\nBefore applying any learning, it is essential to engage with accountable individuals to discuss the implications of these proposals and ensure that all ethical considerations are thoroughly examined."
+    }
+  ]
+}

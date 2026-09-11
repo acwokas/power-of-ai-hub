@@ -5,3 +5,10 @@
 # conventional URL so it isn't a 404-that-looks-like-200 for anyone or
 # anything that checks the default path instead of reading robots.txt first.
 /sitemap.xml   /sitemap-index.xml   301
+
+# Consolidated EDGE entry points. Review-stage redirects are temporary.
+/tools/decision-simulation /tools/edge-journey#evaluate 302
+/tools/red-team-simulation /tools/edge-journey?approach=challenge#evaluate 302
+/tools/conversation-simulator /tools/edge-practice?mode=conversation 302
+/tools/negotiation-simulator /tools/edge-practice?mode=negotiation 302
+/tools/governance-review /tools/edge-practice?mode=board 302

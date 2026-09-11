@@ -1,0 +1,177 @@
+{
+  "preview": "https://ede3993b.power-of-ai-hub-astro.pages.dev",
+  "routes": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "headers": [
+        "cache-control: public, max-age=0, must-revalidate",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>democratising.ai | An independent world of useful ideas</title><meta name=\"description\""
+    },
+    {
+      "path": "/tools",
+      "method": "GET",
+      "status": 200,
+      "headers": [
+        "cache-control: public, max-age=0, must-revalidate",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "<!DOCTYPE html><html lang=\"en-GB\"> <head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><!-- Google Tag Manager (GA4 is configured inside the container, not a separate env var"
+    },
+    {
+      "path": "/tools/edge-journey",
+      "method": "GET",
+      "status": 200,
+      "headers": [
+        "cache-control: public, max-age=0, must-revalidate",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>From a question to progress | EDGE</title><link rel=\"stylesheet\" href=\"/journey/journey"
+    },
+    {
+      "path": "/tools/decision-simulation",
+      "method": "GET",
+      "status": 302,
+      "headers": [
+        "location: /tools/edge-journey#evaluate",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "Redirecting to /tools/edge-journey#evaluate"
+    },
+    {
+      "path": "/tools/negotiation-simulator",
+      "method": "GET",
+      "status": 302,
+      "headers": [
+        "location: /tools/edge-practice?mode=negotiation",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "Redirecting to /tools/edge-practice?mode=negotiation"
+    },
+    {
+      "path": "/not-a-real-page",
+      "method": "GET",
+      "status": 404,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex\"><title>Page not found | democratising.ai</title><link re"
+    },
+    {
+      "path": "/sitemap-index.xml",
+      "method": "GET",
+      "status": 200,
+      "headers": [
+        "cache-control: public, max-age=0, must-revalidate",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><sitemap><loc>https://democratising.ai/sitemap-0.xml</loc></sitemap></sitemapindex>"
+    }
+  ],
+  "controls": [
+    {
+      "path": "/api/decision-analysis",
+      "method": "POST",
+      "status": 410,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"This tool has moved. Open the EDGE toolkit for the current version.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "GET",
+      "status": 405,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Use POST for this tool.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 403,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Open the tool on this site before requesting assistance.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 413,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Shorten this request to 60,000 bytes or fewer. Your draft is unchanged.\"}"
+    }
+  ],
+  "quota_attempts": [
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 400,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Choose an EDGE stage.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 400,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Choose an EDGE stage.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 400,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Choose an EDGE stage.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 400,
+      "headers": [
+        "cache-control: no-store",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"Choose an EDGE stage.\"}"
+    },
+    {
+      "path": "/api/edge-journey",
+      "method": "POST",
+      "status": 429,
+      "headers": [
+        "cache-control: no-store",
+        "retry-after: 3600",
+        "x-robots-tag: noindex, nofollow"
+      ],
+      "body": "{\"error\":\"The AI usage limit has been reached. Try again later, or continue editing without AI.\"}"
+    }
+  ],
+  "control_checks_preview": "https://cd4562f6.power-of-ai-hub-astro.pages.dev",
+  "final_asset_check": {
+    "homepage": 200,
+    "noindex": true,
+    "events_match_source": true,
+    "production_deployment_unchanged": "ed7e4b51-4863-49ab-9131-d6a8f668a350"
+  }
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "mode": "negotiation",
+    "reply": {
+      "reply": "I believe that agreeing on the limited scope is a sensible first step. We can outline the specific objectives and the evidence required to evaluate the pilot's success. Once we have that clarity, we can then consider the potential for a wider rollout based on the findings. What specific aspects of the scope do you think we should focus on?"
+    },
+    "coaching": {
+      "observations": [
+        {
+          "quote": "Could we agree the limited scope and what evidence we need before discussing a wider rollout?",
+          "feedback": "You effectively set the stage for the conversation by focusing on the limited scope and the need for evidence, which helps to manage expectations."
+        },
+        {
+          "quote": "I suggest recording production time and asking both customers about the report value.",
+          "feedback": "You provided specific suggestions for evidence collection, which demonstrates a proactive approach to defining the pilot's parameters."
+        },
+        {
+          "quote": "We have not yet agreed success criteria.",
+          "feedback": "By highlighting the lack of agreed success criteria, you emphasise the uncertainty and the need for further discussion before moving forward."
+        }
+      ],
+      "nextAttempt": "Consider asking open-ended questions to encourage the other party to share their thoughts on the proposed evidence collection and success criteria.",
+      "limits": "The context does not provide insight into the other party's perspective or their willingness to engage with your suggestions."
+    }
+  },
+  {
+    "mode": "board",
+    "reply": {
+      "reply": "What specific metrics or evidence do you plan to gather during the pilot to assess its impact on customer satisfaction and overall effectiveness?"
+    },
+    "coaching": {
+      "observations": [
+        {
+          "quote": "Could we agree the limited scope and what evidence we need before discussing a wider rollout?",
+          "feedback": "You effectively set the stage for a focused discussion by emphasising the need for clarity on scope and evidence before moving forward."
+        },
+        {
+          "quote": "I suggest recording production time and asking both customers about the report value.",
+          "feedback": "You provided concrete suggestions for metrics, which helps to clarify the approach. However, mentioning the lack of agreed success criteria highlights the uncertainty."
+        }
+      ],
+      "nextAttempt": "Consider explicitly stating the potential risks of proceeding without defined success criteria to reinforce your position on uncertainty.",
+      "limits": "The implications of the proposed metrics on future decisions remain unclear."
+    }
+  }
+]

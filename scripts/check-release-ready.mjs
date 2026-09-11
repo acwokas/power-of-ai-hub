@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const config=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));
+const preview=config.env.preview.d1_databases.find(x=>x.binding==='EDGE_USAGE');
+const production=config.env.production.d1_databases.find(x=>x.binding==='EDGE_USAGE');
+assert.ok(preview?.database_id&&production?.database_id,'Both usage bindings are required');
+assert.notEqual(preview.database_id,production.database_id,'Production must not use review counters');
+for(const name of fs.readdirSync('dist'))assert.ok(!/^(?:_qa|release-analytics-check)/.test(name),'Remove local QA fixtures before deployment');
+assert.ok(fs.existsSync('dist/index.html')&&fs.existsSync('dist/404.html'),'Build the homepage and real missing-page document');
+console.log('Release configuration and artifact guard passed. This does not authorise publication.');

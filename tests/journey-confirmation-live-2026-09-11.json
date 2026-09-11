@@ -1,0 +1,93 @@
+[
+  {
+    "input": {
+      "stage": 2,
+      "values": {
+        "actions": "Run one free skills workshop for students. Three organisers are available, but names and dates are not agreed.",
+        "boundaries": "Use the available campus room. No spending has been approved."
+      }
+    },
+    "output": {
+      "suggestions": {
+        "actions": "Organise a skills workshop for students, define the topic and format. Confirm the availability of the campus room and agree on a date. Assign roles for promotion and logistics.",
+        "boundaries": "Ensure no budget is exceeded and all activities are contained within the campus facilities.",
+        "check": "If the room is not available or if spending is required, pause the planning until these issues are resolved.",
+        "review": "Bring records of the workshop plan, including the topic, date, and promotional materials, to review the final details and confirm execution."
+      },
+      "requiresConfirmation": {
+        "actions": false,
+        "boundaries": false,
+        "check": false,
+        "review": false
+      },
+      "questions": [
+        "What specific skills will the workshop focus on?",
+        "What is the target number of students for the workshop?"
+      ],
+      "note": "Clarifying the workshop topic and target audience will help in planning and promoting the event effectively."
+    }
+  },
+  {
+    "input": {
+      "stage": 3,
+      "values": {
+        "observations": "Two reports were delivered. One customer replied positively. The other has not replied. Time spent producing each report was not recorded."
+      },
+      "context": [
+        {
+          "label": "Expected evidence",
+          "value": "Understand customer value and the effort needed to produce reports before deciding on a larger rollout.",
+          "source": "Your draft"
+        }
+      ]
+    },
+    "output": {
+      "suggestions": {
+        "observations": "Two reports were delivered. One customer replied positively. The other has not replied. Time spent producing each report was not recorded.",
+        "difference": "No expectation was recorded for the response rate or time spent on report production, making comparison unavailable.",
+        "learning": "The positive response from one customer indicates potential value in the reports, but the lack of response from the other customer leaves uncertainty about overall reception and effort required.",
+        "nexttest": "Record the time spent producing each report to better understand the effort involved."
+      },
+      "requiresConfirmation": {
+        "observations": false,
+        "difference": false,
+        "learning": true,
+        "nexttest": false
+      },
+      "questions": [
+        "What is the expected response rate from customers?",
+        "Is there a specific timeframe for when you expect replies from customers?"
+      ],
+      "note": "Understanding the time spent on report production will help assess the effort relative to customer feedback."
+    }
+  },
+  {
+    "input": {
+      "stage": 1,
+      "values": {},
+      "context": [
+        {
+          "label": "Direction",
+          "value": "Try one self-directed learning session each week before paying for a course.",
+          "source": "User-confirmed direction"
+        }
+      ]
+    },
+    "output": {
+      "suggestions": {
+        "outcome": "Identify effective self-directed learning methods and resources.",
+        "direction": "Try one self-directed learning session each week before paying for a course.",
+        "success": "Completion of at least four self-directed learning sessions with reflections on their effectiveness.",
+        "scope": "Focus on various topics of interest to assess engagement and learning retention."
+      },
+      "requiresConfirmation": {
+        "outcome": false,
+        "direction": false,
+        "success": true,
+        "scope": false
+      },
+      "questions": [],
+      "note": "The outcome, success criteria, and scope have been defined based on the chosen direction."
+    }
+  }
+]

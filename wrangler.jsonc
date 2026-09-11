@@ -1,0 +1,35 @@
+{
+  "name": "power-of-ai-hub-astro",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-09-11",
+  "d1_databases": [
+    {
+      "binding": "EDGE_USAGE",
+      "database_name": "edge-review-usage-20260911",
+      "database_id": "1cf8ccf8-237f-4832-96c4-a12f57be8e54"
+    }
+  ],
+  "env": {
+    "preview": {
+      "d1_databases": [
+        {
+          "binding": "EDGE_USAGE",
+          "database_name": "edge-review-usage-20260911",
+          "database_id": "1cf8ccf8-237f-4832-96c4-a12f57be8e54"
+        }
+      ]
+    },
+    "production": {
+      "d1_databases": [
+        {
+          "binding": "EDGE_USAGE",
+          "database_name": "edge-production-usage",
+          "database_id": "b36d910f-b599-468d-b2d1-c4831d8456c5"
+        }
+      ],
+      "vars": {
+        "OPENAI_MODEL": "gpt-4o-mini"
+      }
+    }
+  }
+}

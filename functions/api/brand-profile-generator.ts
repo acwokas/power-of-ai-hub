@@ -42,7 +42,7 @@ function buildContext(formData: Record<string, string>): string {
 }
 
 function fullProfilePrompt(context: string): string {
-  return `You are a senior brand positioning strategist. You write in natural contemporary British English.
+  return `You are a senior brand positioning strategist. You write in natural contemporary British English. Do not use em dashes. Preserve supplied facts and uncertainty. Never invent customer proof, competitive superiority or results. Mark unsupported assertions as hypotheses requiring evidence.
 
 Generate a comprehensive brand profile with exactly four sections in this exact order. Each H2 heading must start with "## " on its own line and use the exact heading text shown.
 
@@ -59,10 +59,10 @@ Write this as 2 to 3 paragraphs that could be shared with a team, used in pitche
 
 ## AUDIENCE PERSONAS
 
-Create 2 to 3 detailed personas based on the audience information provided.
+Describe only audience groups supported by the supplied information. Label inferred needs and preferences as hypotheses to validate. Do not fabricate named people, research findings or demographic details. If audience information is thin, explain what needs to be learned rather than inventing detailed personas.
 
 For each persona include:
-- **Name and title** (realistic)
+- **Audience group and role** (from the supplied context)
 - **Day-to-day responsibilities**
 - **Core challenges**
 - **What they care about when evaluating solutions**
@@ -99,7 +99,7 @@ ${context}`;
 
 function regenerateSectionPrompt(section: string, context: string): string {
   const normalised = section.replace(/\s+/g, ' ').trim();
-  return `You are a senior brand positioning strategist. You write in natural contemporary British English.
+  return `You are a senior brand positioning strategist. You write in natural contemporary British English. Do not use em dashes. Preserve supplied facts and uncertainty. Never invent customer proof, competitive superiority or results. Mark unsupported assertions as hypotheses requiring evidence.
 
 Regenerate only the ${normalised} section of a brand profile with more depth, clarity, and specificity. Use the same format as the original. Be specific to this brand's actual context. Avoid generic advice.
 
@@ -111,9 +111,9 @@ Generate only the ${normalised} section. Start with the section heading "## ${no
 
 function refinePrompt(type: 'problem' | 'differentiators'): string {
   if (type === 'problem') {
-    return 'You are a positioning expert. Refine this problem statement to be clearer, more specific, and more compelling. Keep the core meaning but sharpen the language. Quantify where possible. Use British English. Return only the refined statement, nothing else. No preamble. No explanation.';
+    return 'You are a positioning expert. Refine this problem statement to be clearer, more specific, and more compelling. Keep the core meaning but sharpen the language. Preserve supplied figures and uncertainty. Never add unsupported numbers, results or claims. Do not use em dashes. Use British English. Return only the refined statement, nothing else. No preamble. No explanation.';
   }
-  return 'You are a positioning expert. Make these differentiators more specific, concrete, and compelling. Remove vagueness. Keep the core meaning. Use British English. Return only the refined differentiators, nothing else. No preamble. No explanation.';
+  return 'You are a positioning expert. Make these differentiators more specific, concrete, and compelling. Remove vagueness. Keep the core meaning and uncertainty. Never add unsupported claims or numbers. Do not use em dashes. Use British English. Return only the refined differentiators, nothing else. No preamble. No explanation.';
 }
 
 function jsonError(status: number, error: string): Response {
@@ -129,7 +129,7 @@ async function streamFromOpenAI(
   userPrompt: string,
   temperature: number,
 ): Promise<Response> {
-  const model = env.OPENAI_MODEL || 'gpt-4o-mini';
+  const model = 'gpt-4o-mini';
   let upstream: Response;
   try {
     upstream = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -140,6 +140,7 @@ async function streamFromOpenAI(
       },
       body: JSON.stringify({
         model,
+        max_tokens: 6000,
         stream: true,
         temperature,
         messages: [
@@ -171,7 +172,7 @@ async function streamFromOpenAI(
 }
 
 async function refineFromOpenAI(env: Env, systemPrompt: string, text: string): Promise<Response> {
-  const model = env.OPENAI_MODEL || 'gpt-4o-mini';
+  const model = 'gpt-4o-mini';
   let upstream: Response;
   try {
     upstream = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -182,6 +183,7 @@ async function refineFromOpenAI(env: Env, systemPrompt: string, text: string): P
       },
       body: JSON.stringify({
         model,
+        max_tokens: 6000,
         stream: false,
         temperature: 0.4,
         messages: [

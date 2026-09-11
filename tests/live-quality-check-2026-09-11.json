@@ -1,0 +1,44 @@
+[
+  {
+    "input": {
+      "message": "Hi Alex, the workshop is confirmed for Tuesday at 10am in Room 4. Please bring your draft agenda. Reply by Monday if you need a remote joining link. Thanks.",
+      "intent": "Confirm arrangements and explain how to request a remote link.",
+      "audiences": [
+        {
+          "name": "Workshop participant",
+          "perspective": "Already agreed to attend."
+        }
+      ]
+    },
+    "analysis": "## Workshop participant: Already agreed to attend.  \nClear as written. The message confirms the workshop details and provides clear instructions on how to request a remote joining link if needed.",
+    "rewrite": "## Overall rewrite\nHi Alex, the workshop is confirmed for Tuesday at 10am in Room 4. Please bring your draft agenda. Reply by Monday if you need a remote joining link. Thanks.\n\n## What changed and why\nNo changes needed. The original message is clear as written."
+  },
+  {
+    "input": {
+      "message": "Hi Priya, please review the attached proposal and send any comments by Thursday at 3pm. If you have no changes, a short approval reply is enough. Thanks, Sam.",
+      "intent": "Get review or approval by the deadline.",
+      "audiences": [
+        {
+          "name": "Project sponsor",
+          "perspective": "Has agreed to review the proposal."
+        }
+      ]
+    },
+    "analysis": "## Project sponsor\n\nClear as written. The message clearly states the request for review and the deadline, making it easy for the recipient to understand what is required.",
+    "rewrite": "## Overall rewrite\nHi Priya, please review the attached proposal and send any comments by Thursday at 3pm. If you have no changes, a short approval reply is enough. Thanks, Sam.\n\n## What changed and why\nNo changes needed. The original message is clear as written."
+  },
+  {
+    "input": {
+      "message": "Please send it soon. We may be ready to launch next week, but tell the client the launch is guaranteed.",
+      "intent": "Coordinate a client launch update.",
+      "audiences": [
+        {
+          "name": "Account manager",
+          "perspective": "Needs accurate instructions."
+        }
+      ]
+    },
+    "analysis": "## Account manager: Needs accurate instructions.\n\nWorth clarifying. The phrase \"tell the client the launch is guaranteed\" creates ambiguity regarding the certainty of the launch. It is unclear whether the launch is indeed confirmed for next week or if there are still conditions to be met. The author should clarify the status of the launch and whether it is appropriate to communicate a guarantee to the client.",
+    "rewrite": "## Overall rewrite\nPlease send it soon. We may be ready to launch next week, but tell the client the launch is guaranteed.\n\n## What changed and why\nThe original message is preserved as it contains conflicting instructions regarding the certainty of the launch. The author must decide whether the launch is indeed confirmed for next week or if there are conditions that prevent guaranteeing it to the client."
+  }
+]

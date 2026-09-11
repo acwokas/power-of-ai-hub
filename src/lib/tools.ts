@@ -11,9 +11,9 @@ export interface Tool {
 export const tools: Tool[] = [
   {
     slug: 'maturity-assessment',
-    title: 'Maturity Assessment',
+    title: 'AI Readiness Review',
     pillar: 'Evaluate',
-    description: 'Diagnose where your organisation sits on the AI maturity curve.',
+    description: 'Review evidence, unknowns and next actions for a specific AI use case.',
     status: 'live',
   },
   {
@@ -74,9 +74,9 @@ export const tools: Tool[] = [
   },
   {
     slug: 'prompt-engineer',
-    title: 'Prompt Engineer',
+    title: 'Prompt Brief Builder',
     pillar: 'Elevate',
-    description: 'Generate, optimise, and adapt prompts for better AI results.',
+    description: 'Clarify a task and its boundaries before asking AI.',
     status: 'live',
   },
   {

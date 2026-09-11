@@ -1,0 +1,14 @@
+---
+const {description,title="EDGE | democratising.ai"}=Astro.props;
+const path=Astro.url.pathname.replace(/\.html$/,'').replace(/\/$/,'') || '/';
+---
+<meta name="description" content={description}/>
+<link rel="canonical" href={'https://democratising.ai'+path}/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<script is:inline>
+(function(w,d){if(!['democratising.ai','www.democratising.ai'].includes(w.location.hostname))return;w.dataLayer=w.dataLayer||[];w.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-KV37H5CZ';d.head.appendChild(s);})(window,document);
+</script>
+
+<script is:inline src="/edge-events.js"></script>
+
+<meta property="og:type" content="website"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={'https://democratising.ai'+path}/><meta property="og:image" content="https://democratising.ai/og-image.png"/><meta name="twitter:card" content="summary_large_image"/>

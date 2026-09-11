@@ -1,0 +1,61 @@
+{
+  "input": {
+    "mode": "negotiation",
+    "action": "coach",
+    "role": "A supplier",
+    "context": "Discuss a one-report pilot. No price, budget, deadline or wider contract has been agreed. The buyer needs written scope before approval.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "I want to discuss a one-report pilot without committing to a wider rollout."
+      },
+      {
+        "role": "assistant",
+        "content": "That sounds reasonable. I can provide you with a written scope outlining what the one-report pilot would entail. Once you have that, we can discuss any specific requirements or adjustments you might have in mind."
+      },
+      {
+        "role": "user",
+        "content": "Would you consider \u00a3900 for the single report, with no further purchase commitment?"
+      },
+      {
+        "role": "assistant",
+        "content": "I appreciate your offer of \u00a3900 for the single report. However, I would need to consider the specifics of the scope and the resources required to deliver it effectively. Perhaps we could discuss what elements you envision in the report to ensure it meets your needs?"
+      },
+      {
+        "role": "user",
+        "content": "To be clear, \u00a3900 is a proposal, not approval. I would need the scope to include one revision."
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for clarifying that \u00a3900 is a proposal. I can certainly include one revision in the scope. Once I draft the written scope, we can ensure it aligns with your expectations before moving forward. Would you like me to outline the key components of the report as part of that scope?"
+      },
+      {
+        "role": "user",
+        "content": "Please leave this as a proposal. I need a written scope covering the report and one revision before I can approve any spend."
+      },
+      {
+        "role": "assistant",
+        "content": "Understood. I will prepare a written scope that details the report and includes the provision for one revision. Once you have that, you can review it and decide on the proposal. I\u2019ll aim to have it ready for you shortly."
+      }
+    ],
+    "goal": "Avoid confusing a proposed price with an approved purchase."
+  },
+  "coaching": {
+    "observations": [
+      {
+        "quote": "Would you consider \u00a3900 for the single report, with no further purchase commitment?",
+        "feedback": "This statement effectively communicates your proposal while clarifying that it does not imply a commitment to future purchases."
+      },
+      {
+        "quote": "To be clear, \u00a3900 is a proposal, not approval.",
+        "feedback": "This clarification is important as it distinguishes between a proposal and an agreement, helping to avoid any potential misunderstandings."
+      },
+      {
+        "quote": "Please leave this as a proposal.",
+        "feedback": "Reiterating that you want to keep the discussion at the proposal stage reinforces your intention to avoid any premature commitments."
+      }
+    ],
+    "nextAttempt": "Consider summarising the key points of the negotiation to ensure both parties are aligned on the terms discussed.",
+    "limits": "The context does not provide information about the buyer's flexibility or constraints."
+  }
+}

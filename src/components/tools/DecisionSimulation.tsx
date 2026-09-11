@@ -1,3 +1,4 @@
+import { streamReview } from '@/lib/message-review';
 import { useState, useCallback, useRef, useEffect } from 'react';
 import {
   SimulationProvider,
@@ -121,7 +122,7 @@ const fields = {
         { value: '6months', label: 'Next 6 months (short-term survival)' },
         { value: '1-2years', label: 'Next 1 to 2 years (near-term positioning)' },
         { value: '3-5years', label: 'Next 3 to 5 years (medium-term strategy)' },
-        { value: '10plus', label: 'Next 10+ years (long-term identity)' },
+        { value: '10plus', label: 'Next 10+ years (long-term direction)' },
       ],
     },
     {
@@ -137,8 +138,8 @@ const fields = {
 
 const howItWorks = [
   'You provide context about a decision you are facing.',
-  'The AI analyses both paths, identifies second-order effects, surfaces blind spots, and explores how each choice might shape your identity.',
-  'One path may feel more compelling. This reflects real biases. The analysis includes uncomfortable insights because real decisions have real trade-offs.',
+  'Compare the benefits, trade-offs, assumptions and reversibility of each option.',
+  'Choose evidence to gather and a small test before committing. These are possibilities to explore, not predictions.',
 ];
 
 const ANALYSIS_URL = '/api/decision-analysis';
@@ -150,62 +151,15 @@ async function streamAnalysis(
   onError: (msg: string) => void,
   signal?: AbortSignal,
 ) {
-  let resp: Response;
+  let previous = '';
   try {
-    resp = await fetch(ANALYSIS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-      signal,
+    await streamReview(ANALYSIS_URL, formData, signal || new AbortController().signal, text => {
+      onDelta(text.slice(previous.length)); previous = text;
     });
-  } catch (e) {
-    if ((e as DOMException).name === 'AbortError') return;
-    onError('Could not reach the analysis service. Check your connection and retry.');
-    return;
+    onDone();
+  } catch (error) {
+    if ((error as Error).name !== 'AbortError') onError(error instanceof Error ? error.message : 'The review could not complete. Please retry.');
   }
-
-  if (!resp.ok) {
-    const err = (await resp.json().catch(() => ({}))) as { error?: string };
-    onError(err.error || `Analysis failed (status ${resp.status}).`);
-    return;
-  }
-
-  if (!resp.body) {
-    onError('No response stream.');
-    return;
-  }
-
-  const reader = resp.body.getReader();
-  const decoder = new TextDecoder();
-  let buf = '';
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buf += decoder.decode(value, { stream: true });
-
-    let nl: number;
-    while ((nl = buf.indexOf('\n')) !== -1) {
-      let line = buf.slice(0, nl);
-      buf = buf.slice(nl + 1);
-      if (line.endsWith('\r')) line = line.slice(0, -1);
-      if (!line.startsWith('data: ')) continue;
-      const json = line.slice(6).trim();
-      if (json === '[DONE]') {
-        onDone();
-        return;
-      }
-      try {
-        const parsed = JSON.parse(json);
-        const content = parsed.choices?.[0]?.delta?.content;
-        if (content) onDelta(content);
-      } catch {
-        buf = line + '\n' + buf;
-        break;
-      }
-    }
-  }
-  onDone();
 }
 
 function parseIntoSections(text: string): ResultSection[] {
@@ -231,7 +185,7 @@ function classify(id: string): 'pathA' | 'pathB' | 'blind' | 'second' | 'insight
   if (id.startsWith('path-b')) return 'pathB';
   if (id.includes('blind')) return 'blind';
   if (id.includes('second-order') || id.includes('second-order-effects')) return 'second';
-  if (id.includes('uncomfortable')) return 'insight';
+  if (id.includes('test-before')) return 'insight';
   if (id.includes('question')) return 'question';
   return 'other';
 }
@@ -343,7 +297,7 @@ function buildPdf(args: {
   const pathB = sections.find((s) => s.id.startsWith('path-b'));
   const blind = sections.find((s) => s.id.includes('blind'));
   const second = sections.find((s) => s.id.includes('second-order'));
-  const insight = sections.find((s) => s.id.includes('uncomfortable'));
+  const insight = sections.find((s) => s.id.includes('test-before'));
   const question = sections.find((s) => s.id.includes('question'));
 
   const decisionLine = (formData.decision || 'Your decision')
@@ -368,12 +322,11 @@ function buildPdf(args: {
 
   // ---- Page 2: side-by-side path comparison ----
   const labels: Array<{ key: string; label: string; italic?: boolean; tint?: boolean }> = [
-    { key: 'best-case outcome', label: 'Best-case outcome' },
-    { key: 'most likely outcome', label: 'Most likely outcome' },
-    { key: 'worst-case outcome', label: 'Worst-case outcome' },
-    { key: '1-3 year second-order effects', label: '1-3 year second-order effects' },
-    { key: 'second-order effects', label: '1-3 year second-order effects' },
-    { key: 'identity implication', label: 'Identity implication', italic: true, tint: true },
+    {key:'potential benefit',label:'Potential benefit'},
+    {key:'main trade-off',label:'Main trade-off'},
+    {key:'assumptions to test',label:'Assumptions to test'},
+    {key:'evidence needed',label:'Evidence needed'},
+    {key:'reversibility',label:'Reversibility'},
   ];
 
   const buildPathBlocks = (sectionContent: string): ColumnBlock[] => {
@@ -464,7 +417,7 @@ function buildPdf(args: {
   if (insight || question) {
     pdf.newPage();
     if (insight) {
-      pdf.calloutCream('The uncomfortable insight', stripMd(insight.content));
+      pdf.calloutCream('A test before committing', stripMd(insight.content));
     }
     pdf.spacer(12);
     if (question) {
@@ -489,7 +442,7 @@ function buildPdf(args: {
   pdf.ctaCard(
     'Apply the EDGE framework to your career',
     'A practical, repeatable approach to using AI well in your daily work.',
-    'democratising.ai/edge',
+    'adrianwatkins.com/edge',
   );
   pdf.ctaCard(
     'Subscribe to the daily AI briefing',

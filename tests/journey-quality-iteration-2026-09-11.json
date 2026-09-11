@@ -1,0 +1,75 @@
+[
+  {
+    "input": {
+      "stage": 2,
+      "values": {
+        "actions": "Run one free skills workshop for students. Three organisers are available, but names and dates are not agreed.",
+        "boundaries": "Use the available campus room. No spending has been approved."
+      }
+    },
+    "output": {
+      "suggestions": {
+        "actions": "1. Identify and confirm the date for the skills workshop. Responsible: unassigned. 2. Develop a workshop outline and materials. Responsible: unassigned. 3. Promote the workshop to students through campus channels. Responsible: unassigned.",
+        "boundaries": "Use the available campus room. No spending has been approved.",
+        "check": "Confirm the date and room availability at least one week before the workshop.",
+        "review": "Bring the workshop outline and promotional materials to the review. The decision should inform final approval for the workshop."
+      },
+      "questions": [
+        "What specific skills will the workshop focus on?",
+        "Who will be responsible for each action step?"
+      ],
+      "note": "The workshop's focus and responsible roles need clarification to proceed effectively."
+    }
+  },
+  {
+    "input": {
+      "stage": 3,
+      "values": {
+        "observations": "Two reports were delivered. One customer replied positively. The other has not replied. Time spent producing each report was not recorded."
+      },
+      "context": [
+        {
+          "label": "Expected evidence",
+          "value": "Understand customer value and the effort needed to produce reports before deciding on a larger rollout.",
+          "source": "Your draft"
+        }
+      ]
+    },
+    "output": {
+      "suggestions": {
+        "observations": "Two reports were delivered. One customer replied positively. The other has not replied. Time spent producing each report was not recorded.",
+        "difference": "No expectation was recorded for the response rate or time spent on report production.",
+        "learning": "The positive response from one customer indicates potential value, but the lack of response from the other customer leaves uncertainty about overall interest. The absence of recorded production time limits understanding of effort versus outcome.",
+        "nexttest": "Record the time spent on producing reports for the next customer engagement and measure the response rate."
+      },
+      "questions": [
+        "What is the expected response rate from customers?",
+        "Is there a specific timeframe for when you expect replies from customers?"
+      ],
+      "note": "Understanding the time investment in report production is crucial for evaluating customer engagement and planning future efforts."
+    }
+  },
+  {
+    "input": {
+      "stage": 1,
+      "values": {},
+      "context": [
+        {
+          "label": "Direction",
+          "value": "Try one self-directed learning session each week before paying for a course.",
+          "source": "User-confirmed direction"
+        }
+      ]
+    },
+    "output": {
+      "suggestions": {
+        "outcome": "Identify effective self-directed learning methods and resources that enhance knowledge in the chosen subject area.",
+        "direction": "Try one self-directed learning session each week before paying for a course.",
+        "success": "Completion of at least four self-directed learning sessions, with reflections on what was learned and how it can be applied.",
+        "scope": "Focus on a specific subject or skill relevant to personal or professional development."
+      },
+      "questions": [],
+      "note": "The outcome and success criteria are defined based on the chosen direction of trying self-directed learning sessions."
+    }
+  }
+]

@@ -1,49 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Footer from '../../components/Footer.astro';
-import BeforeYouSend from '../../components/tools/BeforeYouSend.tsx';
+import BeforeYouSend from '../../components/tools/BeforeYouSend';
+import '../../styles/before-you-send.css';
 ---
-<BaseLayout
-  title="Before You Send - EDGE Evaluate - DEMOCRATISING.AI"
-  description="Sharpen a message before it leaves your hands. The AI shows how different audiences might read it so you can spot the interpretation gaps before they spot you. Privacy first, no signup."
->
-  <main>
-    <section class="bg-background border-b border-border/60">
-      <div class="container mx-auto px-6 max-w-3xl py-16 md:py-24">
-        <p class="eyebrow mb-5">
-          <a href="/" class="hover:text-foreground transition-colors">DEMOCRATISING.AI</a>
-          <span class="text-foreground/40 mx-1">/</span>
-          <a href="/tools" class="hover:text-foreground transition-colors">EDGE</a>
-          <span class="text-foreground/40 mx-1">/</span>
-          Evaluate
-        </p>
-        <div class="flex items-start gap-4 mb-6">
-          <img
-            src="/brand/edge-mark-evaluate.svg"
-            alt="EDGE Framework mark, Evaluate pillar"
-            width="40"
-            height="40"
-            class="shrink-0 mt-2 md:w-12 md:h-12"
-          />
-          <h1 class="font-serif text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.05]">
-            Before You Send
-          </h1>
-        </div>
-        <p class="text-lg md:text-xl text-foreground/85 leading-relaxed mb-6">
-          Pressure-test a message before it lands. The AI reads it back through the eyes of each audience you name, surfacing the gap between what you meant and what they will hear.
-        </p>
-        <div class="flex items-start gap-3 text-sm text-foreground">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 text-accent shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Your message and audience notes are only used to generate this analysis. Nothing is stored on a server. Form drafts live in your browser only.</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-12 md:py-20">
-      <div class="container mx-auto px-6 max-w-3xl">
-        <BeforeYouSend client:load />
-      </div>
-    </section>
-  </main>
-  <Footer />
+<BaseLayout title="Before You Send | EDGE by Adrian Watkins" description="Explore how your message could land. Compare the original with a suggested version, then refine it without changing the facts.">
+<div class="bys-page"><div class="bys-shell"><nav class="bys-nav" aria-label="Tool navigation"><a class="bys-brand" href="/"><img src="/brand/democratising-mark.svg" alt="" width="36" height="36"/>democratising.ai</a><div><a href="/tools">All EDGE tools</a><a href="https://adrianwatkins.com/edge" target="_blank" rel="noopener noreferrer">About EDGE ↗</a></div></nav><main><header class="bys-header"><div class="bys-label"><img src="/brand/edge-mark-on-navy.svg" alt="EDGE" width="35" height="35"/>EDGE / Evaluate</div><h1>Before You Send<span>.</span></h1><p>Make your intention clearer. Explore how a message could land, then refine it without changing the facts.</p></header><BeforeYouSend client:load/></main><footer class="bys-footer"><span>EDGE, created by Adrian Watkins</span><a href="/">Back to democratising.ai</a></footer></div></div>
 </BaseLayout>

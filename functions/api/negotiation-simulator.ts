@@ -100,7 +100,7 @@ async function streamFromOpenAI(
   messages: { role: string; content: string }[],
   temperature: number,
 ): Promise<Response> {
-  const model = env.OPENAI_MODEL || 'gpt-4o-mini';
+  const model = 'gpt-4o-mini';
   let upstream: Response;
   try {
     upstream = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -109,7 +109,7 @@ async function streamFromOpenAI(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${env.OPENAI_API_KEY}`,
       },
-      body: JSON.stringify({ model, stream: true, temperature, messages }),
+      body: JSON.stringify({ model, max_tokens: 6000, stream: true, temperature, messages }),
     });
   } catch {
     return jsonError(502, 'Could not reach the simulator provider.');

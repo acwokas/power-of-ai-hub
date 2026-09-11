@@ -1,0 +1,26 @@
+{
+  "atomic_sql_concurrency": {
+    "150_simultaneous_attempts": 100,
+    "same_minute_20_attempts": 4,
+    "rolling_hour_28_attempts": 20
+  },
+  "expected": {
+    "day": 100,
+    "minute": 4,
+    "hour": 20
+  },
+  "preview_live": {
+    "oversize": 413,
+    "retired": 410,
+    "wrong_method": 405,
+    "cross_origin": 403,
+    "five_requests_in_one_minute": [
+      400,
+      400,
+      400,
+      400,
+      429
+    ]
+  },
+  "cost_scope": "These endpoints only: fixed gpt-4o-mini, at most 100 reservations per UTC day, one provider request per reservation, at most 6000 output tokens. Not an account-wide monetary budget."
+}
