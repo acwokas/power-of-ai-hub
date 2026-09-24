@@ -31,12 +31,12 @@ export const consumerSites: ConsumerSite[] = [
     logo: '/brand/urbancatowner-mark.png',
   },
   {
-    slug: 'dog-friendly',
-    name: 'Dog-Friendly Singapore',
-    tagline: 'Where to actually take your dog',
+    slug: 'urbanpetpartners',
+    name: 'Urban Pet Partners',
+    tagline: 'Better lives for pets. Built together.',
     description:
-      'The best cafes, restaurants, parks, beaches, and staycations that welcome dogs, ranked and hand-checked rather than scraped from a directory.',
-    url: 'https://dog-friendly.sg',
-    logo: '/brand/dog-friendly-mark.svg',
+      'The partnership home for UrbanDogOwner and UrbanCatOwner: community collaboration, pet expertise and thoughtful commercial partnerships.',
+    url: 'https://urbanpetpartners.com',
+    logo: '/brand/urbanpetpartners-mark.svg',
   },
 ];
