@@ -4,3 +4,18 @@
 .wordmark{display:flex;align-items:center;gap:0}.wordmark>img{width:40px;height:40px;margin-right:10px}.threadbrand:before{display:none}.threadbrand img{width:160px;height:auto;display:block}.introbottom p{max-width:570px}@media(max-width:580px){.wordmark{font-size:17px}.wordmark>img{width:28px;height:28px;margin-right:6px}}
 
 .estate-skip{position:absolute;top:-100px;background:#15212c;color:white;padding:12px;z-index:10}.estate-skip:focus{top:0}.navlinks a{min-height:44px;display:inline-flex;align-items:center}h1 .light{color:#6c7977}@media(max-width:580px){.nav{height:auto;min-height:100px;gap:12px;flex-wrap:wrap;padding:16px 0}.navlinks{flex-wrap:wrap}.navlinks a:nth-child(2){display:inline-flex}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Optional homepage introduction */
+.intro-main{min-width:0;max-width:650px}
+.intro-main p{max-width:570px}
+.intro-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 24px;margin-top:24px}
+.intro-actions>a{font-size:13px;text-decoration:underline;text-underline-offset:5px}
+.intro-video-trigger{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:#fff;padding:10px 17px;font-size:13px;font-weight:600;line-height:1.25;min-height:44px;white-space:normal;text-align:left}
+.intro-video-trigger:hover{background:#293e4b}
+.intro-play{display:grid;place-items:center;width:24px;height:24px;border:1px solid #fff;border-radius:50%;font-size:9px;padding-left:2px;flex:none}
+.intro-video-dialog{position:fixed;inset:0;margin:auto;width:min(92vw,980px);max-width:none;max-height:min(92vh,850px);padding:0;border:0;background:#111a24;color:#fff;box-shadow:0 25px 85px #0008;overflow:auto}
+.intro-video-dialog::backdrop{background:rgba(9,17,24,.82)}
+.intro-video-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 18px;font-size:13px}
+.intro-video-close{background:none;border:0;color:#fff;min-height:44px;padding:0 2px;font-size:13px}
+.intro-video-close span{font-size:25px;vertical-align:middle;margin-left:8px}
+.intro-video-dialog video{display:block;width:100%;height:auto;max-height:calc(92vh - 68px);aspect-ratio:16/9;background:#111;object-fit:contain}
+@media(max-width:580px){.intro-actions{gap:13px 18px;margin-top:20px}.intro-video-trigger{width:100%;justify-content:center}.intro-actions>a{display:inline-block}.intro-video-dialog{width:100vw;max-height:100dvh}.intro-video-dialog video{max-height:calc(100dvh - 68px)}}
