@@ -10,9 +10,10 @@ interface SimulationLayoutProps {
   // when true, tightens vertical padding around the helpers (how-it-works, privacy notice)
   // and uses a slightly larger base typography across the tool.
   compact?: boolean;
+  showProgress?: boolean;
 }
 
-export function SimulationLayout({ howItWorks, children, compact }: SimulationLayoutProps) {
+export function SimulationLayout({ howItWorks, children, compact, showProgress = true }: SimulationLayoutProps) {
   const { phase, currentStep, totalSteps } = useSimulation();
 
   const progressPercent =
@@ -41,7 +42,7 @@ export function SimulationLayout({ howItWorks, children, compact }: SimulationLa
 
       <PrivacyNotice />
 
-      {phase !== 'setup' && (
+      {showProgress && phase !== 'setup' && (
         <div className="space-y-2">
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>{phase === 'reflection' ? 'Complete' : `Step ${currentStep + 1} of ${totalSteps}`}</span>

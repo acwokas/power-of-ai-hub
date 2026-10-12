@@ -1,3 +1,4 @@
+import { readTerminalStream, INCOMPLETE_RESPONSE } from '../../lib/terminal-stream';
 import { draftStorage } from '@/lib/draft-storage';
 import { parseBrandContentHandoff } from '@/lib/brand-workspace-handoff';
 import { useState, useCallback, useEffect, useRef } from 'react';
@@ -391,6 +392,7 @@ export default function BrandProfileGenerator() {
 
   const streamGenerate = async (regenerateSection?: string) => {
     const isRegen = !!regenerateSection;
+    const previousProfile = profileText;
     if (isRegen) {
       setIsRegenerating(true);
       setRegeneratingKey(regenerateSection || null);
@@ -431,36 +433,10 @@ export default function BrandProfileGenerator() {
       }
       if (!resp.body) throw new Error('No response stream.');
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let buf = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buf += decoder.decode(value, { stream: true });
-        let nl: number;
-        while ((nl = buf.indexOf('\n')) !== -1) {
-          let line = buf.slice(0, nl);
-          buf = buf.slice(nl + 1);
-          if (line.endsWith('\r')) line = line.slice(0, -1);
-          if (line.startsWith(':') || line.trim() === '') continue;
-          if (!line.startsWith('data: ')) continue;
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === '[DONE]') break;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) {
-              accumulated += content;
-              if (!isRegen) setProfileText(accumulated);
-            }
-          } catch {
-            buf = line + '\n' + buf;
-            break;
-          }
-        }
-      }
+      accumulated = await readTerminalStream(resp, (delta) => {
+        accumulated += delta;
+        if (!isRegen) setProfileText(accumulated);
+      }, controller.signal);
 
       const now = new Date().toISOString();
 
@@ -501,10 +477,10 @@ export default function BrandProfileGenerator() {
 
       setPhase('results');
     } catch (err) {
-      if ((err as DOMException).name === 'AbortError') return;
-      const message = err instanceof Error ? err.message : 'Generation failed';
+      setProfileText(previousProfile);
+      const message = (err as DOMException).name === 'AbortError' ? INCOMPLETE_RESPONSE : err instanceof Error ? err.message : INCOMPLETE_RESPONSE;
       toast({ title: 'Generation failed', description: message, variant: 'destructive' });
-      if (!isRegen) setPhase('review');
+      if (!isRegen) setPhase(previousProfile ? 'results' : 'review');
     } finally {
       if (phaseInterval) clearInterval(phaseInterval);
       if (progressInterval) clearInterval(progressInterval);

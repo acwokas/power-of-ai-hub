@@ -1,3 +1,4 @@
+import { readTerminalStream, INCOMPLETE_RESPONSE } from '../../lib/terminal-stream';
 import { draftStorage } from '@/lib/draft-storage';
 import { csvRows } from '@/lib/csv';
 import { contentReviewPrompts, replaceContentPost } from '@/lib/content-draft-review';
@@ -375,6 +376,7 @@ export default function ContentSprintGenerator() {
   };
 
   const streamGenerate = async () => {
+    const previousSprint = sprintText;
     setPhase('loading');
     setLoadingPhaseIdx(0);
     setLoadingProgress(0);
@@ -418,41 +420,12 @@ export default function ContentSprintGenerator() {
       }
       if (!resp.body) throw new Error('No response stream.');
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let buf = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buf += decoder.decode(value, { stream: true });
-
-        let nl: number;
-        while ((nl = buf.indexOf('\n')) !== -1) {
-          let line = buf.slice(0, nl);
-          buf = buf.slice(nl + 1);
-          if (line.endsWith('\r')) line = line.slice(0, -1);
-          if (line.startsWith(':') || line.trim() === '') continue;
-          if (!line.startsWith('data: ')) continue;
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === '[DONE]') break;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) {
-              accumulated += content;
-              setSprintText(accumulated);
-              const dayCount = (accumulated.match(/## Day \d+/gi) || []).length;
-              if (dayCount > 0) {
-                setLoadingPhaseIdx(Math.min(2 + dayCount, loadingPhases.length - 1));
-              }
-            }
-          } catch {
-            buf = line + '\n' + buf;
-            break;
-          }
-        }
-      }
+      accumulated = await readTerminalStream(resp, (delta) => {
+        accumulated += delta;
+        setSprintText(accumulated);
+        const dayCount = (accumulated.match(/## Day \d+/gi) || []).length;
+        if (dayCount > 0) setLoadingPhaseIdx(Math.min(2 + dayCount, loadingPhases.length - 1));
+      }, controller.signal);
 
       const now = new Date().toISOString();
       setSprintText(accumulated);
@@ -464,10 +437,10 @@ export default function ContentSprintGenerator() {
       }
       setPhase('results');
     } catch (err) {
-      if ((err as DOMException).name === 'AbortError') return;
-      const message = err instanceof Error ? err.message : 'Generation failed';
+      setSprintText(previousSprint);
+      const message = (err as DOMException).name === 'AbortError' ? INCOMPLETE_RESPONSE : err instanceof Error ? err.message : INCOMPLETE_RESPONSE;
       toast({ title: 'Generation failed', description: message, variant: 'destructive' });
-      setPhase('config');
+      setPhase(previousSprint ? 'results' : 'config');
     } finally {
       clearInterval(phaseInterval);
       clearInterval(progressInterval);
@@ -494,32 +467,7 @@ export default function ContentSprintGenerator() {
       if (!resp.ok) throw new Error('Optimisation failed');
       if (!resp.body) throw new Error('No response');
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let optimised = '';
-      let buf = '';
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buf += decoder.decode(value, { stream: true });
-        let nl: number;
-        while ((nl = buf.indexOf('\n')) !== -1) {
-          let line = buf.slice(0, nl);
-          buf = buf.slice(nl + 1);
-          if (line.endsWith('\r')) line = line.slice(0, -1);
-          if (!line.startsWith('data: ')) continue;
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === '[DONE]') break;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const c = parsed.choices?.[0]?.delta?.content;
-            if (c) optimised += c;
-          } catch {
-            buf = line + '\n' + buf;
-            break;
-          }
-        }
-      }
+      const optimised = await readTerminalStream(resp, () => {});
 
       if (optimised) {
         const updated = sprintText.replace(content, optimised.trim());
