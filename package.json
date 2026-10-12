@@ -12,7 +12,9 @@
     "check": "astro check",
     "deploy:preview": "wrangler pages deploy dist --project-name power-of-ai-hub-astro --branch edge-before-you-send-review --commit-dirty=true",
     "check:release": "node scripts/check-release-ready.mjs",
-    "predeploy:preview": "npm run check:release"
+    "predeploy:preview": "npm run check:release",
+    "test": "node --test tests/*.test.mjs",
+    "prebuild": "npm test"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

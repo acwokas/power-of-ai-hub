@@ -1,3 +1,4 @@
+import { readTerminalStream, INCOMPLETE_RESPONSE } from '../../lib/terminal-stream';
 import { draftStorage } from '@/lib/draft-storage';
 import { useState, useCallback, useRef, useEffect } from 'react';
 import {
@@ -193,7 +194,7 @@ async function streamChat(
       signal,
     });
   } catch (e) {
-    if ((e as DOMException).name === 'AbortError') return;
+    if ((e as DOMException).name === 'AbortError') { onError(INCOMPLETE_RESPONSE); return; }
     onError('Could not reach the simulator. Check your connection and retry.');
     return;
   }
@@ -208,36 +209,12 @@ async function streamChat(
     return;
   }
 
-  const reader = resp.body.getReader();
-  const decoder = new TextDecoder();
-  let buf = '';
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buf += decoder.decode(value, { stream: true });
-    let nl: number;
-    while ((nl = buf.indexOf('\n')) !== -1) {
-      let line = buf.slice(0, nl);
-      buf = buf.slice(nl + 1);
-      if (line.endsWith('\r')) line = line.slice(0, -1);
-      if (!line.startsWith('data: ')) continue;
-      const json = line.slice(6).trim();
-      if (json === '[DONE]') {
-        onDone();
-        return;
-      }
-      try {
-        const parsed = JSON.parse(json);
-        const content = parsed.choices?.[0]?.delta?.content;
-        if (content) onDelta(content);
-      } catch {
-        buf = line + '\n' + buf;
-        break;
-      }
-    }
+  try {
+    await readTerminalStream(resp, onDelta, signal);
+    onDone();
+  } catch {
+    onError(INCOMPLETE_RESPONSE);
   }
-  onDone();
 }
 
 function parseSections(text: string): ResultSection[] {
@@ -324,6 +301,8 @@ function EthicalContent() {
 
   const [scenarioRaw, setScenarioRaw] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const [streamError, setStreamError] = useState('');
+  const [reflectionComplete, setReflectionComplete] = useState(false);
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [reasoning, setReasoning] = useState('');
@@ -385,6 +364,7 @@ function EthicalContent() {
     };
     setSetup(s);
     setDecisions([]);
+    setStreamError('');
     setScenarioRaw('');
     setResponseRaw('');
     setMessages([]);
@@ -406,6 +386,7 @@ function EthicalContent() {
       () => setIsStreaming(false),
       (err) => {
         setIsStreaming(false);
+        setStreamError(err);
         toast({ title: 'Failed to generate scenario', description: err, variant: 'destructive' });
       },
       ctrl.signal,
@@ -413,7 +394,7 @@ function EthicalContent() {
   }, [formData, selectedTensions, setPhase]);
 
   const handleSelectOption = (option: string) => {
-    if (isStreaming || awaitingReasoning) return;
+    if (isStreaming || streamError || awaitingReasoning) return;
     setSelectedOption(option);
     setAwaitingReasoning(true);
   };
@@ -446,17 +427,16 @@ function EthicalContent() {
       (delta) => {
         content += delta;
         setResponseRaw(content);
-        if (content.includes('SIMULATION COMPLETE')) {
-          setSimulationComplete(true);
-        }
       },
       () => {
         setIsStreaming(false);
+        setSimulationComplete(content.includes('SIMULATION COMPLETE'));
         setMessages((prev) => [...prev, { role: 'assistant', content }]);
         setCurrentDecisionPoint((prev) => prev + 1);
       },
       (err) => {
         setIsStreaming(false);
+        setStreamError(err);
         toast({ title: 'Response failed', description: err, variant: 'destructive' });
       },
       ctrl.signal,
@@ -465,6 +445,8 @@ function EthicalContent() {
 
   const handleEndReflect = useCallback(() => {
     if (!setup || decisions.length === 0) return;
+    setStreamError('');
+    setReflectionComplete(false);
     setPhase('reflection');
     setIsReflecting(true);
     setReflectionRaw('');
@@ -474,9 +456,10 @@ function EthicalContent() {
     streamChat(
       { mode: 'reflection', setup, simulationTranscript: transcript },
       (delta) => setReflectionRaw((prev) => prev + delta),
-      () => setIsReflecting(false),
+      () => { setIsReflecting(false); setReflectionComplete(true); },
       (err) => {
         setIsReflecting(false);
+        setStreamError(err);
         toast({ title: 'Analysis failed', description: err, variant: 'destructive' });
       },
     );
@@ -497,7 +480,7 @@ function EthicalContent() {
       .map((d) => `## Decision ${d.point}: ${d.topic}\nChoice: ${d.choice}\nReasoning: ${d.reasoning}`)
       .join('\n\n');
     let content = `# Ethical Dilemma Simulator\n\nFictional learning exercise. Outcomes are simulated. Any policy, safeguards or boundaries are discussion drafts, not approved instructions.\n\nGenerated: ${new Date().toISOString()}\n\n## SCENARIO\n\nUse case: ${setup.useCase}\nTensions: ${setup.tensions.join(', ')}\nAffected: ${setup.affected}\nStakeholders: ${setup.stakeholders}\n\n## DECISIONS\n\n${transcript}`;
-    if (reflectionRaw) content += `\n\n---\n\n${reflectionRaw}`;
+    if (reflectionComplete && reflectionRaw) content += `\n\n---\n\n${reflectionRaw}`;
     if (personalNotes) content += `\n\n---\n\n## PERSONAL NOTES\n\n${personalNotes}`;
     const blob = new Blob([content], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
@@ -634,13 +617,18 @@ function EthicalContent() {
               variant="outline"
               size="sm"
               onClick={handleEndReflect}
-              disabled={decisions.length === 0}
+              disabled={decisions.length === 0 || isStreaming}
               className="text-xs h-7"
             >
               End and reflect
             </Button>
           </div>
         </div>
+
+        {streamError && <div role="alert" className="space-y-2">
+          <p className="text-sm text-destructive">Incomplete response. {streamError}</p>
+          {decisions.length === 0 && <Button variant="outline" onClick={handleStart}>Retry scenario</Button>}
+        </div>}
 
         {decisions.length > 0 && (
           <Collapsible>
@@ -712,7 +700,7 @@ function EthicalContent() {
           </div>
         </ScrollArea>
 
-        {!isStreaming && !awaitingReasoning && options.length > 0 && !simulationComplete && (
+        {!isStreaming && !streamError && !awaitingReasoning && options.length > 0 && !simulationComplete && (
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground font-medium">Choose your approach:</p>
             <div className="space-y-2">
@@ -788,6 +776,10 @@ function EthicalContent() {
 
   return (
     <div className="space-y-6">
+      {streamError && <div role="alert" className="space-y-2">
+        <p className="text-sm text-destructive">Incomplete analysis. {streamError} Partial analysis is excluded from downloads.</p>
+        <Button variant="outline" onClick={handleEndReflect}>Retry analysis</Button>
+      </div>}
       {isReflecting && reflectionSections.length === 0 && (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">Analysing ethical framework and generating policies...</p>
@@ -840,7 +832,7 @@ function EthicalContent() {
       {!isReflecting && reflectionSections.length > 0 && (
         <div className="space-y-3 pt-4 border-t border-border/20">
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleDownload}>
+            <Button variant="outline" size="sm" data-edge-event="edge_export_requested" onClick={handleDownload} disabled={!reflectionComplete}>
               <Download className="h-3.5 w-3.5 mr-1.5" /> Download all policies
             </Button>
             <Button variant="outline" size="sm" onClick={handleStartOver}>
