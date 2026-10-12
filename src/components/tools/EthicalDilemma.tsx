@@ -194,11 +194,12 @@ async function streamChat(
       signal,
     });
   } catch (e) {
-    if ((e as DOMException).name === 'AbortError') { onError(INCOMPLETE_RESPONSE); return; }
+    if (signal?.aborted) return;
     onError('Could not reach the simulator. Check your connection and retry.');
     return;
   }
 
+  if (signal?.aborted) return;
   if (!resp.ok) {
     const err = (await resp.json().catch(() => ({}))) as { error?: string };
     onError(err.error || `Request failed (status ${resp.status}).`);
@@ -211,9 +212,9 @@ async function streamChat(
 
   try {
     await readTerminalStream(resp, onDelta, signal);
-    onDone();
+    if (!signal?.aborted) onDone();
   } catch {
-    onError(INCOMPLETE_RESPONSE);
+    if (!signal?.aborted) onError(INCOMPLETE_RESPONSE);
   }
 }
 
@@ -450,6 +451,8 @@ function EthicalContent() {
     setPhase('reflection');
     setIsReflecting(true);
     setReflectionRaw('');
+    const ctrl = new AbortController();
+    abortRef.current = ctrl;
     const transcript = decisions
       .map((d) => `Decision ${d.point} (${d.topic}): ${d.choice}\nReasoning: ${d.reasoning}`)
       .join('\n\n---\n\n');
@@ -462,6 +465,7 @@ function EthicalContent() {
         setStreamError(err);
         toast({ title: 'Analysis failed', description: err, variant: 'destructive' });
       },
+      ctrl.signal,
     );
   }, [setup, decisions, setPhase]);
 
@@ -493,6 +497,10 @@ function EthicalContent() {
 
   const handleStartOver = () => {
     abortRef.current?.abort();
+    setIsStreaming(false);
+    setIsReflecting(false);
+    setStreamError('');
+    setReflectionComplete(false);
     setSetup(null);
     setDecisions([]);
     setScenarioRaw('');
@@ -803,9 +811,11 @@ function EthicalContent() {
         </div>
       )}
 
-      {reflectionSections.map((s, i) => (
+      {reflectionComplete ? reflectionSections.map((s, i) => (
         <SectionCard key={s.id} section={s} defaultOpen={i < 3} />
-      ))}
+      )) : reflectionSections.length > 0 && (
+        <div className="whitespace-pre-wrap text-sm text-foreground">{reflectionRaw}</div>
+      )}
 
       {isReflecting && reflectionSections.length > 0 && (
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -840,7 +850,9 @@ function EthicalContent() {
             </Button>
           </div>
           <button
+            disabled={!reflectionComplete}
             onClick={async () => {
+              if (!reflectionComplete) return;
               await navigator.clipboard.writeText(reflectionRaw);
               toast({ title: 'Copied', description: 'Full analysis and policies copied.' });
             }}
@@ -857,7 +869,7 @@ function EthicalContent() {
 export default function EthicalDilemma() {
   return (
     <SimulationProvider roomId="ethical-dilemma" totalSteps={2}>
-      <SimulationLayout howItWorks={howItWorks}>
+      <SimulationLayout howItWorks={howItWorks} showProgress={false}>
         <EthicalContent />
       </SimulationLayout>
     </SimulationProvider>

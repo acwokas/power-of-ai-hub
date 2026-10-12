@@ -86,3 +86,14 @@ test('Ethics completion phrase in a truncated chat cannot finish or advance the 
   else {assert.deepEqual(finished,[]);assert.deepEqual(points,[]);assert.equal(assistant.length,0);assert.equal(errors.length,1);}
  }
 });
+
+test('cancellation during a chunk containing DONE cannot commit',async()=>{
+ const ctrl=new AbortController();await assert.rejects(readTerminalStream(response(valid),()=>ctrl.abort(),ctrl.signal),{name:'AbortError'});
+});
+test('Ethics reset cancellation does not invoke callbacks in the replacement screen',async()=>{
+ const s=setup('');const ctrl=new AbortController();let completed=0,failed=0,cancelled=false;
+ s.scope.fetch=async()=>new Response(new ReadableStream({cancel(){cancelled=true;}}));
+ const pending=clientFunction('src/components/tools/EthicalDilemma.tsx','streamChat',s.scope)({},()=>{},()=>completed++,()=>failed++,ctrl.signal);
+ await new Promise(resolve=>setImmediate(resolve));ctrl.abort();await pending;
+ assert.equal(cancelled,true);assert.equal(completed,0);assert.equal(failed,0);
+});

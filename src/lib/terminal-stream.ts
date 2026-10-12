@@ -42,6 +42,7 @@ export async function readTerminalStream(
         break;
       }
     }
+    signal?.throwIfAborted();
     if (!complete || !text.trim()) throw new Error(INCOMPLETE_RESPONSE);
     return text;
   } finally {
