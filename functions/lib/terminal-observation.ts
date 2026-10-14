@@ -11,6 +11,7 @@ export class TerminalObserver {
  private invalid = false;
  private ended = false;
  private result: TerminalObservation | null = null;
+ get terminalSeen(): boolean { return this.marker; }
  private line(value: string) {
   if (this.invalid || this.marker || !value.startsWith('data:')) return;
   const data = value.slice(5).trim();
@@ -80,7 +81,12 @@ export function observeTerminalStream(
    try {
     const part = await reader.read();
     if (part.done) { await settle(cancelled?'cancelled':'eof'); if (!cancelled) controller.close(); release(); return; }
-    observer.push(part.value); controller.enqueue(part.value);
+    observer.push(part.value);
+    // Persist completion before exposing the final marker to the client. Without
+    // this barrier, a legitimate client acknowledgement can race the receipt.
+    // The existing 500 ms cap keeps a failed store from blocking user output.
+    if (observer.terminalSeen) await settle('eof');
+    if (!cancelled) controller.enqueue(part.value);
    } catch (error) { await settle(cancelled?'cancelled':'error'); if (!cancelled) controller.error(error); release(); }
   },
   async cancel(reason) {

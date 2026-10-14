@@ -66,3 +66,12 @@ test('an unavailable receipt store has a bounded effect on response completion',
  const value=await Promise.race([result,new Promise(resolve=>setTimeout(()=>resolve('deadline-exceeded'),1000))]);
  assert.notEqual(value,'deadline-exceeded');
 });
+
+test('terminal marker is not delivered ahead of its completion receipt',async()=>{
+ const bytes=enc.encode(delta+'data: [DONE]\n\n');let releaseRecord,recorded=false;
+ const recording=new Promise(resolve=>{releaseRecord=()=>{recorded=true;resolve();};});
+ const wrapped=observeTerminalStream(new ReadableStream({start(c){c.enqueue(bytes);c.close();}}),()=>recording);
+ const reader=wrapped.getReader();let delivered=false;const reading=reader.read().then(x=>{delivered=true;return x;});
+ await new Promise(resolve=>setTimeout(resolve,10));assert.equal(delivered,false);
+ releaseRecord();const chunk=await reading;assert.equal(recorded,true);assert.deepEqual(chunk.value,bytes);await reader.cancel();
+});
