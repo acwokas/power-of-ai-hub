@@ -1,12 +1,15 @@
-interface Env { EDGE_USAGE?: D1Database; OPENAI_API_KEY?: string }
+import {instrumentDeliveryResponse,d1ReceiptStore,acknowledgeDelivery,cleanupDeliveryReceipts} from './lib/delivery-instrumentation';
+interface Env { EDGE_USAGE?: D1Database; OPENAI_API_KEY?: string; EDGE_DELIVERY_RECEIPTS?: string; EDGE_RECEIPT_RELEASE?: string }
 const live=new Set(['before-you-send','before-you-send-rewrite','edge-journey','edge-practice','brand-profile-generator','content-sprint-generator','ethical-dilemma']);
 const error=(status:number,message:string,retry?:number)=>Response.json({error:message},{status,headers:{'Cache-Control':'no-store',...(retry?{'Retry-After':String(retry)}:{})}});
 export const onRequest: PagesFunction<Env> = async context => {
  const url=new URL(context.request.url);
+ const receipts=context.env.EDGE_DELIVERY_RECEIPTS==='enabled' && /^[a-f0-9]{40}$/.test(context.env.EDGE_RECEIPT_RELEASE||'');
  let response:Response;
  if(url.pathname.startsWith('/api/')){
   const route=url.pathname.slice(5);
-  if(!live.has(route))response=error(410,'This tool has moved. Open the EDGE toolkit for the current version.');
+  if(route==='delivery-receipt'&&receipts&&context.env.EDGE_USAGE)response=await acknowledgeDelivery(context.request,d1ReceiptStore(context.env.EDGE_USAGE));
+  else if(!live.has(route))response=error(410,'This tool has moved. Open the EDGE toolkit for the current version.');
   else if(context.request.method!=='POST')response=error(405,'Use POST for this tool.');
   else if(!context.env.EDGE_USAGE)response=error(503,'AI assistance is temporarily unavailable. Your draft remains editable.');
   else {
@@ -29,13 +32,13 @@ export const onRequest: PagesFunction<Env> = async context => {
       (SELECT count(*) FROM usage_reservations WHERE fingerprint=?3 AND ts>=?5)<20 AND
       (SELECT count(*) FROM usage_reservations WHERE fingerprint=?3 AND ts>=?6)<4`).bind(crypto.randomUUID(),now,fingerprint,day,now-3600,now-60).run();
      if(result.meta.changes!==1)response=error(429,'The AI usage limit has been reached. Try again later, or continue editing without AI.',3600);
-     else {context.waitUntil(context.env.EDGE_USAGE.prepare('DELETE FROM usage_reservations WHERE ts < ?1').bind(now-172800).run());response=await context.next();}
+     else {context.waitUntil(context.env.EDGE_USAGE.prepare('DELETE FROM usage_reservations WHERE ts < ?1').bind(now-172800).run());response=await context.next();if(receipts){response=await instrumentDeliveryResponse(response,route,context.env.EDGE_RECEIPT_RELEASE!,d1ReceiptStore(context.env.EDGE_USAGE));context.waitUntil(cleanupDeliveryReceipts(context.env.EDGE_USAGE,now).catch(()=>{console.error('edge_receipt_cleanup_failed')}));}}
     }catch{response=error(503,'AI assistance is temporarily unavailable. Your draft remains editable.');}
    }
   }
  }else response=await context.next();
  // Private aggregate diagnostics contain no input, output, IP or user identifier.
- if(url.pathname.startsWith('/api/') && context.env.EDGE_USAGE){
+ if(url.pathname.startsWith('/api/') && url.pathname!=='/api/delivery-receipt' && context.env.EDGE_USAGE){
   const tool=live.has(url.pathname.slice(5))?url.pathname.slice(5):'retired';
   const day=Math.floor(Date.now()/86400000)*86400;
   const db=context.env.EDGE_USAGE;

@@ -24,3 +24,5 @@ for(const status of [200,400,403,409,410,500])test('non-ack status '+status+' st
 test('network error does not retry or change the result displayed to the user',async()=>{
  const r=response();let calls=0;assert.equal(await acknowledgeCommittedResponse(r,async()=>{calls++;throw Error('PRIVATE network error');}),false);assert.equal(calls,1);assert.equal(r.bodyUsed,false);
 });
+
+test('public browser helper exactly matches the tested TypeScript implementation',()=>{assert.equal(fs.readFileSync('public/journey/delivery-acknowledgement.js','utf8'),ts.transpile(fs.readFileSync('src/lib/delivery-acknowledgement.ts','utf8'),{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}));});

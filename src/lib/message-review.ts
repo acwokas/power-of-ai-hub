@@ -16,7 +16,7 @@ export function parseSuggestion(raw: string) {
   const section=(name: string)=>normal.match(new RegExp('^## '+name+'\\s*\\n([\\s\\S]*?)(?=^## |$(?![\\s\\S]))','m'))?.[1].trim() || '';
   return {message: section('Overall rewrite'), rationale: section('What changed and why').split('\n').filter(x=>/^[-*] /.test(x)).map(x=>x.slice(2))};
 }
-export async function streamReview(url: string, body: unknown, signal: AbortSignal, onText: (text: string)=>void) {
+export async function streamReview(url: string, body: unknown, signal: AbortSignal, onText: (text: string)=>void, onComplete?: (response:Response)=>void) {
   const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal});
   if (!response.ok) { const error=await response.json().catch(()=>({})) as {error?:string}; throw new Error(error.error || 'The request could not complete. Please retry.'); }
   if (!response.body) throw new Error('No response arrived. Please retry.');
@@ -32,6 +32,8 @@ export async function streamReview(url: string, body: unknown, signal: AbortSign
   try {
     while(!complete){const {done,value}=await reader.read();if(done){buffer+=decoder.decode();if(buffer.trim())line(buffer);break;}buffer+=decoder.decode(value,{stream:true});let end;while((end=buffer.indexOf('\n'))>=0){line(buffer.slice(0,end).replace(/\r$/,''));buffer=buffer.slice(end+1);if(complete)break;}}
     if(!complete || !text.trim()) throw new Error('The response was interrupted. Your message is still available. Please retry.');
+    if(signal.aborted)throw new DOMException('Cancelled','AbortError');
+    onComplete?.(response);
     return text;
   } finally { await reader.cancel().catch(()=>{});reader.releaseLock(); }
 }

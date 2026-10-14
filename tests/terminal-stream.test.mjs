@@ -39,8 +39,8 @@ function clientFunction(component,name,scope){
   return new Function('scope',`with(scope){${transpile(code)}}`)(scope);
 }
 function setup(wire){
-  const saved=[],phases=[],notices=[]; const state={profileText:'Previous profile',sprintText:'Previous sprint'};
-  const scope={readTerminalStream,INCOMPLETE_RESPONSE,API_URL:'/synthetic',fetch:async()=>response(wire),
+  const saved=[],phases=[],notices=[],acks=[]; const state={profileText:'Previous profile',sprintText:'Previous sprint'};
+  const scope={acknowledgeCommittedResponse:r=>{acks.push(r);return Promise.resolve(true)},readTerminalStream,INCOMPLETE_RESPONSE,API_URL:'/synthetic',fetch:async()=>response(wire),
     profileText:state.profileText,sprintText:state.sprintText,formData:{},abortRef:{},loadingPhases:['A','B'],
     PROFILE_STORAGE_KEY:'profile',SPRINT_STORAGE_KEY:'sprint',generatedAt:'old',duration:7,ideaCount:3,objective:'',evidence:'',selectedPlatforms:[],selectedThemes:[],events:'',toneSlider:50,profileData:null,inlineProfile:{},
     buildRequestProfileData:()=>({}),setInterval:()=>1,clearInterval:()=>{},
@@ -48,7 +48,7 @@ function setup(wire){
     setPhase:p=>phases.push(p),toast:v=>notices.push(v),draftStorage:{setItem:(...args)=>saved.push(args)},
   };
   for(const name of ['setIsRegenerating','setRegeneratingKey','setLoadingPhase','setLoadingProgress','setGeneratedAt','setLoadingPhaseIdx','setIsOptimising'])scope[name]=()=>{};
-  return {scope,state,saved,phases,notices};
+  return {scope,state,saved,phases,notices,acks};
 }
 for (const [component,fn,args] of [
  ['BrandProfileGenerator','streamGenerate',[]],['BrandProfileGenerator','streamGenerate',['Voice']],
@@ -57,6 +57,7 @@ for (const [component,fn,args] of [
  test(`${component}/${args.length?args[0]:'full'} only commits complete responses`,async()=>{
   for(const wire of ['',chunk('partial'),valid]){
    const s=setup(wire);await clientFunction(`src/components/tools/${component}.tsx`,fn,s.scope)(...args);
+   assert.equal(s.acks.length,wire===valid?1:0);
    if(wire===valid){assert.equal(s.saved.length,1);}
    else {assert.equal(s.saved.length,0);assert.equal(s.state.profileText,'Previous profile');assert.equal(s.state.sprintText,'Previous sprint');assert.equal(s.notices.length,1);assert.match(s.notices[0].description,/incomplete/i);}
   }
@@ -66,7 +67,7 @@ for(const mode of ['scenario','chat','reflection']) test(`Ethics ${mode} never c
  for(const wire of ['',chunk('SIMULATION COMPLETE'),valid]){
   const s=setup(wire);let complete=0,failed=0;
   await clientFunction('src/components/tools/EthicalDilemma.tsx','streamChat',s.scope)({mode},()=>{},()=>complete++,()=>failed++);
-  assert.equal(complete,wire===valid?1:0);assert.equal(failed,wire===valid?0:1);
+  assert.equal(s.acks.length,wire===valid?1:0);assert.equal(complete,wire===valid?1:0);assert.equal(failed,wire===valid?0:1);
  }
 });
 

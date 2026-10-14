@@ -18,9 +18,9 @@ test('suggestion review gates new targets, avoids empty-field conflict prompts a
  function descend(e){return e.children.flatMap(c=>[c,...descend(c)])}
  const get=id=>{if(!elements.has(id)){const e=element();e.id=id}return elements.get(id)};
  const nav=element();let conflicts=0;
- const context={URLSearchParams,document:{getElementById:get,querySelector:()=>nav,querySelectorAll:()=>[],createElement:element,createTextNode:t=>Object.assign(element('text'),{textContent:t})},sessionStorage:{getItem:()=>null,removeItem(){}},AbortController,
+ const context={acknowledgeCommittedResponse:()=>Promise.resolve(false),URLSearchParams,document:{getElementById:get,querySelector:()=>nav,querySelectorAll:()=>[],createElement:element,createTextNode:t=>Object.assign(element('text'),{textContent:t})},sessionStorage:{getItem:()=>null,removeItem(){}},AbortController,
   window:{location:{hash:''},addEventListener(){},confirm:()=>{conflicts++;return true}},fetch:async()=>({ok:true,json:async()=>({suggestions:{situation:'Try a one-week photography routine.'},requiresConfirmation:{situation:true},questions:[],note:'Review the timing.'})})};
- vm.runInNewContext(fs.readFileSync('public/journey/journey.js','utf8'),context);
+ vm.runInNewContext(fs.readFileSync('public/journey/journey.js','utf8').replace(/^import[^\n]+\n/,''),context);
  await get('suggest').onclick();
  const nodes=descend(get('suggestions'));
  const checkbox=nodes.find(e=>e.tag==='input');

@@ -1,3 +1,4 @@
+import { acknowledgeCommittedResponse } from '../../lib/delivery-acknowledgement';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {DRAFT_KEY,DRAFT_TTL,restoreDraft,parseSuggestion,streamReview,wordChanges,type Draft} from '../../lib/message-review';
 const blank=():Draft=>({message:'',intent:'',audiences:[{name:'',perspective:''}]});
@@ -14,9 +15,11 @@ export default function BeforeYouSend(){
   const input=kind==='analysis'?structuredClone(draft):original;if(!input)return;
   controller.current?.abort();const ctrl=new AbortController();controller.current=ctrl;setBusy(kind);setError('');setNotice('');
   if(kind==='analysis'){setOriginal(input);setAnalysis('');setSuggestion('');setRationale([]);setComplete(false);setPhase('review');setHighlight(false);}
-  try{const text=await streamReview('/api/before-you-send'+(kind==='rewrite'?'-rewrite':''),{...input,...(kind==='rewrite'?{analysis}:{})},ctrl.signal,t=>{if(kind==='analysis')setAnalysis(t)});
+  let completedResponse: Response | undefined;
+  try{const text=await streamReview('/api/before-you-send'+(kind==='rewrite'?'-rewrite':''),{...input,...(kind==='rewrite'?{analysis}:{})},ctrl.signal,t=>{if(kind==='analysis')setAnalysis(t)},response=>{completedResponse=response;});
    if(ctrl.signal.aborted)return;
    if(kind==='analysis')setComplete(true);else{const parsed=parseSuggestion(text);if(!parsed.message)throw new Error('The suggestion could not be read. Please retry.');setSuggestion(parsed.message);setRationale(parsed.rationale);}
+   if(completedResponse)void acknowledgeCommittedResponse(completedResponse);
   }catch(e){if(!ctrl.signal.aborted)setError(e instanceof Error?e.message:'The request did not finish. Please retry.');}
   finally{if(controller.current===ctrl)setBusy(null);}
  }
