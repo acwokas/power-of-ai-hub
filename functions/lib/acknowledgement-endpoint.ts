@@ -24,6 +24,6 @@ export async function handleDeliveryAcknowledgement(
  let body;try{body=validateAcknowledgement(JSON.parse(text));}catch{return empty(400);}
  try {
   const accepted=await consume(body.id,await acknowledgementDigest(body.token),now);
-  return empty(accepted?204:409);
+  return empty(accepted===true?204:409);
  }catch{return empty(503);}
 }

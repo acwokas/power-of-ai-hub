@@ -22,3 +22,7 @@ test('missing, expired, incomplete and reused receipts share an empty conflict r
 test('store error is unknown, with no retry or leaked text',async()=>{
  let calls=0;const r=await handleDeliveryAcknowledgement(request(),async()=>{calls++;throw Error('PRIVATE');},1000);assert.equal(r.status,503);assert.equal(calls,1);assert.equal(await r.text(),'');
 });
+
+for(const value of [undefined,null,'unknown',1,{}])test('nonboolean store response never certifies acknowledgement '+JSON.stringify(value),async()=>{
+ const r=await handleDeliveryAcknowledgement(request(),async()=>value,1000);assert.equal(r.status,409);
+});
