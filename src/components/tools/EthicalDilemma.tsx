@@ -1,3 +1,4 @@
+import { acknowledgeCommittedResponse } from '../../lib/delivery-acknowledgement';
 import { readTerminalStream, INCOMPLETE_RESPONSE } from '../../lib/terminal-stream';
 import { draftStorage } from '@/lib/draft-storage';
 import { useState, useCallback, useRef, useEffect } from 'react';
@@ -212,7 +213,7 @@ async function streamChat(
 
   try {
     await readTerminalStream(resp, onDelta, signal);
-    if (!signal?.aborted) onDone();
+    if (!signal?.aborted) { onDone(); void acknowledgeCommittedResponse(resp); }
   } catch {
     if (!signal?.aborted) onError(INCOMPLETE_RESPONSE);
   }

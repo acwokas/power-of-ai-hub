@@ -1,3 +1,4 @@
+import { acknowledgeCommittedResponse } from '../../lib/delivery-acknowledgement';
 import { readTerminalStream, INCOMPLETE_RESPONSE } from '../../lib/terminal-stream';
 import { draftStorage } from '@/lib/draft-storage';
 import { csvRows } from '@/lib/csv';
@@ -436,6 +437,7 @@ export default function ContentSprintGenerator() {
         // ignore
       }
       setPhase('results');
+      if (!controller.signal.aborted) void acknowledgeCommittedResponse(resp);
     } catch (err) {
       setSprintText(previousSprint);
       const message = (err as DOMException).name === 'AbortError' ? INCOMPLETE_RESPONSE : err instanceof Error ? err.message : INCOMPLETE_RESPONSE;
@@ -478,6 +480,7 @@ export default function ContentSprintGenerator() {
           // ignore
         }
         toast({ title: `${platformName} post optimised` });
+        void acknowledgeCommittedResponse(resp);
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Optimisation failed';

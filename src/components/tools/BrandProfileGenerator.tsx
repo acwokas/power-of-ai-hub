@@ -1,3 +1,4 @@
+import { acknowledgeCommittedResponse } from '../../lib/delivery-acknowledgement';
 import { readTerminalStream, INCOMPLETE_RESPONSE } from '../../lib/terminal-stream';
 import { draftStorage } from '@/lib/draft-storage';
 import { parseBrandContentHandoff } from '@/lib/brand-workspace-handoff';
@@ -476,6 +477,7 @@ export default function BrandProfileGenerator() {
       }
 
       setPhase('results');
+      if (!controller.signal.aborted) void acknowledgeCommittedResponse(resp);
     } catch (err) {
       setProfileText(previousProfile);
       const message = (err as DOMException).name === 'AbortError' ? INCOMPLETE_RESPONSE : err instanceof Error ? err.message : INCOMPLETE_RESPONSE;
