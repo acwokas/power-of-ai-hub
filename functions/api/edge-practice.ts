@@ -26,7 +26,7 @@ export const onRequestPost=async({request,env}:{request:Request;env:Env})=>{
  if(!env.OPENAI_API_KEY)return json(503,{error:'Practice is temporarily unavailable.'});
  try{const response=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({model:'gpt-4o-mini',temperature:0.3,max_tokens:1000,messages:practiceMessages(input),...(input.action==='coach'?{response_format:{type:'json_object'}}:{})})});
  if(!response.ok){await response.body?.cancel();return json(response.status===429?429:502,{error:'The response could not complete. Your last line is still available to retry.'})}
- const data=await response.json() as {choices?:{message?:{content?:string}}[]};const content=data.choices?.[0]?.message?.content;if(!content||content.length>10000)throw new Error();
+ const data=await response.json() as {choices?:{finish_reason?:string;message?:{content?:string}}[]};if(data.choices?.[0]?.finish_reason!=='stop')throw new Error('Incomplete provider response');const content=data.choices[0].message?.content;if(!content||content.length>10000)throw new Error();
  if(input.action==='reply')return json(200,{reply:content});
  const result=JSON.parse(content);if(!Array.isArray(result.observations)||result.observations.length>3||typeof result.nextAttempt!=='string'||typeof result.limits!=='string')throw new Error();
  const userText=input.messages.filter(m=>m.role==='user').map(m=>m.content);

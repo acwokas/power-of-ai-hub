@@ -62,8 +62,10 @@ export const onRequestPost=async({request,env}:{request:Request;env:Env})=>{
         {role:'user',content:JSON.stringify(input)}]})
     });
     if(!response.ok){await response.body?.cancel();return json(response.status===429?429:502,{error:'Suggestions could not complete. Please retry. Your brief is unchanged.'})}
-    const result=await response.json() as {choices?:{message?:{content?:string}}[]};
-    const output=JSON.parse(result.choices?.[0]?.message?.content||'');
+    const result=await response.json() as {choices?:{finish_reason?:string;message?:{content?:string}}[]};
+    // A parseable partial object is not a completed provider response.
+    if(result.choices?.[0]?.finish_reason!=='stop')throw new Error('Incomplete provider response');
+    const output=JSON.parse(result.choices[0].message?.content||'');
     if(!output.suggestions||typeof output.suggestions!=='object'||typeof output.note!=='string'||output.note.length>1500||!Array.isArray(output.questions)||output.questions.length>3||output.questions.some((q:unknown)=>typeof q!=='string'||q.length>700))throw new Error('Invalid output');
     const suggestions:Record<string,string>={};
     for(const key of fields[input.stage]){const v=output.suggestions[key];if(typeof v!=='string'||v.length>6000)throw new Error('Invalid output');suggestions[key]=v;}
