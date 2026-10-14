@@ -1,4 +1,4 @@
-/** Offline-prepared receipt contract. Not wired to middleware or a database.
+/** Receipt contract, integrated behind the default-off middleware flag.
  * Tokens link a browser acknowledgement to a completed server request. They do
  * not establish human readership, request content or provider billing.
  */
