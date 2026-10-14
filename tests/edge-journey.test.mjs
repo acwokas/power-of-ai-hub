@@ -8,7 +8,7 @@ test('journey requires usable context and observed evidence for review',()=>{
 });
 test('journey preserves observations even if provider rewrites them',async()=>{
  const old=globalThis.fetch;
- try{globalThis.fetch=async()=>new Response(JSON.stringify({choices:[{message:{content:JSON.stringify({suggestions:{observations:'Invented success',difference:'The expected response level was not met.',learning:'Evidence is limited.',nexttest:'Gather feedback.'},questions:[],note:'Consider the evidence.'})}}]}));
+ try{globalThis.fetch=async()=>new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify({suggestions:{observations:'Invented success',difference:'The expected response level was not met.',learning:'Evidence is limited.',nexttest:'Gather feedback.'},questions:[],note:'Consider the evidence.'})}}]}));
  const observation='Three participants attended; feedback has not yet been collected.';
  const r=await onRequestPost({request:new Request('https://local/api',{method:'POST',body:JSON.stringify({stage:3,values:{observations:observation}})}),env:{OPENAI_API_KEY:'test'}});
  assert.equal(r.status,200);const body=await r.json();assert.equal(body.suggestions.observations,observation);assert.match(body.suggestions.difference,/No expectation/);assert.doesNotMatch(body.suggestions.difference,/was not met/);assert.match(body.suggestions.learning,/Possible interpretation/);
@@ -16,13 +16,13 @@ test('journey preserves observations even if provider rewrites them',async()=>{
 });
 test('journey rejects malformed provider structure without exposing it',async()=>{
  const old=globalThis.fetch;
- try{globalThis.fetch=async()=>new Response(JSON.stringify({choices:[{message:{content:'private malformed response'}}]}));
+ try{globalThis.fetch=async()=>new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:'private malformed response'}}]}));
  const r=await onRequestPost({request:new Request('https://local/api',{method:'POST',body:JSON.stringify(base)}),env:{OPENAI_API_KEY:'test'}});assert.equal(r.status,502);assert.doesNotMatch(await r.text(),/private malformed/);
  }finally{globalThis.fetch=old;}
 });
 test('an unconfirmed source cannot overwrite the suggested direction as a confirmed decision',async()=>{
  const old=globalThis.fetch;
- try{globalThis.fetch=async()=>new Response(JSON.stringify({choices:[{message:{content:JSON.stringify({suggestions:{outcome:'A useful draft',direction:'A proposed pilot',success:'',scope:''},questions:[],note:'Confirm your direction.'})}}]}));
+ try{globalThis.fetch=async()=>new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify({suggestions:{outcome:'A useful draft',direction:'A proposed pilot',success:'',scope:''},questions:[],note:'Confirm your direction.'})}}]}));
  const run=async source=>{const r=await onRequestPost({request:new Request('https://local/api',{method:'POST',body:JSON.stringify({stage:1,values:{},context:[{label:'Direction',value:'Roll out to everyone immediately.',source}]})}),env:{OPENAI_API_KEY:'test'}});return (await r.json()).suggestions.direction};
  assert.equal(await run('unconfirmed direction'),'A proposed pilot');
  assert.equal(await run('User-confirmed direction'),'Roll out to everyone immediately.');
