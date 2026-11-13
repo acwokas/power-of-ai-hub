@@ -1,0 +1,28 @@
+---
+// Source checked in the original Vulcan Post article on 13 November 2026.
+const featureUrl = 'https://vulcanpost.com/914334/mycareersfuture-job-offers-salary-bands/';
+---
+<aside class="press-feature" aria-label="PayLine in the press">
+  <div class="press-feature-brand">
+    <span class="press-feature-label">As featured in</span>
+    <img src="/images/vulcan-post-logo.svg" alt="Vulcan Post" width="200" height="38" />
+  </div>
+  <div class="press-feature-copy">
+    <p class="press-feature-title">PayLine in Vulcan Post’s Editor’s Picks</p>
+    <p class="press-feature-detail">Exploring Singapore’s advertised salary bands. <time datetime="2026-11-11">11 November 2026</time>.</p>
+    <a href={featureUrl} target="_blank" rel="noopener noreferrer">Read the feature <span aria-hidden="true">↗</span><span class="press-feature-sr"> (opens in a new tab)</span></a>
+  </div>
+</aside>
+<style>
+  .press-feature { display:flex; align-items:center; gap:24px; margin:24px 0; padding:20px 24px; border:1px solid #d8c8b1; border-left:4px solid #a65d26; border-radius:8px; background:#fffaf1; color:#25251f; text-align:left; }
+  .press-feature-brand { flex:0 0 160px; }
+  .press-feature-label { display:block; margin-bottom:10px; color:#625241; font:600 10px/1.4 system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+  .press-feature-brand img { display:block; width:160px; max-width:100%; height:auto; margin:0; }
+  .press-feature-copy { min-width:0; }
+  .press-feature .press-feature-title { margin:0 0 6px; font:600 17px/1.35 system-ui,sans-serif; color:#25251f; }
+  .press-feature .press-feature-detail { margin:0 0 10px; font:400 13px/1.6 system-ui,sans-serif; color:#625241; }
+  .press-feature a { display:inline-flex; align-items:center; gap:6px; min-height:28px; color:#793c15; font:600 13px/1.5 system-ui,sans-serif; text-decoration:underline; text-underline-offset:4px; }
+  .press-feature a:focus-visible { outline:3px solid #793c15; outline-offset:5px; }
+  .press-feature-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+  @media(max-width:600px) { .press-feature { flex-direction:column; align-items:flex-start; gap:16px; padding:18px; } .press-feature-brand { flex-basis:auto; } }
+</style>
